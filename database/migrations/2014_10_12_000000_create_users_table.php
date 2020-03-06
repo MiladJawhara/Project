@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('user_name')->unique();
             $table->string('national_id')->unique();
             //nullable properties
             $table->timestamp('email_verified_at')->nullable();
