@@ -51,7 +51,8 @@ class RegisterController extends Controller
     {
         if ($data['user_type'] === 'student') {
             return Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
+                'f_name' => ['required', 'string', 'max:255'],
+                'l_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
@@ -62,7 +63,8 @@ class RegisterController extends Controller
             ]);
         } else {
             return Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
+                'f_name' => ['required', 'string', 'max:255'],
+                'l_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
@@ -82,7 +84,8 @@ class RegisterController extends Controller
     {
         if ($data['user_type'] === 'student') {
             return User::create([
-                'name' => $data['name'],
+                'f_name' => $data['f_name'],
+                'l_name' => $data['l_name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'national_id' => $data['national_id'],
@@ -93,7 +96,8 @@ class RegisterController extends Controller
             ]);
         } else {
             return User::create([
-                'name' => $data['name'],
+                'f_name' => $data['f_name'],
+                'l_name' => $data['l_name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'national_id' => $data['national_id'],
