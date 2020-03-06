@@ -49,11 +49,29 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        if ($data['user_type'] === 'student') {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'user_name' => ['required', 'string', 'min:3', 'unique:users'],
+                'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
+                'university_id' => ['required', 'numeric', 'unique:users'],
+                'user_type' => ['required', 'string', 'in:student,supervisor'],
+                'department' => ['required', 'string'],
+                'year_of_study' => ['required', 'string'],
+            ]);
+        } else {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'user_name' => ['required', 'string', 'min:3', 'unique:users'],
+                'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
+                'user_type' => ['required', 'string', 'in:student,supervisor'],
+                'department' => ['required', 'string'],
+            ]);
+        }
     }
 
     /**
@@ -64,10 +82,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if ($data['user_type'] === 'student') {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'user_name' => $data['user_name'],
+                'national_id' => $data['national_id'],
+                'university_id' => $data['university_id'],
+                'user_type' => $data['user_type'],
+                'department' => $data['department'],
+                'year_of_study' => $data['year_of_study'],
+            ]);
+        } else {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'user_name' => $data['user_name'],
+                'national_id' => $data['national_id'],
+                'user_type' => $data['user_type'],
+                'department' => $data['department'],
+            ]);
+        }
     }
 }

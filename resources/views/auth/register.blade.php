@@ -12,11 +12,11 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="account-type" class="col-md-4 col-form-label text-md-right">{{ __('نوع الحساب') }}</label>
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('نوع الحساب') }}</label>
                             <div class="col-md-6">
-                                <select id="account-type" name="account_type"  onchange="hideFields(this.value)" class="form-control custom-select custom-select-sm">
-                                    <option value="طالب">طالب</option>
-                                    <option value="مشرف">مشرف</option>
+                                <select id="user_type" name="user_type"  onchange="hideFields(this.value)" class="form-control custom-select custom-select-sm">
+                                    <option value="student">طالب</option>
+                                    <option value="supervisor">مشرف</option>
                                 </select>
                             </div>
                         </div>
@@ -30,10 +30,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="user-name" class="col-md-4 col-form-label text-md-right">{{ __('اسم المستخدم(باللغة الإنكليزية)') }}</label>
+                            <label for="user_name" class="col-md-4 col-form-label text-md-right">{{ __('اسم المستخدم(باللغة الإنكليزية)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user-name" type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user-name" autofocus>
+                                <input id="user_name" type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user_name" autofocus>
 
                                 @error('user_name')
                                     <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                             <label for="national-id" class="col-md-4 col-form-label text-md-right">{{ __('الرقم الوطني') }}</label>
 
                             <div class="col-md-6">
-                                <input id="national-id" value="{{ old('national_id') }}" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" required>
+                                <input id="national_id" value="{{ old('national_id') }}" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" required>
                                 @error('national_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -103,9 +103,9 @@
                         </div>
 
                         <div class="form-group row std-filde">
-                            <label for="year-of-study" class="col-md-4 col-form-label text-md-right">{{ __('سنة الدراسة') }}</label>
+                            <label for="year_of_study" class="col-md-4 col-form-label text-md-right">{{ __('سنة الدراسة') }}</label>
                             <div class="col-md-6">
-                                <select id="year-of-study" name="year_of_study" class="std-req form-control custom-select custom-select-sm">
+                                <select id="year_of_study" name="year_of_study" class="std-req form-control custom-select custom-select-sm">
                                     <option value="الأولى">الأولى</option>
                                     <option value="الثانية">الثانية</option>
                                     <option value="الثالثة">الثالثة</option>
@@ -117,10 +117,10 @@
                         </div>
 
                         <div class="form-group row std-filde">
-                            <label for="university-id" class="col-md-4 col-form-label text-md-right">{{ __('الرقم الجامعي') }}</label>
+                            <label for="university_id" class="col-md-4 col-form-label text-md-right">{{ __('الرقم الجامعي') }}</label>
 
                             <div class="col-md-6">
-                                <input id="university-id" type="text" class="form-control std-req" name="university_id" required>
+                                <input id="university_id" type="text" class="form-control std-req" name="university_id" required>
                             </div>
                         </div>
 
@@ -142,7 +142,7 @@
     function hideFields(value){
         let elements  = document.getElementsByClassName('std-filde');
         let stdReqs = document.getElementsByClassName('std-req');
-        if(value === 'مشرف'){
+        if(value === 'supervisor'){
            for (const key in elements) {
                if (elements.hasOwnProperty(key)) {
                    const element = elements[key];
@@ -177,16 +177,16 @@
     }
 
     window.onload = () =>{
-       hideFields(document.getElementById('account-type').value);
+       hideFields(document.getElementById('account_type').value);
     }
 
     @if($errors->any())
     $(document).ready(function(){
         let old =  '{{ old('account_type') }}'
-       $('#account-type').children().each(function (i,e){
+       $('#account_type').children().each(function (i,e){
             if(e.value === old){
                 $(e).attr('selected', '');
-                $('#account-type').change();
+                $('#account_type').change();
                 return false;
             }
 
