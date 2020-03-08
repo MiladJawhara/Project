@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -49,6 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         if ($data['user_type'] === 'student') {
             return Validator::make($data, [
                 'f_name' => ['required', 'string', 'max:255'],
@@ -82,28 +85,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $tempData = [
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'national_id' => $data['national_id'],
+            'user_type' => $data['user_type'],
+            'department' => $data['department'],
+        ];
+
+
         if ($data['user_type'] === 'student') {
-            return User::create([
-                'f_name' => $data['f_name'],
-                'l_name' => $data['l_name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'national_id' => $data['national_id'],
-                'university_id' => $data['university_id'],
-                'user_type' => $data['user_type'],
-                'department' => $data['department'],
-                'year_of_study' => $data['year_of_study'],
-            ]);
-        } else {
-            return User::create([
-                'f_name' => $data['f_name'],
-                'l_name' => $data['l_name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'national_id' => $data['national_id'],
-                'user_type' => $data['user_type'],
-                'department' => $data['department'],
+            $tempData['university_id'] = $data['university_id'];
+            $tempData['year_of_study'] = $data['year_of_study'];
+        }
+
+
+        $user = User::create($tempData);
+
+        if ($data['user_type'] !== 'student') {
+
+            DB::table('supervisor_unverified')->insert([
+                'user_id' => $user->id,
+                'created_at' => Date::now(),
+                'updated_at' => Date::now(),
             ]);
         }
+
+        return $user;
     }
 }

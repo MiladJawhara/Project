@@ -5,24 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div style="text-align: right" class="card-header">{{ __('إنشاء حساب') }}</div>
+                <div class="card-header">{{ __('Create account') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('نوع الحساب') }}</label>
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('Account Type') }}</label>
                             <div class="col-md-6">
                                 <select id="user_type" name="user_type"  onchange="hideFields(this.value)" class="form-control custom-select custom-select-sm">
-                                    <option value="student">طالب</option>
-                                    <option value="supervisor">مشرف</option>
+                                    <option value="student">{{ __('Student') }}</option>
+                                <option value="supervisor">{{__('Supervisor')}}</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="f_name" class="col-md-4 col-form-label text-md-right">{{ __('الاسم الأول') }}</label>
+                            <label for="f_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="f_name" type="text" class="form-control @error('f_name') is-invalid @enderror" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name" autofocus>
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="l_name" class="col-md-4 col-form-label text-md-right">{{ __('الاسم الأخير') }}</label>
+                            <label for="l_name" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
                             <div class="col-md-6">
                                 <input id="l_name" type="text" class="form-control @error('l_name') is-invalid @enderror" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name" autofocus>
                             </div>
@@ -38,7 +38,7 @@
 
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('البريد الإلكتروني') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('كلمة المرور') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تأكيد كلمة المرور') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('confirm password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('القسم') }}</label>
+                            <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('department') }}</label>
                             <div class="col-md-6">
                                 <select id="department" name="department" class="form-control custom-select custom-select-sm">
                                     <option value="none">لا يوجد</option>
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="national-id" class="col-md-4 col-form-label text-md-right">{{ __('الرقم الوطني') }}</label>
+                            <label for="national-id" class="col-md-4 col-form-label text-md-right">{{ __('National ID') }}</label>
 
                             <div class="col-md-6">
                                 <input id="national_id" value="{{ old('national_id') }}" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" required>
@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="form-group row std-filde">
-                            <label for="year_of_study" class="col-md-4 col-form-label text-md-right">{{ __('سنة الدراسة') }}</label>
+                            <label for="year_of_study" class="col-md-4 col-form-label text-md-right">{{ __('Year of study') }}</label>
                             <div class="col-md-6">
                                 <select id="year_of_study" name="year_of_study" class="std-req form-control custom-select custom-select-sm">
                                     <option value="الأولى">الأولى</option>
@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="form-group row std-filde">
-                            <label for="university_id" class="col-md-4 col-form-label text-md-right">{{ __('الرقم الجامعي') }}</label>
+                            <label for="university_id" class="col-md-4 col-form-label text-md-right">{{ __('University ID') }}</label>
 
                             <div class="col-md-6">
                                 <input id="university_id" type="text" class="form-control std-req" name="university_id" required>
@@ -171,16 +171,16 @@
     }
 
     window.onload = () =>{
-       hideFields(document.getElementById('account_type').value);
+       hideFields(document.getElementById('user_type').value);
     }
 
     @if($errors->any())
     $(document).ready(function(){
         let old =  '{{ old('account_type') }}'
-       $('#account_type').children().each(function (i,e){
+       $('#user_type').children().each(function (i,e){
             if(e.value === old){
                 $(e).attr('selected', '');
-                $('#account_type').change();
+                $('#user_type').change();
                 return false;
             }
 

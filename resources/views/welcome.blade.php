@@ -6,7 +6,7 @@
     <div class="content">
         <div class="title m-b-md">
             @auth
-            <h3>مرحبا بك {{ auth()->user()->f_name }}</h3>
+            <h3>{{ __('messeges.welcome',['f_name' => auth()->user()->f_name]) }}</h3>
             @else
             مرحبا بك رجائا قم
             <a href="{{ route('login') }}">بتسجيل الدخول</a>

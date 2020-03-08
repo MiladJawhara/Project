@@ -31,6 +31,17 @@ class CreateUsersTable extends Migration
             $table->string('university_id')->nullable()->unique();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+        });
+
+
+        Schema::create('supervisor_unverified', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

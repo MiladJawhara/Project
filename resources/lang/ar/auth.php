@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'لايتطابق هذا الإيميل مع أي من سجلاتنا',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => 'العديد من محاولات تسجيل الدخول. رجائا أعد المحاولة خلال :seconds ثانية.',
 
 ];
