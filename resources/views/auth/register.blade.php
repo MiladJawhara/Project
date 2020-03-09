@@ -119,9 +119,9 @@
                         </div>
 
                         <div class="form-group row mb-0 text-right">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('إنشاء الحساب') }}
+                                    {{ __('Create') }}
                                 </button>
                             </div>
                         </div>

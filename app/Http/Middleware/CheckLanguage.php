@@ -15,8 +15,8 @@ class CheckLanguage
      */
     public function handle($request, Closure $next)
     {
-        if ($request->has('lan')) {
-            app()->setLocale($request['lan']);
+        if ($request->has('lang')) {
+            app()->setLocale($request['lang']);
         }
         return $next($request);
     }

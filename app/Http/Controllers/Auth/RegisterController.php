@@ -103,16 +103,6 @@ class RegisterController extends Controller
 
 
         $user = User::create($tempData);
-
-        if ($data['user_type'] !== 'student') {
-
-            DB::table('supervisor_unverified')->insert([
-                'user_id' => $user->id,
-                'created_at' => Date::now(),
-                'updated_at' => Date::now(),
-            ]);
-        }
-
         return $user;
     }
 }
