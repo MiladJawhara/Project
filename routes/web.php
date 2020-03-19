@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::get('/admin/user/{id}', function ($id) {
+Route::get('/test', function () {
 
-    return view('admin.users.show', ['user' => User::find($id)]);
+    return view('test');
+});
+
+Route::get('/info', function () {
+
+    Session::all();
+
+    return session()->all();
 });

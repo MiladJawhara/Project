@@ -29,6 +29,11 @@ class AddSupervisorToUnverifiedTable
      */
     public function handle(Registered $event)
     {
+
+        /*
+            Here we check if the user has been registered as an supervisor,
+            then we should add him to the unverified supervisors table to be checked by the admin
+        */
         $user = $event->user;
 
         if ($user->user_type == 'supervisor') {
