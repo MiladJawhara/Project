@@ -15,14 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(
-            Settings::class,
-            function () {
-                return Settings::make(
-                    storage_path('app/settings.json')
-                );
-            }
-        );
     }
 
     /**
@@ -32,8 +24,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!File::exists(storage_path('app/settings.json'))) {
-            settings()->init();
-        }
     }
 }

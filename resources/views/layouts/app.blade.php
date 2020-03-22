@@ -18,13 +18,17 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div id="app">
+
+    </div>
+    {{-- <div>
         @include('components.navbar')
         <main class="py-4">
             @yield('content')
         </main>
-         <!-- Scripts -->
+
+    </div> --}}
+      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    </div>
 </body>
 </html>

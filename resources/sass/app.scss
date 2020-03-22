@@ -1,10 +1,12 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
-@import 'init';
+@import "variables";
+@import "init";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap4-toggle/css/bootstrap4-toggle.min.css';
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap4-toggle/css/bootstrap4-toggle.min.css";
+@import "~vuetify/dist/vuetify.min.css";
+@import "~@mdi/font/css/materialdesignicons.min.css";
