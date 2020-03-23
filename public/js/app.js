@@ -2115,7 +2115,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -39747,9 +39746,13 @@ var render = function() {
       _c(
         "v-btn",
         {
-          staticClass: "m-2",
-          staticStyle: { "z-index": "1" },
-          attrs: { fab: "", small: "", dark: "", color: "teal", fixed: "" },
+          staticClass: "mt-2",
+          staticStyle: {
+            "z-index": "1",
+            left: "-25px",
+            "padding-left": "25px"
+          },
+          attrs: { small: "", dark: "", color: "teal", fixed: "" },
           on: {
             click: function($event) {
               _vm.drawer = !_vm.drawer
@@ -39767,7 +39770,7 @@ var render = function() {
       _c(
         "v-navigation-drawer",
         {
-          attrs: { color: "primary", absolute: "", dark: "" },
+          attrs: { color: "primary", fixed: "", dark: "" },
           model: {
             value: _vm.drawer,
             callback: function($$v) {
@@ -39869,7 +39872,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-container",
-            { staticClass: "p-0" },
+            { staticClass: "p-0 pt-5" },
             [
               _c(
                 "v-row",

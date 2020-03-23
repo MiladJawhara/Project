@@ -1,18 +1,17 @@
 <template>
     <div>
         <v-btn
-            class="m-2"
-            fab
+            class="mt-2"
             small
             dark
             color="teal"
             @click="drawer = !drawer"
             fixed
-            style="z-index: 1"
+            style="z-index: 1 ;left: -25px; padding-left: 25px"
         >
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
         </v-btn>
-        <v-navigation-drawer v-model="drawer" color="primary" absolute dark>
+        <v-navigation-drawer v-model="drawer" color="primary" fixed dark>
             <v-list dense nav class="py-0">
                 <v-list-item two-line>
                     <v-list-item-avatar>

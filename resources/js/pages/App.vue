@@ -13,7 +13,7 @@
                     <v-list-item-content>Register</v-list-item-content>
                 </v-list-item>
             </side-bar>
-            <v-container class="p-0">
+            <v-container class="p-0 pt-5">
                 <v-row>
                     <!-- main -->
                     <v-col>

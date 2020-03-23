@@ -15,7 +15,7 @@
                                             label="Account Type"
                                             dense
                                             :items="accountTypes"
-                                            v-model="form.accountType"
+                                            v-model="form.user_type"
                                         >
                                         </v-select>
                                     </v-col>
@@ -92,11 +92,6 @@
                                             label="Confirm Password"
                                             title="Confirm The Password You Have Entered!"
                                             prepend-icon="mdi-key-plus"
-                                            :append-icon="
-                                                !showPassword
-                                                    ? 'mdi-eye'
-                                                    : 'mdi-eye-off'
-                                            "
                                             v-model="form.password_confirmation"
                                             @click:append="
                                                 showPassword = !showPassword
@@ -118,6 +113,46 @@
                                 </v-row>
 
                                 <v-row>
+                                    <v-col>
+                                        <v-select
+                                            prepend-icon=""
+                                            label="Department"
+                                            dense
+                                            :items="departments"
+                                            v-model="form.department"
+                                        >
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+
+                                <template v-if="form.accountType == 'Student'">
+                                    <v-row>
+                                        <v-col>
+                                            <v-select
+                                                prepend-icon="mdi-timetable"
+                                                label="Year Of Study"
+                                                dense
+                                                :items="yearsOfStudy"
+                                                v-model="form.year_of_study"
+                                            >
+                                            </v-select>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field
+                                                type="text"
+                                                label="University ID"
+                                                title="Your University ID"
+                                                prepend-icon="mdi-id-card"
+                                                v-model="form.university_id"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </template>
+
+                                <v-row>
                                     <v-col :cols="isMobile ? 12 : 'auto'">
                                         <router-link :to="{ name: 'login' }"
                                             >have an account already?
@@ -130,8 +165,19 @@
                                             style="float: right"
                                             color="primary"
                                             @click.prevent="createNewAccount"
-                                            >Create</v-btn
+                                            :disabled="progressing"
                                         >
+                                            <template v-if="progressing">
+                                                <v-progress-circular
+                                                    color="wihte"
+                                                    indeterminate
+                                                >
+                                                </v-progress-circular>
+                                            </template>
+                                            <template v-if="!progressing"
+                                                >Create</template
+                                            >
+                                        </v-btn>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -152,16 +198,48 @@ export default {
     data() {
         return {
             form: new Form({
-                accountType: '',
-                email: '',
-                password: ''
+                user_type: 'Student',
+                department: 'none'
             }),
             showPassword: false,
-            accountTypes: ['Student', 'Supervaisor']
+            accountTypes: ['Student', 'Supervisor'],
+            yearsOfStudy: ['first year', 'second year', 'theard year'],
+            departments: ['none'],
+            progressing: false
+        }
+    },
+    watch: {
+        selectedAccountType(value) {
+            if (value == this.accountTypes[1]) {
+                if (this.form.year_of_study !== undefined) {
+                    delete this.form.year_of_study
+                }
+
+                if (this.form.university_id !== undefined) {
+                    delete this.form.university_id
+                }
+            }
         }
     },
     computed: {
+        selectedAccountType() {
+            return this.form.user_type
+        },
         ...mapGetters('global', ['isMobile'])
+    },
+    methods: {
+        async createNewAccount() {
+            if (this.progressing) return
+            this.progressing = true
+            try {
+                const { data } = await this.form.post('/api/auth/register')
+                console.log(data)
+            } catch (err) {
+                console.log(this.form)
+            } finally {
+                this.progressing = false
+            }
+        }
     }
 }
 </script>
