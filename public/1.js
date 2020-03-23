@@ -217,6 +217,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -281,25 +282,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _ref = _context.sent;
                 data = _ref.data;
                 console.log(data);
-                _context.next = 14;
+                _context.next = 13;
                 break;
 
               case 11:
                 _context.prev = 11;
                 _context.t0 = _context["catch"](3);
-                console.log(_this.form);
 
-              case 14:
-                _context.prev = 14;
+              case 13:
+                _context.prev = 13;
                 _this.progressing = false;
-                return _context.finish(14);
+                return _context.finish(13);
 
-              case 17:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 11, 14, 17]]);
+        }, _callee, null, [[3, 11, 13, 16]]);
       }))();
     }
   }
@@ -358,6 +358,8 @@ var render = function() {
                                     [
                                       _c("v-select", {
                                         attrs: {
+                                          "prepend-icon":
+                                            "mdi-account-cog-outline",
                                           label: "Account Type",
                                           dense: "",
                                           items: _vm.accountTypes
@@ -582,7 +584,7 @@ var render = function() {
                                     [
                                       _c("v-select", {
                                         attrs: {
-                                          "prepend-icon": "",
+                                          "prepend-icon": "mdi-office-building",
                                           label: "Department",
                                           dense: "",
                                           items: _vm.departments
@@ -606,7 +608,7 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _vm.form.accountType == "Student"
+                              _vm.form.user_type == "Student"
                                 ? [
                                     _c(
                                       "v-row",

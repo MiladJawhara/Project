@@ -12,6 +12,7 @@
                                 <v-row>
                                     <v-col>
                                         <v-select
+                                            prepend-icon="mdi-account-cog-outline"
                                             label="Account Type"
                                             dense
                                             :items="accountTypes"
@@ -115,7 +116,7 @@
                                 <v-row>
                                     <v-col>
                                         <v-select
-                                            prepend-icon=""
+                                            prepend-icon="mdi-office-building"
                                             label="Department"
                                             dense
                                             :items="departments"
@@ -125,7 +126,7 @@
                                     </v-col>
                                 </v-row>
 
-                                <template v-if="form.accountType == 'Student'">
+                                <template v-if="form.user_type == 'Student'">
                                     <v-row>
                                         <v-col>
                                             <v-select
@@ -235,7 +236,6 @@ export default {
                 const { data } = await this.form.post('/api/auth/register')
                 console.log(data)
             } catch (err) {
-                console.log(this.form)
             } finally {
                 this.progressing = false
             }
