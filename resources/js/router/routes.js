@@ -1,12 +1,11 @@
 function importPage(path) {
     return () =>
-        import(/* webpackChunkName: '' */ '../pages/' + path).then(
+        import ( /* webpackChunkName: '' */ '../pages/' + path).then(
             m => m.default || m
         )
 }
 
-export default [
-    {
+export default [{
         path: '/login',
         name: 'login',
         component: importPage('auth/Login')
@@ -16,4 +15,5 @@ export default [
         name: 'register',
         component: importPage('auth/Register')
     }
+
 ]
