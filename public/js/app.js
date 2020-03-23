@@ -2183,11 +2183,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   created: function created() {
-    window.addEventListener('resize', this.handleResize);
-    this.$store.commit('global/SET_SCREEN_WIDTH');
+    window.addEventListener('resize', this.setScreenWidth);
+    this.setScreenWidth();
   },
   destroyed: function destroyed() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.setScreenWidth);
   },
   components: {
     SideBar: _components_SideBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2199,11 +2199,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('global', ['isMobile'])),
-  methods: {
-    handleResize: function handleResize() {
-      this.$store.commit('global/SET_SCREEN_WIDTH');
-    }
-  }
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('global', ['setScreenWidth']))
 });
 
 /***/ }),
@@ -97636,31 +97632,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return actions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getters", function() { return getters; });
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mutation-types */ "./resources/js/Store/mutation-types.js");
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 var mobileScreenLimit = 1000;
 var state = {
   screenWidth: window.screen.width,
   mobileScreen: false,
   showSideBar: false
 };
-var mutations = {
-  SET_SCREEN_WIDTH: function SET_SCREEN_WIDTH(state) {
-    state.screenWidth = window.screen.width;
-    this.commit('global/SET_MOBILE_SCREEN');
-  },
-  SET_MOBILE_SCREEN: function SET_MOBILE_SCREEN(state) {
-    if (state.screenWidth > mobileScreenLimit) {
-      state.mobileScreen = false;
-    } else {
-      state.mobileScreen = true;
-    }
-  },
-  TOGGLE_SIDE_BAR: function TOGGLE_SIDE_BAR(state) {
-    state.showSideBar = !state.showSideBar;
-  }
-};
+var mutations = (_mutations = {}, _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_SCREEN_WIDTH"], function (state) {
+  state.screenWidth = window.screen.width;
+  state.mobileScreen = state.screenWidth <= mobileScreenLimit;
+}), _defineProperty(_mutations, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_SIDE_BAR"], function (state) {
+  state.showSideBar = !state.showSideBar;
+}), _mutations);
 var actions = {
-  toggleSideBar: function toggleSideBar(context) {
-    context.commit('TOGGLE_SIDE_BAR');
+  toggleSideBar: function toggleSideBar(_ref) {
+    var commit = _ref.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_SIDE_BAR"]);
+  },
+  setScreenWidth: function setScreenWidth(_ref2) {
+    var commit = _ref2.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_SCREEN_WIDTH"]);
   }
 };
 var getters = {
@@ -97681,11 +97678,13 @@ var getters = {
 /*!**********************************************!*\
   !*** ./resources/js/Store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGOUT, SAVE_TOKEN, FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE, UPDATE_USER, SET_LOCALE */
+/*! exports provided: SET_SCREEN_WIDTH, TOGGLE_SIDE_BAR, LOGOUT, SAVE_TOKEN, FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE, UPDATE_USER, SET_LOCALE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SCREEN_WIDTH", function() { return SET_SCREEN_WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_SIDE_BAR", function() { return TOGGLE_SIDE_BAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SAVE_TOKEN", function() { return SAVE_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_USER", function() { return FETCH_USER; });
@@ -97693,15 +97692,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_USER_FAILURE", function() { return FETCH_USER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_USER", function() { return UPDATE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_LOCALE", function() { return SET_LOCALE; });
-// auth.js
-var LOGOUT = "LOGOUT";
-var SAVE_TOKEN = "SAVE_TOKEN";
-var FETCH_USER = "FETCH_USER";
-var FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
-var FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
-var UPDATE_USER = "UPDATE_USER"; // lang.js
+// gloabal.js
+var SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
+var TOGGLE_SIDE_BAR = 'TOGGLE_SIDE_BAR'; // auth.js
 
-var SET_LOCALE = "SET_LOCALE";
+var LOGOUT = 'LOGOUT';
+var SAVE_TOKEN = 'SAVE_TOKEN';
+var FETCH_USER = 'FETCH_USER';
+var FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+var FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
+var UPDATE_USER = 'UPDATE_USER'; // lang.js
+
+var SET_LOCALE = 'SET_LOCALE';
 
 /***/ }),
 
@@ -97946,6 +97948,216 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/middleware sync .*\\.js$":
+/*!***********************************************************!*\
+  !*** ./resources/js/middleware sync nonrecursive .*\.js$ ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./admin.js": "./resources/js/middleware/admin.js",
+	"./auth.js": "./resources/js/middleware/auth.js",
+	"./check-auth.js": "./resources/js/middleware/check-auth.js",
+	"./guest.js": "./resources/js/middleware/guest.js",
+	"./test.js": "./resources/js/middleware/test.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js/middleware sync .*\\.js$";
+
+/***/ }),
+
+/***/ "./resources/js/middleware/admin.js":
+/*!******************************************!*\
+  !*** ./resources/js/middleware/admin.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (to, from, next) {
+  if (_Store_index__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/user'].role !== 'admin') {
+    next({
+      name: 'home'
+    });
+  } else {
+    next();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/middleware/auth.js":
+/*!*****************************************!*\
+  !*** ./resources/js/middleware/auth.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/(function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(to, from, next) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!_Store_index__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/check']) {
+              next({
+                name: 'login'
+              });
+            } else {
+              next();
+            }
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+})());
+
+/***/ }),
+
+/***/ "./resources/js/middleware/check-auth.js":
+/*!***********************************************!*\
+  !*** ./resources/js/middleware/check-auth.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/(function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(to, from, next) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!(!_Store_index__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/check'] && _Store_index__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/token'])) {
+              _context.next = 8;
+              break;
+            }
+
+            _context.prev = 1;
+            _context.next = 4;
+            return _Store_index__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('auth/fetchUser');
+
+          case 4:
+            _context.next = 8;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](1);
+
+          case 8:
+            next();
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 6]]);
+  }));
+
+  return function (_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+})());
+
+/***/ }),
+
+/***/ "./resources/js/middleware/guest.js":
+/*!******************************************!*\
+  !*** ./resources/js/middleware/guest.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (to, from, next) {
+  if (_Store_index__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/check']) {
+    next({
+      name: 'home'
+    });
+  } else {
+    next();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/middleware/test.js":
+/*!*****************************************!*\
+  !*** ./resources/js/middleware/test.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (to, from, next) {
+  if (to.query.name !== undefined) {
+    console.log(to.query.name);
+  }
+
+  next();
+});
+
+/***/ }),
+
 /***/ "./resources/js/pages lazy recursive ^\\.\\/.*$":
 /*!***********************************************************!*\
   !*** ./resources/js/pages lazy ^\.\/.*$ namespace object ***!
@@ -98117,20 +98329,199 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/router/routes.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/router/routes.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]); // The middleware for every page of the application.
 
-var globalMiddleware = ["locale", "check-auth"];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  mode: "history",
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__["default"]
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // The middleware for every page of the application.
+
+var globalMiddleware = ['check-auth', 'test']; // ***********************************************************
+
+function resolveMiddleware(requireContext) {
+  return requireContext.keys().map(function (file) {
+    var res = [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)];
+    return res;
+  }).reduce(function (guards, _ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        name = _ref2[0],
+        guard = _ref2[1];
+
+    return _objectSpread({}, guards, _defineProperty({}, name, guard["default"]));
+  }, {});
+} // ***********************************************************
+// Load middleware modules dynamically.
+
+
+var routeMiddleware = resolveMiddleware(__webpack_require__("./resources/js/middleware sync .*\\.js$")); // ***********************************************************
+
+function resolveComponents(components) {
+  return Promise.all(components.map(function (component) {
+    return typeof component === 'function' ? component() : component;
+  }));
+} // ***********************************************************
+
+
+function getMiddleware(components) {
+  var middleware = [].concat(globalMiddleware);
+  components.filter(function (c) {
+    return c.middleware;
+  }).forEach(function (component) {
+    if (Array.isArray(component.middleware)) {
+      middleware.push.apply(middleware, _toConsumableArray(component.middleware));
+    } else {
+      middleware.push(component.middleware);
+    }
+  });
+  return middleware;
+} // ***********************************************************
+
+
+function callMiddleware(middleware, to, from, next) {
+  var stack = middleware.reverse();
+
+  var _next = function _next() {
+    // Stop if "_next" was called with an argument or the stack is empty.
+    if (arguments.length > 0 || stack.length === 0) {
+      return next.apply(void 0, arguments);
+    }
+
+    var middleware = stack.pop();
+
+    if (typeof middleware === 'function') {
+      middleware(to, from, _next);
+    } else if (routeMiddleware[middleware]) {
+      routeMiddleware[middleware](to, from, _next);
+    } else {
+      throw Error("Undefined middleware [".concat(middleware, "]"));
+    }
+  };
+
+  _next();
+} // ***********************************************************
+
+
+function beforeEach(_x, _x2, _x3) {
+  return _beforeEach.apply(this, arguments);
+} // ***********************************************************
+
+
+function _beforeEach() {
+  _beforeEach = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(to, from, next) {
+    var components, middleware;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            components = [];
+            _context.prev = 1;
+            _context.next = 4;
+            return resolveComponents(router.getMatchedComponents(_objectSpread({}, to)));
+
+          case 4:
+            components = _context.sent;
+            _context.next = 12;
+            break;
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](1);
+
+            if (!/^Loading( CSS)? chunk (\d)+ failed\./.test(_context.t0.message)) {
+              _context.next = 12;
+              break;
+            }
+
+            window.location.reload(true);
+            return _context.abrupt("return");
+
+          case 12:
+            if (!(components.length === 0)) {
+              _context.next = 14;
+              break;
+            }
+
+            return _context.abrupt("return", next());
+
+          case 14:
+            // Get the middleware for all the matched components.
+            middleware = getMiddleware(components); // Call each middleware.
+
+            callMiddleware(middleware, to, from, function () {
+              next.apply(void 0, arguments);
+            });
+
+          case 16:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 7]]);
+  }));
+  return _beforeEach.apply(this, arguments);
+}
+
+function afterEach(_x4, _x5, _x6) {
+  return _afterEach.apply(this, arguments);
+} // ***********************************************************
+// router
+
+
+function _afterEach() {
+  _afterEach = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(to, from, next) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _afterEach.apply(this, arguments);
+}
+
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
+  mode: 'history',
+  routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
+router.beforeEach(beforeEach); // theis will be called before any route
+
+router.afterEach(afterEach); // theis will be called after any route
+
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/NavBar.vue'
 import Cookie from 'js-cookie'
@@ -37,11 +37,11 @@ export default {
     name: 'App',
 
     created() {
-        window.addEventListener('resize', this.handleResize)
-        this.$store.commit('global/SET_SCREEN_WIDTH')
+        window.addEventListener('resize', this.setScreenWidth)
+        this.setScreenWidth()
     },
     destroyed() {
-        window.removeEventListener('resize', this.handleResize)
+        window.removeEventListener('resize', this.setScreenWidth)
     },
     components: {
         SideBar,
@@ -55,9 +55,7 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
-        handleResize() {
-            this.$store.commit('global/SET_SCREEN_WIDTH')
-        }
+        ...mapActions('global', ['setScreenWidth'])
     }
 }
 </script>

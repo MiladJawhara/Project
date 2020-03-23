@@ -1,3 +1,4 @@
+import * as types from '../mutation-types'
 const mobileScreenLimit = 1000
 
 export const state = {
@@ -7,25 +8,21 @@ export const state = {
 }
 
 export const mutations = {
-    SET_SCREEN_WIDTH(state) {
+    [types.SET_SCREEN_WIDTH](state) {
         state.screenWidth = window.screen.width
-        this.commit('global/SET_MOBILE_SCREEN')
+        state.mobileScreen = state.screenWidth <= mobileScreenLimit
     },
-    SET_MOBILE_SCREEN(state) {
-        if (state.screenWidth > mobileScreenLimit) {
-            state.mobileScreen = false
-        } else {
-            state.mobileScreen = true
-        }
-    },
-    TOGGLE_SIDE_BAR(state) {
+    [types.TOGGLE_SIDE_BAR](state) {
         state.showSideBar = !state.showSideBar
     }
 }
 
 export const actions = {
-    toggleSideBar(context) {
-        context.commit('TOGGLE_SIDE_BAR')
+    toggleSideBar({ commit }) {
+        commit(types.TOGGLE_SIDE_BAR)
+    },
+    setScreenWidth({ commit }) {
+        commit(types.SET_SCREEN_WIDTH)
     }
 }
 
