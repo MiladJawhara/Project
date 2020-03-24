@@ -2176,6 +2176,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -39860,6 +39863,13 @@ var render = function() {
                 "v-list-item",
                 { attrs: { to: { name: "register" } } },
                 [_c("v-list-item-content", [_vm._v("Register")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { to: { name: "admin-settings" } } },
+                [_c("v-list-item-content", [_vm._v("Admin Settings")])],
                 1
               )
             ],

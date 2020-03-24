@@ -13,6 +13,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'admin-settings',
   middleware: ['auth', 'admin']
@@ -35,9 +38,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h6", [_vm._v("admin settings")]),
+      _vm._v(" "),
+      _c("h2", [_vm._v("welcome to the settings page")])
+    ])
+  }
+]
 render._withStripped = true
 
 
