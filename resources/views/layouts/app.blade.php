@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-
+        <router-view></router-view>
     </div>
     {{-- <div>
         @include('components.navbar')

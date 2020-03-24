@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h6>admin settings</h6>
-        <h2>welcome to the settings page</h2>
+        <h1>Welcom To admin Page</h1>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'admin-settings'
+    name: 'admin-main'
 }
 </script>
 

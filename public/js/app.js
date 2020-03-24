@@ -2179,6 +2179,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -39867,9 +39873,27 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-list-item",
-                { attrs: { to: { name: "admin-settings" } } },
-                [_c("v-list-item-content", [_vm._v("Admin Settings")])],
+                "v-list-group",
+                {
+                  attrs: { "sub-group": "true", color: "#fff" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-content", [_vm._v("Admin")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item",
+                    { attrs: { link: "", to: { name: "admin-settings" } } },
+                    [_vm._v("\n                    Settings\n                ")]
+                  )
+                ],
                 1
               )
             ],
@@ -97742,14 +97766,14 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-if (document.getElementById("app")) {
+if (document.getElementById('app')) {
   new Vue({
-    el: "#app",
+    el: '#app',
     store: _Store_index__WEBPACK_IMPORTED_MODULE_5__["default"],
     router: _router_index__WEBPACK_IMPORTED_MODULE_3__["default"],
     vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_4__["default"],
-    render: function render(h) {
-      return h(_pages_App__WEBPACK_IMPORTED_MODULE_2__["default"]);
+    components: {
+      App: _pages_App__WEBPACK_IMPORTED_MODULE_2__["default"]
     }
   });
 }
@@ -98182,13 +98206,21 @@ var map = {
 	"./App.vue": [
 		"./resources/js/pages/App.vue"
 	],
+	"./admin/main": [
+		"./resources/js/pages/admin/main.vue",
+		1
+	],
+	"./admin/main.vue": [
+		"./resources/js/pages/admin/main.vue",
+		1
+	],
 	"./admin/settings": [
 		"./resources/js/pages/admin/settings.vue",
-		1
+		2
 	],
 	"./admin/settings.vue": [
 		"./resources/js/pages/admin/settings.vue",
-		1
+		2
 	],
 	"./auth/Login": [
 		"./resources/js/pages/auth/Login.vue",
@@ -98200,13 +98232,13 @@ var map = {
 	],
 	"./auth/Register": [
 		"./resources/js/pages/auth/Register.vue",
-		3,
-		2
+		4,
+		3
 	],
 	"./auth/Register.vue": [
 		"./resources/js/pages/auth/Register.vue",
-		3,
-		2
+		4,
+		3
 	]
 };
 function webpackAsyncContext(req) {
@@ -98386,7 +98418,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // The middleware for every page of the application.
 
-var globalMiddleware = ['check-auth', 'test']; // ***********************************************************
+var globalMiddleware = ['test']; // ***********************************************************
 
 function resolveMiddleware(requireContext) {
   return requireContext.keys().map(function (file) {
@@ -98562,19 +98594,26 @@ function importPage(path) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ([{
-  path: '/login',
-  name: 'login',
-  component: importPage('auth/Login')
-}, {
-  path: '/register',
-  name: 'register',
-  component: importPage('auth/Register')
-}, {
-  path: '/admin',
+  path: '/',
+  name: 'app',
+  component: importPage('App'),
   children: [{
-    path: '/settings',
-    name: 'admin-settings',
-    component: importPage('admin/settings')
+    path: '/login',
+    name: 'login',
+    component: importPage('auth/Login')
+  }, {
+    path: '/register',
+    name: 'register',
+    component: importPage('auth/Register')
+  }, {
+    path: '/admin',
+    name: 'admin-main',
+    component: importPage('admin/main'),
+    children: [{
+      path: 'settings',
+      name: 'admin-settings',
+      component: importPage('admin/settings')
+    }]
   }]
 }]);
 

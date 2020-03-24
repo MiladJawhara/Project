@@ -7,22 +7,31 @@ function importPage(path) {
 
 export default [
     {
-        path: '/login',
-        name: 'login',
-        component: importPage('auth/Login')
-    },
-    {
-        path: '/register',
-        name: 'register',
-        component: importPage('auth/Register')
-    },
-    {
-        path: '/admin',
+        path: '/',
+        name: 'app',
+        component: importPage('App'),
         children: [
             {
-                path: '/settings',
-                name: 'admin-settings',
-                component: importPage('admin/settings')
+                path: '/login',
+                name: 'login',
+                component: importPage('auth/Login')
+            },
+            {
+                path: '/register',
+                name: 'register',
+                component: importPage('auth/Register')
+            },
+            {
+                path: '/admin',
+                name: 'admin-main',
+                component: importPage('admin/main'),
+                children: [
+                    {
+                        path: 'settings',
+                        name: 'admin-settings',
+                        component: importPage('admin/settings')
+                    }
+                ]
             }
         ]
     }
