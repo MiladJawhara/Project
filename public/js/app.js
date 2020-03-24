@@ -98172,6 +98172,14 @@ var map = {
 	"./App.vue": [
 		"./resources/js/pages/App.vue"
 	],
+	"./admin/settings": [
+		"./resources/js/pages/admin/settings.vue",
+		1
+	],
+	"./admin/settings.vue": [
+		"./resources/js/pages/admin/settings.vue",
+		1
+	],
 	"./auth/Login": [
 		"./resources/js/pages/auth/Login.vue",
 		0
@@ -98182,13 +98190,13 @@ var map = {
 	],
 	"./auth/Register": [
 		"./resources/js/pages/auth/Register.vue",
-		2,
-		1
+		3,
+		2
 	],
 	"./auth/Register.vue": [
 		"./resources/js/pages/auth/Register.vue",
-		2,
-		1
+		3,
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -98551,6 +98559,13 @@ function importPage(path) {
   path: '/register',
   name: 'register',
   component: importPage('auth/Register')
+}, {
+  path: '/admin',
+  children: [{
+    path: '/settings',
+    name: 'admin-settings',
+    component: importPage('admin/settings')
+  }]
 }]);
 
 /***/ }),

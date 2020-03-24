@@ -21,6 +21,7 @@ export default [
         children: [
             {
                 path: '/settings',
+                name: 'admin-settings',
                 component: importPage('admin/settings')
             }
         ]
