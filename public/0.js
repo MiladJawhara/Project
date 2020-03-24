@@ -137,7 +137,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ppt-3[data-v-42c42d6a] {\n    padding-top: 38px;\n}\n.ml-30[data-v-42c42d6a] {\n    margin-left: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.ppt-3[data-v-42c42d6a] {\r\n    padding-top: 38px;\n}\n.ml-30[data-v-42c42d6a] {\r\n    margin-left: 30px;\n}\r\n", ""]);
 
 // exports
 

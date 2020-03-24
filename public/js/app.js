@@ -6788,7 +6788,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bg-primary {\n    background-color: #1976d2;\n    color: azure;\n}\n.bg-proto {\n    background-color: #c97414;\n    color: azure;\n}\n.fade-enter-active,\n.fade-leave-active {\n    transition: opacity 0.3s ease;\n}\n.fade-enter, .fade-leave-to\n/* .component-fade-leave-active below version 2.1.8 */ {\n    opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.bg-primary {\r\n    background-color: #1976d2;\r\n    color: azure;\n}\n.bg-proto {\r\n    background-color: #c97414;\r\n    color: azure;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: opacity 0.3s ease;\n}\n.fade-enter, .fade-leave-to\r\n/* .component-fade-leave-active below version 2.1.8 */ {\r\n    opacity: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -98172,6 +98172,14 @@ var map = {
 	"./App.vue": [
 		"./resources/js/pages/App.vue"
 	],
+	"./admin/settings": [
+		"./resources/js/pages/admin/settings.vue",
+		1
+	],
+	"./admin/settings.vue": [
+		"./resources/js/pages/admin/settings.vue",
+		1
+	],
 	"./auth/Login": [
 		"./resources/js/pages/auth/Login.vue",
 		0
@@ -98182,13 +98190,13 @@ var map = {
 	],
 	"./auth/Register": [
 		"./resources/js/pages/auth/Register.vue",
-		2,
-		1
+		3,
+		2
 	],
 	"./auth/Register.vue": [
 		"./resources/js/pages/auth/Register.vue",
-		2,
-		1
+		3,
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -98551,6 +98559,12 @@ function importPage(path) {
   path: '/register',
   name: 'register',
   component: importPage('auth/Register')
+}, {
+  path: '/admin',
+  children: [{
+    path: '/settings',
+    component: importPage('admin/settings')
+  }]
 }]);
 
 /***/ }),
@@ -98573,8 +98587,8 @@ function importPage(path) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/milad/my-files/laravel-projects/GIT/project-v2/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/milad/my-files/laravel-projects/GIT/project-v2/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Github\project-v2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Github\project-v2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

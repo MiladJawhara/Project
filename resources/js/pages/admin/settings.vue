@@ -1,5 +1,8 @@
 <template>
-    <div></div>
+    <div> 
+          <h4>admin settings<h4> 
+          <h2>welcome to the settings page</h2> 
+    </div>
 </template>
 
 <script>

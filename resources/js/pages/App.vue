@@ -12,6 +12,9 @@
                 <v-list-item :to="{ name: 'register' }">
                     <v-list-item-content>Register</v-list-item-content>
                 </v-list-item>
+                 <v-list-item :to="{ name: 'admin-settings' }">
+                    <v-list-item-content>Admin Settings</v-list-item-content>
+                </v-list-item>
             </side-bar>
             <v-container class="p-0 pt-5">
                 <v-row>
