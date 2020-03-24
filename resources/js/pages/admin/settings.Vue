@@ -7,9 +7,7 @@
 <script>
     export default {
         name:'admin-settings',
-        middleware:['auth','admin']
-
-        
+        middleware:['auth','admin']        
     }
 </script>
 
