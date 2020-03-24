@@ -1,16 +1,12 @@
 <template>
-    <div>
-
-    </div>
+    <div></div>
 </template>
 
 <script>
-    export default {
-        name:'admin-settings',
-        middleware:['auth','admin']        
-    }
+export default {
+    name: 'admin-settings',
+    middleware: ['auth', 'admin']
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
