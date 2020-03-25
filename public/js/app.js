@@ -98184,37 +98184,39 @@ var map = {
 	],
 	"./admin/Main": [
 		"./resources/js/pages/admin/Main.vue",
-		1
+		2
 	],
 	"./admin/Main.vue": [
 		"./resources/js/pages/admin/Main.vue",
-		1
+		2
 	],
 	"./admin/settings": [
 		"./resources/js/pages/admin/settings.vue",
-		2
+		0,
+		3
 	],
 	"./admin/settings.vue": [
 		"./resources/js/pages/admin/settings.vue",
-		2
+		0,
+		3
 	],
 	"./auth/Login": [
 		"./resources/js/pages/auth/Login.vue",
-		0
+		1
 	],
 	"./auth/Login.vue": [
 		"./resources/js/pages/auth/Login.vue",
-		0
+		1
 	],
 	"./auth/Register": [
 		"./resources/js/pages/auth/Register.vue",
-		4,
-		3
+		0,
+		4
 	],
 	"./auth/Register.vue": [
 		"./resources/js/pages/auth/Register.vue",
-		4,
-		3
+		0,
+		4
 	]
 };
 function webpackAsyncContext(req) {
