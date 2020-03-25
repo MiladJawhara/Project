@@ -70,7 +70,7 @@ export default {
 
     computed: {
         navigationHeaderstyle() {
-            return 'background-color: primary;'
+            return 'background-color: lightgray;'
         },
         ...mapGetters('global', ['isMobile'])
     }

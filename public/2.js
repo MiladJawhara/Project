@@ -83,7 +83,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({
     navigationHeaderstyle: function navigationHeaderstyle() {
-      return 'background-color: primary;';
+      return 'background-color: lightgray;';
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('global', ['isMobile']))
 });
