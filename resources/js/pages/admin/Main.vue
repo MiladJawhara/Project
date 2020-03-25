@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <v-col elevation="12" :cols="isMobile ? 12 : 3">
+            <v-col elevation="20" :cols="isMobile ? 12 : 3">
                 <v-card shaped v-if="!isMobile">
                     <v-card-title :style="navigationHeaderstyle"
                         >Options</v-card-title
@@ -46,7 +46,12 @@
                 </template>
             </v-col>
             <v-col>
-                <router-view></router-view>
+                <v-card>
+                    <v-card-title>Settings</v-card-title>
+                    <v-card-text>
+                        <router-view></router-view>
+                    </v-card-text>
+                </v-card>
             </v-col>
         </v-row>
     </v-container>

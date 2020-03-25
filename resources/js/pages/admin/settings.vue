@@ -1,121 +1,113 @@
 <template>
-    <v-card>
-        <v-card-title>Settings</v-card-title>
-        <v-card-text>
-            <v-container>
-                <v-row justify="center">
-                    <v-col :cols="!isMobile ? 8 : 12">
-                        <v-card>
-                            <v-card-title class="bg-primary"
-                                >choose year</v-card-title
-                            >
-                            <v-card-text>
-                                <v-form>
-                                    <v-container class="pl-0 pr-0">
-                                        <v-row>
-                                            <v-col>
-                                                <v-select
-                                                    prepend-icon="mdi-account-cog-outline"
-                                                    label="Year"
-                                                    dense
-                                                    :items="yearsOfStudy"
-                                                    v-model="form.Year"
-                                                >
-                                                </v-select>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                </v-row>
-
-                <v-row justify="center">
-                    <v-col :cols="!isMobile ? 8 : 12">
-                        <v-card>
-                            <v-card-title class="bg-primary"
-                                >choose depatment</v-card-title
-                            >
-                            <v-card-text>
-                                <v-form>
-                                    <v-container class="pl-0 pr-0">
-                                        <v-row>
-                                            <v-col>
-                                                <v-select
-                                                    prepend-icon="mdi-account-cog-outline"
-                                                    label="Dept"
-                                                    dense
-                                                    :items="departments"
-                                                    v-model="form.Dept"
-                                                >
-                                                </v-select>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                </v-row>
-
-                <v-row justify="center">
-                    <v-col :cols="!isMobile ? 8 : 12">
-                        <v-card>
-                            <v-card-title class="bg-primary"
-                                >set number of students per group</v-card-title
-                            >
-                            <v-card-text>
-                                <v-form>
-                                    <v-container class="pl-0 pr-0">
-                                        <v-row>
-                                            <v-col>
-                                                <v-select
-                                                    prepend-icon="mdi-account-cog-outline"
-                                                    label="Num"
-                                                    dense
-                                                    :items="num"
-                                                    v-model="form.Num"
-                                                >
-                                                </v-select>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                </v-row>
-
-                <v-row justify="center">
-                    <v-col :cols="!isMobile ? 8 : 12">
-                        <v-card>
-                            <v-card-title class="bg-primary"
-                                >add dept</v-card-title
-                            >
-                            <v-card-text>
-                                <v-form>
-                                    <v-container class="pl-0 pr-0">
-                                        <v-row>
-                                            <v-col>
-                                                <v-text-field
-                                                    type="text"
-                                                    label="New Dept"
-                                                    title="Add New Dept"
-                                                    prepend-icon="mdi-id-card"
-                                                    v-model="form.new_dept"
-                                                ></v-text-field>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-card-text>
+    <v-container>
+        <v-row justify="center"> </v-card-text>
     </v-card>
+            <v-col :cols="!isMobile ? 8 : 12">
+                <v-card>
+                    <v-card-title class="bg-primary">choose year</v-card-title>
+                    <v-card-text>
+                        <v-form>
+                            <v-container class="pl-0 pr-0">
+                                <v-row>
+                                    <v-col>
+                                        <v-select
+                                            prepend-icon="mdi-account-cog-outline"
+                                            label="Year"
+                                            dense
+                                            :items="yearsOfStudy"
+                                            v-model="form.Year"
+                                        >
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+
+        <v-row justify="center">
+            <v-col :cols="!isMobile ? 8 : 12">
+                <v-card>
+                    <v-card-title class="bg-primary"
+                        >choose depatment</v-card-title
+                    >
+                    <v-card-text>
+                        <v-form>
+                            <v-container class="pl-0 pr-0">
+                                <v-row>
+                                    <v-col>
+                                        <v-select
+                                            prepend-icon="mdi-account-cog-outline"
+                                            label="Dept"
+                                            dense
+                                            :items="departments"
+                                            v-model="form.Dept"
+                                        >
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+
+        <v-row justify="center">
+            <v-col :cols="!isMobile ? 8 : 12">
+                <v-card>
+                    <v-card-title class="bg-primary"
+                        >set number of students per group</v-card-title
+                    >
+                    <v-card-text>
+                        <v-form>
+                            <v-container class="pl-0 pr-0">
+                                <v-row>
+                                    <v-col>
+                                        <v-select
+                                            prepend-icon="mdi-account-cog-outline"
+                                            label="Num"
+                                            dense
+                                            :items="num"
+                                            v-model="form.Num"
+                                        >
+                                        </v-select>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+
+        <v-row justify="center">
+            <v-col :cols="!isMobile ? 8 : 12">
+                <v-card>
+                    <v-card-title class="bg-primary">add dept</v-card-title>
+                    <v-card-text>
+                        <v-form>
+                            <v-container class="pl-0 pr-0">
+                                <v-row>
+                                    <v-col>
+                                        <v-text-field
+                                            type="text"
+                                            label="New Dept"
+                                            title="Add New Dept"
+                                            prepend-icon="mdi-id-card"
+                                            v-model="form.new_dept"
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
