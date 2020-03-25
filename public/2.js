@@ -200,7 +200,7 @@ var render = function() {
             2
           ),
           _vm._v(" "),
-          _c("v-col", { attrs: { cols: "auto" } }, [_c("router-view")], 1)
+          _c("v-col", [_c("router-view")], 1)
         ],
         1
       )

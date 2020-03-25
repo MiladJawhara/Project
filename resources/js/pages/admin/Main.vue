@@ -45,7 +45,7 @@
                     </v-expansion-panels>
                 </template>
             </v-col>
-            <v-col cols="auto">
+            <v-col>
                 <router-view></router-view>
             </v-col>
         </v-row>

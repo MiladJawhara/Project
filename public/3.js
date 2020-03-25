@@ -138,10 +138,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -189,55 +185,73 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
+    "v-card",
     [
+      _c("v-card-title", [_vm._v("Settings")]),
+      _vm._v(" "),
       _c(
-        "v-row",
-        { attrs: { justify: "center" } },
+        "v-card-text",
         [
           _c(
-            "v-col",
-            { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
+            "v-container",
             [
               _c(
-                "v-card",
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
-                  _c("v-card-title", { staticClass: "bg-primary" }, [
-                    _vm._v("choose year")
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "v-card-text",
+                    "v-col",
+                    { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
                     [
                       _c(
-                        "v-form",
+                        "v-card",
                         [
+                          _c("v-card-title", { staticClass: "bg-primary" }, [
+                            _vm._v("choose year")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-container",
-                            { staticClass: "pl-0 pr-0" },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-form",
                                 [
                                   _c(
-                                    "v-col",
+                                    "v-container",
+                                    { staticClass: "pl-0 pr-0" },
                                     [
-                                      _c("v-select", {
-                                        attrs: {
-                                          "prepend-icon":
-                                            "mdi-account-cog-outline",
-                                          label: "Year",
-                                          dense: "",
-                                          items: _vm.yearsOfStudy
-                                        },
-                                        model: {
-                                          value: _vm.form.Year,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.form, "Year", $$v)
-                                          },
-                                          expression: "form.Year"
-                                        }
-                                      })
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            [
+                                              _c("v-select", {
+                                                attrs: {
+                                                  "prepend-icon":
+                                                    "mdi-account-cog-outline",
+                                                  label: "Year",
+                                                  dense: "",
+                                                  items: _vm.yearsOfStudy
+                                                },
+                                                model: {
+                                                  value: _vm.form.Year,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "Year",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "form.Year"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -255,61 +269,65 @@ var render = function() {
                   )
                 ],
                 1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { justify: "center" } },
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "v-card",
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
-                  _c("v-card-title", { staticClass: "bg-primary" }, [
-                    _vm._v("choose depatment")
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "v-card-text",
+                    "v-col",
+                    { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
                     [
                       _c(
-                        "v-form",
+                        "v-card",
                         [
+                          _c("v-card-title", { staticClass: "bg-primary" }, [
+                            _vm._v("choose depatment")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-container",
-                            { staticClass: "pl-0 pr-0" },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-form",
                                 [
                                   _c(
-                                    "v-col",
+                                    "v-container",
+                                    { staticClass: "pl-0 pr-0" },
                                     [
-                                      _c("v-select", {
-                                        attrs: {
-                                          "prepend-icon":
-                                            "mdi-account-cog-outline",
-                                          label: "Dept",
-                                          dense: "",
-                                          items: _vm.departments
-                                        },
-                                        model: {
-                                          value: _vm.form.Dept,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.form, "Dept", $$v)
-                                          },
-                                          expression: "form.Dept"
-                                        }
-                                      })
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            [
+                                              _c("v-select", {
+                                                attrs: {
+                                                  "prepend-icon":
+                                                    "mdi-account-cog-outline",
+                                                  label: "Dept",
+                                                  dense: "",
+                                                  items: _vm.departments
+                                                },
+                                                model: {
+                                                  value: _vm.form.Dept,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "Dept",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "form.Dept"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -327,61 +345,65 @@ var render = function() {
                   )
                 ],
                 1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { justify: "center" } },
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "v-card",
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
-                  _c("v-card-title", { staticClass: "bg-primary" }, [
-                    _vm._v("set number of students per group")
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "v-card-text",
+                    "v-col",
+                    { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
                     [
                       _c(
-                        "v-form",
+                        "v-card",
                         [
+                          _c("v-card-title", { staticClass: "bg-primary" }, [
+                            _vm._v("set number of students per group")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-container",
-                            { staticClass: "pl-0 pr-0" },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-form",
                                 [
                                   _c(
-                                    "v-col",
+                                    "v-container",
+                                    { staticClass: "pl-0 pr-0" },
                                     [
-                                      _c("v-select", {
-                                        attrs: {
-                                          "prepend-icon":
-                                            "mdi-account-cog-outline",
-                                          label: "Num",
-                                          dense: "",
-                                          items: _vm.num
-                                        },
-                                        model: {
-                                          value: _vm.form.Num,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.form, "Num", $$v)
-                                          },
-                                          expression: "form.Num"
-                                        }
-                                      })
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            [
+                                              _c("v-select", {
+                                                attrs: {
+                                                  "prepend-icon":
+                                                    "mdi-account-cog-outline",
+                                                  label: "Num",
+                                                  dense: "",
+                                                  items: _vm.num
+                                                },
+                                                model: {
+                                                  value: _vm.form.Num,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "Num",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "form.Num"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -399,60 +421,64 @@ var render = function() {
                   )
                 ],
                 1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-row",
-        { attrs: { justify: "center" } },
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "v-card",
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
-                  _c("v-card-title", { staticClass: "bg-primary" }, [
-                    _vm._v("add dept")
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "v-card-text",
+                    "v-col",
+                    { attrs: { cols: !_vm.isMobile ? 8 : 12 } },
                     [
                       _c(
-                        "v-form",
+                        "v-card",
                         [
+                          _c("v-card-title", { staticClass: "bg-primary" }, [
+                            _vm._v("add dept")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "v-container",
-                            { staticClass: "pl-0 pr-0" },
+                            "v-card-text",
                             [
                               _c(
-                                "v-row",
+                                "v-form",
                                 [
                                   _c(
-                                    "v-col",
+                                    "v-container",
+                                    { staticClass: "pl-0 pr-0" },
                                     [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          type: "text",
-                                          label: "New Dept",
-                                          title: "Add New Dept",
-                                          "prepend-icon": "mdi-id-card"
-                                        },
-                                        model: {
-                                          value: _vm.form.new_dept,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.form, "new_dept", $$v)
-                                          },
-                                          expression: "form.new_dept"
-                                        }
-                                      })
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  type: "text",
+                                                  label: "New Dept",
+                                                  title: "Add New Dept",
+                                                  "prepend-icon": "mdi-id-card"
+                                                },
+                                                model: {
+                                                  value: _vm.form.new_dept,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "new_dept",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "form.new_dept"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
