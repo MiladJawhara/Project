@@ -3,25 +3,19 @@
         <!-- NavBar -->
         <!-- <nav-bar /> -->
         <!-- NavBar -->
+        <side-bar>
+            <v-list-item :to="{ name: 'login' }">
+                <v-list-item-content>Login</v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'register' }">
+                <v-list-item-content>Register</v-list-item-content>
+            </v-list-item>
 
+            <v-list-item :to="{ name: 'admin' }">
+                <v-list-item-content>Admin</v-list-item-content>
+            </v-list-item>
+        </side-bar>
         <v-content>
-            <side-bar>
-                <v-list-item :to="{ name: 'login' }">
-                    <v-list-item-content>Login</v-list-item-content>
-                </v-list-item>
-                <v-list-item :to="{ name: 'register' }">
-                    <v-list-item-content>Register</v-list-item-content>
-                </v-list-item>
-
-                <v-list-group sub-group="true" color="#fff">
-                    <template v-slot:activator>
-                        <v-list-item-content>Admin</v-list-item-content>
-                    </template>
-                    <v-list-item link :to="{ name: 'admin-settings' }">
-                        Settings
-                    </v-list-item>
-                </v-list-group>
-            </side-bar>
             <v-container class="p-0 pt-5">
                 <v-row>
                     <!-- main -->

@@ -2179,12 +2179,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -39853,53 +39847,35 @@ var render = function() {
     "v-app",
     [
       _c(
-        "v-content",
+        "side-bar",
         [
           _c(
-            "side-bar",
-            [
-              _c(
-                "v-list-item",
-                { attrs: { to: { name: "login" } } },
-                [_c("v-list-item-content", [_vm._v("Login")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-item",
-                { attrs: { to: { name: "register" } } },
-                [_c("v-list-item-content", [_vm._v("Register")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-group",
-                {
-                  attrs: { "sub-group": "true", color: "#fff" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "activator",
-                      fn: function() {
-                        return [_c("v-list-item-content", [_vm._v("Admin")])]
-                      },
-                      proxy: true
-                    }
-                  ])
-                },
-                [
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item",
-                    { attrs: { link: "", to: { name: "admin-settings" } } },
-                    [_vm._v("\n                    Settings\n                ")]
-                  )
-                ],
-                1
-              )
-            ],
+            "v-list-item",
+            { attrs: { to: { name: "login" } } },
+            [_c("v-list-item-content", [_vm._v("Login")])],
             1
           ),
           _vm._v(" "),
+          _c(
+            "v-list-item",
+            { attrs: { to: { name: "register" } } },
+            [_c("v-list-item-content", [_vm._v("Register")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            { attrs: { to: { name: "admin" } } },
+            [_c("v-list-item-content", [_vm._v("Admin")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        [
           _c(
             "v-container",
             { staticClass: "p-0 pt-5" },
@@ -98206,12 +98182,12 @@ var map = {
 	"./App.vue": [
 		"./resources/js/pages/App.vue"
 	],
-	"./admin/main": [
-		"./resources/js/pages/admin/main.vue",
+	"./admin/Main": [
+		"./resources/js/pages/admin/Main.vue",
 		1
 	],
-	"./admin/main.vue": [
-		"./resources/js/pages/admin/main.vue",
+	"./admin/Main.vue": [
+		"./resources/js/pages/admin/Main.vue",
 		1
 	],
 	"./admin/settings": [
@@ -98607,11 +98583,11 @@ function importPage(path) {
     component: importPage('auth/Register')
   }, {
     path: '/admin',
-    name: 'admin-main',
-    component: importPage('admin/main'),
+    name: 'admin',
+    component: importPage('admin/Main'),
     children: [{
       path: 'settings',
-      name: 'admin-settings',
+      name: 'admin.settings',
       component: importPage('admin/settings')
     }]
   }]

@@ -18,24 +18,6 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-Route::get('/test', function () {
-
-    return view('test');
-});
-
-Route::get('/info', function () {
-
-    Session::all();
-
-    return session()->all();
-});
+Route::get('{path}', function () {
+    return view('layouts.app');
+})->where('path', '(.*)');

@@ -23,12 +23,12 @@ export default [
             },
             {
                 path: '/admin',
-                name: 'admin-main',
-                component: importPage('admin/main'),
+                name: 'admin',
+                component: importPage('admin/Main'),
                 children: [
                     {
                         path: 'settings',
-                        name: 'admin-settings',
+                        name: 'admin.settings',
                         component: importPage('admin/settings')
                     }
                 ]
