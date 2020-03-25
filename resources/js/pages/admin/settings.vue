@@ -1,7 +1,6 @@
 <template>
     <v-container>
         <v-row justify="center"> </v-card-text>
-    </v-card>
             <v-col :cols="!isMobile ? 8 : 12">
                 <v-card>
                     <v-card-title class="bg-primary">choose year</v-card-title>
