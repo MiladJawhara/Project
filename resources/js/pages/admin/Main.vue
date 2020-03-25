@@ -46,12 +46,14 @@
                 </template>
             </v-col>
             <v-col>
-                <v-card>
-                    <v-card-title>Settings</v-card-title>
-                    <v-card-text>
-                        <router-view></router-view>
-                    </v-card-text>
-                </v-card>
+                <transition name="fade">
+                    <v-card v-if="getTitle !== ''">
+                        <v-card-title> {{ getTitle }}</v-card-title>
+                        <v-card-text>
+                            <router-view></router-view>
+                        </v-card-text>
+                    </v-card>
+                </transition>
             </v-col>
         </v-row>
     </v-container>
@@ -74,6 +76,21 @@ export default {
     },
 
     computed: {
+        getTitle() {
+            let name = this.$route.name
+
+            for (const link in this.links) {
+                if (this.links.hasOwnProperty(link)) {
+                    const element = this.links[link]
+
+                    if (element.name === name) {
+                        return element.title
+                    }
+                }
+            }
+
+            return ''
+        },
         navigationHeaderstyle() {
             return 'background-color: lightgray;'
         },
