@@ -53,11 +53,12 @@
                                             title="Add New Dept"
                                             prepend-icon="mdi-bank-plus"
                                             v-model="form.new_dept"
+                                            @input="changeS2"
                                         ></v-text-field>
                                     
                                     <v-row>
                                         <v-col>
-                                        <v-btn rounded color="green" id="addD" @click="addDept">
+                                        <v-btn rounded color="green" id="addD" @click="addDept" v-if="checked2">
                                             <v-text>confirm</v-text>
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
@@ -82,11 +83,12 @@
                                             title="Add New Year"
                                             prepend-icon="mdi-shape-circle-plus"
                                             v-model="form.new_year"
+                                            @input="changeS"
                                         ></v-text-field>
                                     
                                     <v-row>
                                         <v-col>
-                                        <v-btn rounded color="green" id="addY" @click="addYear">
+                                        <v-btn rounded color="green" id="addY" @click="addYear" v-if="checked">
                                             <v-text>confirm</v-text>
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
@@ -130,7 +132,9 @@ export default {
             departments: ['none', 1, 2, 3, 4],
             num: [1, 2, 3, 4, 5, 6, 7, 8],
             numc1:0,
-            numc2:0
+            numc2:0,
+            checked:false,
+            checked2:false
         }
     },
     methods:{
@@ -146,6 +150,7 @@ export default {
         {
             var newY=this.yearsOfStudy,
                 newIn= document.getElementById('newYI').value;
+
             newY.splice(newY.length, 1, newIn);
             this.yearsOfStudy=newY;
             this.numc1++;
@@ -160,6 +165,16 @@ export default {
         {
             this.yearsOfStudy.pop();
             this.numc1--;
+        },
+        changeS()
+        {
+            var d=this.checked;
+            this.checked=!d;
+        },
+                changeS2()
+        {
+            var d=this.checked2;
+            this.checked2=!d;
         }
     },
     computed: {
