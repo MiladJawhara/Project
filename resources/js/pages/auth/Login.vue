@@ -157,6 +157,7 @@ export default {
     methods: {
         async login() {
             this.firstTime = false
+            this.snackbar = false
             try {
                 const { data } = await this.form.post('/api/auth/login')
                 this.snackbarMessage = 'Welcome back ' + data.user.f_name
