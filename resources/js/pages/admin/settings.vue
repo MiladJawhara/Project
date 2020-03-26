@@ -55,8 +55,19 @@
                                             v-model="form.new_dept"
                                         ></v-text-field>
                                     
-                                    <v-row justify="center">
-                                        <v-btn color="blue" id="addD" @click="addDept" size="xsmall">add dept</v-btn>
+                                    <v-row>
+                                        <v-col>
+                                        <v-btn rounded color="green" id="addD" @click="addDept">
+                                            <v-text>confirm</v-text>
+                                            <v-icon> mdi-check-circle-outline</v-icon>
+                                        </v-btn>
+                                        </v-col>
+                                         <v-col>
+                                        <v-btn rounded color="red" id="addD" @click="rollbackD"  v-if="numc2>0">
+                                            <v-text>rollback</v-text>
+                                            <v-icon> mdi-reply-outline</v-icon>
+                                        </v-btn>
+                                         </v-col>
                                     </v-row>
                                         </v-col>
                                   </v-row>
@@ -73,8 +84,19 @@
                                             v-model="form.new_year"
                                         ></v-text-field>
                                     
-                                    <v-row justify="center">
-                                        <v-btn color="blue" id="addY" @click="addYear">add year</v-btn>
+                                    <v-row>
+                                        <v-col>
+                                        <v-btn rounded color="green" id="addY" @click="addYear">
+                                            <v-text>confirm</v-text>
+                                            <v-icon> mdi-check-circle-outline</v-icon>
+                                        </v-btn>
+                                        </v-col>
+                                        <v-col>
+                                        <v-btn rounded color="red" id="addD" @click="rollbackY" v-if="numc1>0">
+                                            <v-text>rollback</v-text>
+                                            <v-icon> mdi-reply-outline</v-icon>
+                                        </v-btn>
+                                        </v-col>
                                     </v-row>
                                         </v-col>
                                   </v-row>
@@ -106,7 +128,9 @@ export default {
                 'fifth year'
             ],
             departments: ['none', 1, 2, 3, 4],
-            num: [1, 2, 3, 4, 5, 6, 7, 8]
+            num: [1, 2, 3, 4, 5, 6, 7, 8],
+            numc1:0,
+            numc2:0
         }
     },
     methods:{
@@ -114,15 +138,28 @@ export default {
         {
             var newD=this.departments;
             newD.splice(newD.length, 1, document.getElementById('newDI').value);
-            thi.departments=newD;
+            this.departments=newD;
+            this.numc2++;
 
         },
         addYear()
         {
-            var newY=this.yearsOfStudy;
-            newY.splice(newY.length, 1, document.getElementById('newYI').value);
-            thi.yearsOfStudy=newY;
+            var newY=this.yearsOfStudy,
+                newIn= document.getElementById('newYI').value;
+            newY.splice(newY.length, 1, newIn);
+            this.yearsOfStudy=newY;
+            this.numc1++;
 
+        },
+        rollbackD()
+        {
+            this.departments.pop();
+            this.numc2--;
+        },
+        rollbackY()
+        {
+            this.yearsOfStudy.pop();
+            this.numc1--;
         }
     },
     computed: {
