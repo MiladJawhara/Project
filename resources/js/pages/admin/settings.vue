@@ -16,11 +16,10 @@
                                             :items="yearsOfStudy"
                                             v-model="form.Year"
                                         >
-                                        
                                         </v-select>
                                     </v-col>
                                 </v-row>
-                            
+
                                 <v-row>
                                     <v-col>
                                         <v-select
@@ -33,7 +32,7 @@
                                         </v-select>
                                     </v-col>
                                 </v-row>
-                            
+
                                 <v-row>
                                     <v-col>
                                         <v-select
@@ -82,7 +81,7 @@
                                   </v-row>
                            </v-form>
     </v-container> 
-      </v-form>    
+ </v-form>    
   </v-card-text>
   </v-card>
   </v-col>
@@ -121,7 +120,7 @@ export default {
             thi.departments=newD;
 
         },
-                addYear()
+        addYear()
         {
             var newY=this.yearsOfStudy;
             newY.splice(newY.length, 1, document.getElementById('newYI').value);
