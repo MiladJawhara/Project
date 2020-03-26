@@ -2,9 +2,6 @@
     <v-container>
         <v-row justify="center">
             <v-col :cols="!isMobile ? 8 : 12">
-                <v-card >
-                    <v-card-title class="bg-primary" prepend-icon="mdi-tune" dense>General Settings</v-card-title>
-             <v-card-text>
                         <v-form>
                             <v-container class="pl-0 pr-0">
                                 <v-row>
@@ -58,12 +55,13 @@
                                             v-model="form.new_dept"
                                         ></v-text-field>
                                     
-                              
-                                        <v-btn color="blue" id="addD" @click="addDept">add dept</v-btn>
+                                    <v-row justify="center">
+                                        <v-btn color="blue" id="addD" @click="addDept" size="xsmall">add dept</v-btn>
+                                    </v-row>
                                         </v-col>
                                   </v-row>
-                           </v-form>
-                                                      <v-form>
+                          </v-form>
+                          <v-form>
                                 <v-row>
                                     <v-col>
                                         <v-text-field
@@ -71,19 +69,18 @@
                                             type="text"
                                             label="New Year"
                                             title="Add New Year"
-                                            prepend-icon="mdi-bank-plus"
+                                            prepend-icon="mdi-shape-circle-plus"
                                             v-model="form.new_year"
                                         ></v-text-field>
                                     
-                              
+                                    <v-row justify="center">
                                         <v-btn color="blue" id="addY" @click="addYear">add year</v-btn>
+                                    </v-row>
                                         </v-col>
                                   </v-row>
                            </v-form>
     </v-container> 
  </v-form>    
-  </v-card-text>
-  </v-card>
   </v-col>
   </v-row>
  </v-container>
