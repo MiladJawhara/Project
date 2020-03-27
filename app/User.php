@@ -166,4 +166,29 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * For Testing purposes
+     *
+     * @param string $email
+     * @param string $type
+     * @param string $f_name
+     * @param string $l_name
+     * @param string $password
+     * @param string $national_id
+     * @return boolean
+     */
+    public static function createUser(string $email, string $type = null, string $f_name = 'FirstName', string $l_name = 'LastName', string $password = '321654987', string $national_id = null): bool
+    {
+        $admin = new User();
+        $admin->user_type = $type ? $type : 'Test';
+        $admin->f_name = $f_name;
+        $admin->l_name = $l_name;
+        $admin->password = Hash::make($password);
+        $admin->email = $email;
+        $admin->email_verified_at = Date::now();
+        $admin->national_id = $national_id ? $national_id : random_int(10000000000, 99999999999);
+        $admin->save();
+        return true;
+    }
 }
