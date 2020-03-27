@@ -193,9 +193,24 @@
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+// import axios from 'axios'
 export default {
     name: 'Register',
     middleware: 'guest',
+    created() {
+        axios
+            .get('/api/years') // here we use axios to perform a get request to the server
+            .then(({ data }) => {
+                // then we call the then function on the promes returned from the get function
+                // and destructuring the respons object and take just data property from it
+                // watch is just an array of objects
+                data.forEach(year => {
+                    // then add the year title to the "yearsOfStudy" array
+                    this.yearsOfStudy.push(year.title)
+                })
+            })
+            .catch(err => {})
+    },
     data() {
         return {
             form: new Form({
@@ -204,7 +219,7 @@ export default {
             }),
             showPassword: false,
             accountTypes: ['Student', 'Supervisor'],
-            yearsOfStudy: ['first year', 'second year', 'theard year'],
+            yearsOfStudy: [],
             departments: ['none'],
             progressing: false
         }
