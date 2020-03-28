@@ -2,6 +2,8 @@
     <v-container>
         <v-row justify="center">
             <v-col :cols="!isMobile ? 8 : 12">
+
+
                         <v-form>
                             <v-container class="pl-0 pr-0">
                                 <v-row>
@@ -30,7 +32,60 @@
                                     </v-col>
                                 </v-row>
 
+                                <v-row justify="center">
+                                        <v-subheader>
+                                            <v-icon>
+                                                mdi-account
+                                            </v-icon>
+ 
+                                            <v-text>min and max students per group</v-text></v-subheader>
+                                            <v-icon>
+                                                mdi-account-group
+                                            </v-icon>
+                                </v-row>
                                 <v-row>
+                                    <v-row>
+                                        <v-col class="px-4">
+                                        <v-range-slider
+                                            v-model="range"
+                                            :max="max"
+                                            :min="min"
+                                            hide-details
+                                            class="align-center"
+                                            thumb-label
+                                            always-dirty
+                                            thumb-color="green"
+                                            
+                                            
+                                        >
+                                            <template v-slot:prepend>
+                                            <v-text-field
+                                                :value="range[0]"
+                                                class="mt-0 pt-0"
+                                                hide-details
+                                                single-line
+                                                type="number"
+                                                style="width: 30px"
+                                                @change="$set(range, 0, $event)"
+                                            ></v-text-field>
+                                            </template>
+                                            <template v-slot:append>
+                                            <v-text-field
+                                                :value="range[1]"
+                                                class="mt-0 pt-0"
+                                                hide-details
+                                                single-line
+                                                type="number"
+                                                style="width: 30px"
+                                                @change="$set(range, 1, $event)"
+                                            ></v-text-field>
+                                            </template>
+                                        </v-range-slider>
+                                        </v-col>
+                                    </v-row>
+
+                                </v-row>
+<!--                                 <v-row>
                                     <v-col>
                                         <v-select
                                             prepend-icon="mdi-account-group"
@@ -41,9 +96,9 @@
                                         >
                                         </v-select>
                                     </v-col>
-                                </v-row>
+                                </v-row> -->
                          
-                           <v-form>
+                        
                                 <v-row>
                                     <v-col>
                                         <v-text-field
@@ -53,12 +108,11 @@
                                             title="Add New Dept"
                                             prepend-icon="mdi-bank-plus"
                                             v-model="form.new_dept"
-                                            @input="changeS2"
                                         ></v-text-field>
                                     
                                     <v-row>
                                         <v-col>
-                                        <v-btn rounded color="green" id="addD" @click="addDept" v-if="checked2">
+                                        <v-btn rounded color="green" id="addD" @click="addDept" v-if="(form.new_dept)">
                                             <v-text>confirm</v-text>
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
@@ -72,8 +126,8 @@
                                     </v-row>
                                         </v-col>
                                   </v-row>
-                          </v-form>
-                          <v-form>
+                         
+                         
                                 <v-row>
                                     <v-col>
                                         <v-text-field
@@ -83,12 +137,11 @@
                                             title="Add New Year"
                                             prepend-icon="mdi-shape-circle-plus"
                                             v-model="form.new_year"
-                                            @input="changeS"
                                         ></v-text-field>
                                     
                                     <v-row>
                                         <v-col>
-                                        <v-btn rounded color="green" id="addY" @click="addYear" v-if="checked">
+                                        <v-btn rounded color="green" id="addY" @click="addYear" v-if="(form.new_year)">
                                             <v-text>confirm</v-text>
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
@@ -102,7 +155,32 @@
                                     </v-row>
                                         </v-col>
                                   </v-row>
-                           </v-form>
+        
+                                <v-tabs
+      v-model="tab"
+      background-color="blue lighten-2"
+      dark
+    >
+      <v-tab
+        v-for="n in departments"
+        :key="n"
+      >
+        dept: {{ n }}
+      </v-tab>
+    </v-tabs>
+        <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="i in departments"
+        :key="i"
+        :value="'dept:' + i"
+      >
+        <v-container fluid>
+{{ departments[i] }}
+        </v-container>
+      </v-tab-item>
+    </v-tabs-items>
+
+                           
     </v-container> 
  </v-form>    
   </v-col>
@@ -120,7 +198,9 @@ export default {
             form: new Form({
                 department: 'none',
                 year: 'first year',
-                numberOfStudents: 0
+                numberOfStudents: 0,
+                minNumberOStudents:0,
+                maxNumberOfStudens:0
             }),
             yearsOfStudy: [
                 'first year',
@@ -130,11 +210,11 @@ export default {
                 'fifth year'
             ],
             departments: ['none', 1, 2, 3, 4],
-            num: [1, 2, 3, 4, 5, 6, 7, 8],
             numc1:0,
             numc2:0,
-            checked:false,
-            checked2:false
+            min: 1,
+            max: 7,
+            range:[1,7]
         }
     },
     methods:{
@@ -175,6 +255,11 @@ export default {
         {
             var d=this.checked2;
             this.checked2=!d;
+        },
+        CallColor()
+        {
+            if (max) return ("red")
+             if(min) return("green")
         }
     },
     computed: {
@@ -187,6 +272,15 @@ export default {
         selectedNumber() {
             return this.form.Num
         },
+        selectedMinNumber()
+        {
+            return this.range[0]
+        },
+                selectedMaxNumber()
+        {
+            return this.range[1]
+        },
+
         ...mapGetters('global', ['isMobile'])
     }
 }
