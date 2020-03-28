@@ -16,6 +16,12 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    public static $USER_TYPES = [
+        'Student',
+        'Supervisor',
+        'Admin'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +31,6 @@ class User extends Authenticatable implements JWTSubject
         'f_name',
         'l_name',
         'user_type',
-        'user_name',
         'email',
         'password',
         'department',

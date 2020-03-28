@@ -101,16 +101,16 @@ class AuthController extends Controller
 
     protected function validator(array $data)
     {
+        if ($data['user_type'] === User::$USER_TYPES[0]) {
 
-        if ($data['user_type'] === 'student') {
             return Validator::make($data, [
                 'f_name' => ['required', 'string', 'max:255'],
                 'l_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
-                'university_id' => ['required', 'numeric', 'unique:users'],
-                'user_type' => ['required', 'string', 'in:Student,Supervisor'],
+                'national_id' => ['required', 'string', 'min:11', 'unique:users'],
+                'university_id' => ['required', 'string', 'unique:users,university_id'],
+                'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
                 'department' => ['required', 'string'],
                 'year_of_study' => ['required', 'string'],
             ]);
@@ -120,8 +120,8 @@ class AuthController extends Controller
                 'l_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'national_id' => ['required', 'numeric', 'min:11', 'unique:users'],
-                'user_type' => ['required', 'string', 'in:Student,Supervisor'],
+                'national_id' => ['required', 'string', 'min:11', 'unique:users'],
+                'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
                 'department' => ['required', 'string'],
             ]);
         }
@@ -138,8 +138,7 @@ class AuthController extends Controller
             'department' => $data['department'],
         ];
 
-
-        if ($data['user_type'] === 'student') {
+        if ($data['user_type'] === User::$USER_TYPES[0]) {
             $tempData['university_id'] = $data['university_id'];
             $tempData['year_of_study'] = $data['year_of_study'];
         }

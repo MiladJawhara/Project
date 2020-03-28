@@ -27,8 +27,9 @@ class CreateUsersTable extends Migration
             $table->string('department')->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
             $table->string('year_of_study')->nullable();
+            $table->string('university_id')->unique()->nullable();
             $table->string('profile_img_url')->nullable();
-            $table->string('university_id')->nullable()->unique();
+
             $table->rememberToken();
             $table->timestamps();
 
