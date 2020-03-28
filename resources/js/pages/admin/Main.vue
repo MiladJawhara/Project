@@ -69,6 +69,14 @@ export default {
                 {
                     title: 'Settings',
                     name: 'admin.settings'
+                },
+                {
+                    title:'Dashboard',
+                    name: 'admin.Dashboard'
+                },
+                {
+                    title:'Add professor',
+                    name:'admin.AddAdmin'
                 }
             ]
         }
