@@ -86,7 +86,7 @@
                                     <v-row>
                                         <v-col>
                                             <ValidationProvider
-                                                rules="required|min:8|alpha_dash|password:@confirm"
+                                                rules="required|min:8|alpha_dash|password:@Confirm"
                                                 name="Password"
                                                 v-slot="{ errors }"
                                             >
@@ -118,7 +118,7 @@
                                         <v-col>
                                             <ValidationProvider
                                                 rules="required|alpha_dash"
-                                                name="confirm"
+                                                name="Confirm"
                                                 v-slot="{ errors }"
                                             >
                                                 <v-text-field
@@ -146,7 +146,7 @@
                                         <v-col>
                                             <ValidationProvider
                                                 rules="required|digits:11"
-                                                name="Confirm"
+                                                name="National ID"
                                                 v-slot="{ errors }"
                                             >
                                                 <v-text-field
@@ -179,14 +179,23 @@
                                     >
                                         <v-row>
                                             <v-col>
-                                                <v-select
-                                                    prepend-icon="mdi-timetable"
-                                                    label="Year Of Study"
-                                                    dense
-                                                    :items="yearsOfStudy"
-                                                    v-model="form.year_of_study"
+                                                <ValidationProvider
+                                                    rules="required"
+                                                    name="Year Of Study"
+                                                    v-slot="{ errors }"
                                                 >
-                                                </v-select>
+                                                    <v-select
+                                                        prepend-icon="mdi-timetable"
+                                                        label="Year Of Study"
+                                                        :error-messages="errors"
+                                                        dense
+                                                        :items="yearsOfStudy"
+                                                        v-model="
+                                                            form.year_of_study
+                                                        "
+                                                    >
+                                                    </v-select>
+                                                </ValidationProvider>
                                             </v-col>
                                         </v-row>
 
@@ -194,7 +203,7 @@
                                             <v-col>
                                                 <ValidationProvider
                                                     rules="required|numeric"
-                                                    name="Confirm"
+                                                    name="University ID"
                                                     v-slot="{ errors }"
                                                 >
                                                     <v-text-field
