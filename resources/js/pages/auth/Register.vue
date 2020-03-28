@@ -299,7 +299,7 @@ extend('required', {
 
 extend('email', {
     ...email,
-    message: 'Pleas enter a valid email address'
+    message: 'Please enter a valid email address'
 })
 extend('min', {
     validate(value, { min }) {

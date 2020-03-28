@@ -133,7 +133,7 @@ extend('required', {
 
 extend('email', {
     ...email,
-    message: 'Pleas enter a valid email address'
+    message: 'Please enter a valid email address'
 })
 
 export default {
