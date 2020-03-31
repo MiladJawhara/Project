@@ -7,11 +7,17 @@
             color="teal"
             @click="drawer = !drawer"
             fixed
-            style="z-index: 1 ;left: -25px; padding-left: 25px"
+            style="z-index: 10 ;left: -25px; padding-left: 25px"
         >
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
         </v-btn>
-        <v-navigation-drawer v-model="drawer" color="primary" fixed dark>
+        <v-navigation-drawer
+            style="z-index: 99"
+            v-model="drawer"
+            color="primary"
+            fixed
+            dark
+        >
             <v-list dense nav class="py-0">
                 <v-list-item two-line>
                     <v-list-item-avatar>

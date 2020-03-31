@@ -10,6 +10,7 @@ export const state = {
 export const mutations = {
     [types.SET_SCREEN_WIDTH](state) {
         state.screenWidth = window.screen.width
+        state.mobileScreen = state.screenWidth <= mobileScreenLimit
     },
     [types.TOGGLE_SIDE_BAR](state) {
         state.showSideBar = !state.showSideBar
