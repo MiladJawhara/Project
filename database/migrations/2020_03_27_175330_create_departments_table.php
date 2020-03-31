@@ -51,5 +51,7 @@ class CreateDepartmentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('departments');
+        Schema::dropIfExists('years');
+        Schema::dropIfExists('departments_groups_settings');
     }
 }
