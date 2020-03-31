@@ -1,5 +1,4 @@
 // gloabal.js
-
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH'
 export const TOGGLE_SIDE_BAR = 'TOGGLE_SIDE_BAR'
 
@@ -13,3 +12,6 @@ export const UPDATE_USER = 'UPDATE_USER'
 
 // lang.js
 export const SET_LOCALE = 'SET_LOCALE'
+
+// data.js
+export const SET_YEARS = 'SET_YEARS'

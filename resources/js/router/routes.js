@@ -30,6 +30,11 @@ export default [
                         path: 'settings',
                         name: 'admin.settings',
                         component: importPage('admin/Settings')
+                    },
+                    {
+                        path: 'dashboard',
+                        name: 'admin.dashboard',
+                        component: importPage('admin/Dashboard')
                     }
                 ]
             }

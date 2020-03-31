@@ -279,7 +279,7 @@
 <script>
 import axios from 'axios'
 import Form from 'vform'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import {
     required,
     email,
@@ -342,18 +342,11 @@ export default {
     name: 'Register',
     middleware: 'guest',
     created() {
-        axios
-            .get('/api/years') // here we use axios to perform a get request to the server
-            .then(({ data }) => {
-                // then we call the then function on the promes returned from the get function
-                // and destructuring the respons object and take just data property from it
-                // watch is just an array of objects
-                data.forEach(year => {
-                    // then add the year title to the "yearsOfStudy" array
-                    this.yearsOfStudy.push(year.title)
-                })
+        this.getYears().then(data => {
+            data.forEach(year => {
+                this.yearsOfStudy.push(year.title)
             })
-            .catch(err => {})
+        })
     },
     data() {
         return {
@@ -390,6 +383,7 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
+        ...mapActions('data', ['getYears']),
         async createNewAccount() {
             if (this.progressing) return
             this.progressing = true

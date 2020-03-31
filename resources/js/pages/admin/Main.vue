@@ -71,12 +71,12 @@ export default {
                     name: 'admin.settings'
                 },
                 {
-                    title:'Dashboard',
-                    name: 'admin.Dashboard'
+                    title: 'Dashboard',
+                    name: 'admin.dashboard'
                 },
                 {
-                    title:'Add professor',
-                    name:'admin.AddAdmin'
+                    title: 'Add professor',
+                    name: 'admin.AddAdmin'
                 }
             ]
         }
