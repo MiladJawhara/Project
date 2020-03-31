@@ -27,6 +27,7 @@ class AuthController extends Controller
 
     public function register()
     {
+        dd('Hello');
         $data =  $this->validator(request()->all())->validate();
 
         $this->createUser($data);
