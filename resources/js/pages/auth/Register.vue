@@ -343,9 +343,7 @@ export default {
     middleware: 'guest',
     created() {
         this.getYears().then(data => {
-            data.forEach(year => {
-                this.yearsOfStudy.push(year.title)
-            })
+            this.yearsOfStudy = data
         })
     },
     data() {

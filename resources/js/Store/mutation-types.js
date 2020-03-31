@@ -14,4 +14,4 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const SET_LOCALE = 'SET_LOCALE'
 
 // data.js
-export const SET_YEARS = 'SET_YEARS'
+export const SET_YEARS_TITLES = 'SET_YEARS_TITLES'

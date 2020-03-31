@@ -16,12 +16,6 @@ class Year extends Model
     public static function getDefault()
     {
 
-        foreach (self::$defaultYearsTitle as $key => $value) {
-            self::create(
-                [
-                    'title' => $value
-                ]
-            );
-        }
+        return self::$defaultYearsTitle;
     }
 }

@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 
 // state
 export const state = {
-    years: []
+    yearsTitles: []
 }
 
 // getters
@@ -11,8 +11,8 @@ export const getters = {}
 
 // mutations
 export const mutations = {
-    [types.SET_YEARS](state, years) {
-        state.years = years
+    [types.SET_YEARS_TITLES](state, yearsTitle) {
+        state.yearsTitles = yearsTitle
     }
 }
 
@@ -20,14 +20,14 @@ export const mutations = {
 export const actions = {
     getYears({ state, commit }) {
         return new Promise((resolve, reject) => {
-            if (state.years.length == 0) {
+            if (state.yearsTitles.length == 0) {
                 Axios.get('/api/years').then(res => {
                     const data = res.data
-                    commit(types.SET_YEARS, data)
+                    commit(types.SET_YEARS_TITLES, data)
                     resolve(data)
                 })
             } else {
-                resolve(state.years)
+                resolve(state.yearsTitles)
             }
         })
     }
