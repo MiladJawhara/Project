@@ -13,11 +13,8 @@ class Year extends Model
     private static $defaultYearsTitle = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
 
 
-    public static function init()
+    public static function getDefault()
     {
-        if (Year::all()->count() !== 0) {
-            return;
-        }
 
         foreach (self::$defaultYearsTitle as $key => $value) {
             self::create(
