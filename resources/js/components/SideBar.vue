@@ -18,7 +18,11 @@
             fixed
             dark
         >
-            <v-list dense nav class="py-0">
+            <v-btn icon fixed right style="z-index: 10" @click="drawer = false"
+                ><v-icon style="rigth:15px">mdi-close</v-icon>
+            </v-btn>
+
+            <v-list dense nav>
                 <v-list-item two-line>
                     <v-list-item-avatar>
                         <img
