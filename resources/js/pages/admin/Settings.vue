@@ -38,7 +38,7 @@
                                                 mdi-account
                                             </v-icon>
  
-                                            <v-text>min and max students per group</v-text></v-subheader>
+                                            min and max students per group</v-subheader>
                                             <v-icon>
                                                 mdi-account-group
                                             </v-icon>
@@ -113,13 +113,13 @@
                                     <v-row>
                                         <v-col>
                                         <v-btn rounded color="green" id="addD" @click="addDept" v-if="(form.new_dept)">
-                                            <v-text>confirm</v-text>
+                                            confirm
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
                                         </v-col>
                                          <v-col>
                                         <v-btn rounded color="red" id="addD" @click="rollbackD"  v-if="numc2>0">
-                                            <v-text>rollback</v-text>
+                                            rollback
                                             <v-icon> mdi-reply-outline</v-icon>
                                         </v-btn>
                                          </v-col>
@@ -138,17 +138,17 @@
                                             prepend-icon="mdi-shape-circle-plus"
                                             v-model="form.new_year"
                                         ></v-text-field>
-                                    
+                                
                                     <v-row>
                                         <v-col>
                                         <v-btn rounded color="green" id="addY" @click="addYear" v-if="(form.new_year)">
-                                            <v-text>confirm</v-text>
+                                            confirm
                                             <v-icon> mdi-check-circle-outline</v-icon>
                                         </v-btn>
                                         </v-col>
                                         <v-col>
                                         <v-btn rounded color="red" id="addD" @click="rollbackY" v-if="numc1>0">
-                                            <v-text>rollback</v-text>
+                                            rollback
                                             <v-icon> mdi-reply-outline</v-icon>
                                         </v-btn>
                                         </v-col>
@@ -156,29 +156,23 @@
                                         </v-col>
                                   </v-row>
         
-                                <v-tabs
+                
+
+  
+    <v-tabs
       v-model="tab"
-      background-color="blue lighten-2"
+      background-color="red lighten-2"
       dark
     >
       <v-tab
-        v-for="n in departments"
-        :key="n"
+        v-for="dept in departments"
+        :key="dept"
       >
-        dept: {{ n }}
+        dept: {{dept}}
+
       </v-tab>
     </v-tabs>
-        <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="i in departments"
-        :key="i"
-        :value="'dept:' + i"
-      >
-        <v-container fluid>
-{{ departments[i] }}
-        </v-container>
-      </v-tab-item>
-    </v-tabs-items>
+
 
                            
     </v-container> 
@@ -196,8 +190,9 @@ export default {
     data() {
         return {
             form: new Form({
+                tab:null,
                 department: 'none',
-                year: 'first year',
+                year: 'none',
                 numberOfStudents: 0,
                 minNumberOStudents:0,
                 maxNumberOfStudens:0
