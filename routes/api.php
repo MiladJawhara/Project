@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/years', fn () => Year::getDefault());
+Route::get('/years', function () {
+    return Year::getDefault();
+});
 
 Route::group([
     'prefix' => 'auth'
