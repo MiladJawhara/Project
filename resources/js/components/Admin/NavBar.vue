@@ -1,7 +1,7 @@
 <template>
     <nav
-        class="navbar navbar-expand-lg navbar-light"
-        style="background-color: #fafafa;"
+        class="navbar navbar-expand-lg navbar-light shadow-sm"
+        style="background-color: #dddddd;"
     >
         <a class="navbar-brand">Admin</a>
         <button
