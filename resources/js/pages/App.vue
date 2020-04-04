@@ -16,7 +16,7 @@
             </v-list-item>
         </side-bar>
         <v-content>
-            <v-container class="p-0 pt-5">
+            <v-container class="p-0">
                 <v-row>
                     <!-- main -->
                     <v-col>
