@@ -46,16 +46,18 @@
                     </template>
                 </v-col> -->
                 <v-col>
-                    <transition name="fade">
-                        <v-card v-if="getTitle !== ''">
+                    <v-card v-if="getTitle !== ''">
+                        <transition name="fade">
                             <v-card-title class="bg-primary">
-                                {{ getTitle }}</v-card-title
-                            >
-                            <v-card-text>
+                                {{ getTitle }}
+                            </v-card-title>
+                        </transition>
+                        <v-card-text>
+                            <transition name="fade">
                                 <router-view></router-view>
-                            </v-card-text>
-                        </v-card>
-                    </transition>
+                            </transition>
+                        </v-card-text>
+                    </v-card>
                 </v-col>
             </v-row>
         </v-container>

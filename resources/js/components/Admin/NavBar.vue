@@ -38,6 +38,7 @@
                             :aria-labelledby="link.title"
                         >
                             <router-link
+                                tag="a"
                                 v-for="(subLink, i) in link.data"
                                 :key="i"
                                 class="dropdown-item"
