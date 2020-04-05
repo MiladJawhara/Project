@@ -85,7 +85,7 @@ export default {
                     data: [
                         {
                             title: 'Gloabal Settings',
-                            data: 'admin.settings'
+                            data: 'admin.groups.globalSettings'
                         }
                     ]
                 }

@@ -22,14 +22,14 @@ export default [
                 component: importPage('auth/Register')
             },
             {
-                path: '/admin',
+                path: 'admin',
                 name: 'admin',
                 component: importPage('admin/Main'),
                 children: [
                     {
-                        path: 'settings',
-                        name: 'admin.settings',
-                        component: importPage('admin/Settings')
+                        path: 'groups/globalSettings',
+                        name: 'admin.groups.globalSettings',
+                        component: importPage('admin/GroupsGloabalSettings')
                     },
                     {
                         path: 'dashboard',
