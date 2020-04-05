@@ -15,3 +15,4 @@ export const SET_LOCALE = 'SET_LOCALE'
 
 // data.js
 export const SET_YEARS_TITLES = 'SET_YEARS_TITLES'
+export const SET_DEPARTMENTS = 'SET_DEPARTMENTS'
