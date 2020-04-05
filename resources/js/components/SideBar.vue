@@ -17,6 +17,7 @@
             color="primary"
             fixed
             dark
+            temporary
         >
             <v-btn icon fixed right style="z-index: 10" @click="drawer = false"
                 ><v-icon style="rigth:15px">mdi-close</v-icon>
