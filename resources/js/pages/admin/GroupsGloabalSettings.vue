@@ -4,11 +4,11 @@
             <v-col>
                 <v-tabs v-model="deptsTab" grow background-color="#add8e6">
                     <v-tab
-                        @change="changeDept(dept.id)"
-                        v-for="dept in departments"
-                        :key="dept.id"
+                        @change="changeDept(i)"
+                        v-for="(dept, i) in departments"
+                        :key="i"
                     >
-                        {{ dept.name }}
+                        {{ dept.title }}
                     </v-tab>
                 </v-tabs>
             </v-col>
@@ -115,40 +115,58 @@ export default {
     name: 'admin-groupsGlobalSettings',
 
     created() {
-        this.getDepartments().then(data => {
-            this.departments = data
-            this.changeDept(0)
+        this.getYears().then((data) => {
+            this.allYears = data
+            this.getDepartments().then((data) => {
+                this.departments = data
+                this.changeDept(0)
+            })
         })
     },
     data() {
         return {
             deptsTab: null,
-            selectedDept: 0,
+            selectedDept: 1,
             yearsList: [],
+            allYears: [],
             selectedYear: null,
             range: [2, 4],
             departments: [],
             // dialogs
             newYearDialog: false,
             newYearName: '',
-            newYearRange: [2, 4]
+            newYearRange: [2, 4],
         }
     },
     methods: {
-        ...mapActions('data', ['getDepartments']),
+        ...mapActions('data', ['getDepartments', 'getYears']),
         changeDept(id) {
             this.selectedYear = null
             this.yearsList = []
             this.selectedDept = id
-            this.yearsList = this.departments[id].settings.map(
-                year => year.name
+            this.yearsList = this.departments[id].groups_settings.map(
+                (groupsSetting) => {
+                    return this.allYears.find(
+                        (year) => year.id == groupsSetting.year_id
+                    ).title
+                }
             )
         },
         yearChanged() {
             if (this.selectedYear !== null) {
-                this.range = this.departments[this.selectedDept].settings.find(
-                    year => year.name === this.selectedYear
-                ).range
+                const settingID = this.allYears.find(
+                    (year) => year.title == this.selectedYear
+                ).id
+
+                const showedSetting = this.departments[
+                    this.selectedDept
+                ].groups_settings.find((setting) => {
+                    return setting.year_id == settingID
+                })
+
+                const min = showedSetting.min_group_members_count
+                const max = showedSetting.max_group_members_count
+                this.range = [min, max]
             }
         },
         addNewYear() {
@@ -156,10 +174,10 @@ export default {
         },
         resolveNewYear() {
             const { selectedDept } = this
-            this.departments[selectedDept].settings.push({
-                id: this.departments[selectedDept].settings.length,
+            this.departments[selectedDept - 1].groups_settings.push({
+                id: this.departments[selectedDept - 1].groups_settings.length,
                 name: this.newYearName,
-                range: this.newYearRange
+                range: this.newYearRange,
             })
             const selectedYear = this.selectedYear
             this.changeDept(selectedDept)
@@ -168,11 +186,11 @@ export default {
             this.yearChanged()
             this.newYearName = ''
             this.newYearRange = [2, 4]
-        }
+        },
     },
     computed: {
-        ...mapGetters('global', ['isMobile'])
-    }
+        ...mapGetters('global', ['isMobile']),
+    },
 }
 </script>
 

@@ -2,7 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Department;
 use App\User;
+use App\Year;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Hash;
@@ -25,9 +27,9 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->email(),
         'password' => Hash::make('12345678'),
         'national_id' => $faker->numberBetween(),
-        'user_type' => 'student',
-        'department' => 'none',
-        'university_id' => $faker->randomNumber(),
-        'year_of_study' => 'الخامسة',
+        'user_type' => $faker->randomElement([User::$USER_TYPES[0], User::$USER_TYPES[1]]),
+        'department_id' => Department::all()->random()->id,
+        'university_id' => $faker->unique()->numberBetween(1, 99999),
+        'year_id' => Year::all()->random()->id,
     ];
 });

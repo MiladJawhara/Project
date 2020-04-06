@@ -16,10 +16,10 @@ class Department extends Model
      *
      * @return Collection
      */
-    public function settings(): Collection
-    {
-        return DB::table('departments_groups_settings')->select()->where('department_id', '=', $this->id)->get();
-    }
+    // public function groupsSettings(): Collection
+    // {
+    //     return DB::table('departments_groups_settings')->select()->where('department_id', '=', $this->id)->get();
+    // }
 
 
 
@@ -29,7 +29,7 @@ class Department extends Model
      * @param integer $yearID
      * @return Collection
      */
-    public function YearSettings(int $yearID)
+    public function groupsSettingsByYear(int $yearID)
     {
         return $this->settings()->where('year_id', '=', $yearID)->first();
     }
@@ -54,5 +54,11 @@ class Department extends Model
         ];
 
         return DB::table('departments_groups_settings')->updateOrInsert($data);
+    }
+
+
+    public function groupsSettings()
+    {
+        return $this->hasMany(GroupsSetting::class);
     }
 }

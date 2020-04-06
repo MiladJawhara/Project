@@ -3,8 +3,8 @@ import * as types from '../mutation-types'
 
 // state
 export const state = {
-    yearsTitles: [],
-    departments: []
+    years: [],
+    departments: [],
 }
 
 // getters
@@ -12,12 +12,12 @@ export const getters = {}
 
 // mutations
 export const mutations = {
-    [types.SET_YEARS_TITLES](state, yearsTitle) {
-        state.yearsTitles = yearsTitle
+    [types.SET_YEARS_TITLES](state, years) {
+        state.years = years
     },
     [types.SET_DEPARTMENTS](state, departments) {
         state.departments = departments
-    }
+    },
 }
 /**
  *
@@ -29,7 +29,7 @@ export const mutations = {
 function getData(stateName, commitType, url, ctx) {
     return new Promise((resolve, reject) => {
         if (stateName.length == 0) {
-            Axios.get(url).then(res => {
+            Axios.get(url).then((res) => {
                 const data = res.data
                 ctx.commit(commitType, data)
                 resolve(data)
@@ -42,19 +42,14 @@ function getData(stateName, commitType, url, ctx) {
 // actions
 export const actions = {
     getYears(ctx) {
-        return getData(
-            state.yearsTitles,
-            types.SET_YEARS_TITLES,
-            '/api/years',
-            ctx
-        )
+        return getData(state.years, types.SET_YEARS_TITLES, '/api/years', ctx)
     },
     getDepartments(ctx) {
         return getData(
             state.departments,
             types.SET_DEPARTMENTS,
-            '/api/departments',
+            '/api/admin/groups/globalSettings',
             ctx
         )
-    }
+    },
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Department;
+use App\GroupsSetting;
 use App\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,55 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/years', function () {
-    return Year::getDefault();
+    return Year::all();
 });
 
-Route::get('/departments', function () {
-    return [
-        [
-            'id' => 0,
-            'name' => 'dept1',
-            'settings' => [
-                [
-                    'id' => 0,
-                    'name' => 'First',
-                    'range' => [2, 4]
-                ],
-                [
-                    'id' => 1,
-                    'name' => 'Second',
-                    'range' => [1, 2]
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Fifth',
-                    'range' => [5, 7]
-                ]
-            ]
-        ],
-        [
-            'id' => 1,
-            'name' => 'dept2',
-            'settings' => [
-                [
-                    'id' => 0,
-                    'name' => 'Second',
-                    'range' => [3, 6]
-                ],
-                [
-                    'id' => 1,
-                    'name' => 'Fourth',
-                    'range' => [2, 3]
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Fifth',
-                    'range' => [1, 4]
-                ]
-            ]
-        ]
-    ];
+Route::get('/admin/groups/globalSettings', function () {
+    return Department::with('groupsSettings')->get();
 });
+
+Route::put('/admin/groups/globalSettings', 'GroupsSettingController@update');
+Route::post('/admin/groups/globalSettings', 'GroupsSettingController@store');
+Route::delete('/admin/groups/globalSettings', 'GroupsSettingController@destroy');
+
 Route::group([
     'prefix' => 'auth'
 ], function ($router) {
