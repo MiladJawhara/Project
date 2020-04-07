@@ -2,6 +2,7 @@
 
 use App\Department;
 use App\GroupsSetting;
+use App\User;
 use App\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/years', function () {
     return Year::all();
+});
+
+Route::get('/supervisors', function () {
+    return User::where('user_type', '=', User::$USER_TYPES[1])->get();
 });
 
 Route::get('/admin/groups/globalSettings', function () {
