@@ -288,39 +288,39 @@ import {
     password,
     alpha,
     digits,
-    numeric,
+    numeric
 } from 'vee-validate/dist/rules'
 import { extend, ValidationProvider, ValidationObserver } from 'vee-validate'
 
 extend('required', {
     ...required,
-    message: "{_field_} can't be empty!",
+    message: "{_field_} can't be empty!"
 })
 
 extend('email', {
     ...email,
-    message: 'Please enter a valid email address',
+    message: 'Please enter a valid email address'
 })
 extend('min', {
     validate(value, { min }) {
         return value.length >= min
     },
     params: ['min'],
-    message: 'The {_field_} field must have at least {min} characters ',
+    message: 'The {_field_} field must have at least {min} characters '
 })
 extend('alpha_dash', {
-    ...alpha_dash,
+    ...alpha_dash
 })
 extend('alpha', {
-    ...alpha,
+    ...alpha
 })
 extend('digits', {
     ...digits,
-    message: 'The {_field_} field must consest of just {length} digits ',
+    message: 'The {_field_} field must consest of just {length} digits '
 })
 extend('numeric', {
     ...numeric,
-    message: 'The {_field_}  field may only contain numeric characters',
+    message: 'The {_field_}  field may only contain numeric characters'
 })
 extend('minmax', {
     validate(value, { min, max }) {
@@ -328,32 +328,32 @@ extend('minmax', {
     },
     params: ['min', 'max'],
     message:
-        'The {_field_} field must have at least {min} characters and {max} characters at most',
+        'The {_field_} field must have at least {min} characters and {max} characters at most'
 })
 extend('password', {
     params: ['target'],
     validate(value, { target }) {
         return value === target
     },
-    message: 'Password confirmation does not match',
+    message: 'Password confirmation does not match'
 })
 
 export default {
     name: 'Register',
     middleware: 'guest',
     created() {
-        this.getYears().then((data) => {
-            this.yearsOfStudy = data.map((year) => year.title)
+        this.getYears().then(data => {
+            this.yearsOfStudy = data.map(year => year.title)
         })
-        this.getDepartments().then((data) => {
-            this.departmentsTitles = data.map((dept) => dept.title)
+        this.getDepartments().then(data => {
+            this.departmentsTitles = data.map(dept => dept.title)
         })
     },
     data() {
         return {
             form: new Form({
                 user_type: 'Student',
-                department: 'none',
+                department: 'none'
             }),
             showPassword: false,
             accountTypes: ['Student', 'Supervisor'],
@@ -361,7 +361,7 @@ export default {
             departmentsTitles: ['none'],
             progressing: false,
             snackbarMessage: '',
-            snackbar: false,
+            snackbar: false
         }
     },
     watch: {
@@ -375,13 +375,13 @@ export default {
                     delete this.form.university_id
                 }
             }
-        },
+        }
     },
     computed: {
         selectedAccountType() {
             return this.form.user_type
         },
-        ...mapGetters('global', ['isMobile']),
+        ...mapGetters('global', ['isMobile'])
     },
     methods: {
         ...mapActions('data', ['getYears', 'getDepartments']),
@@ -390,8 +390,10 @@ export default {
             this.progressing = true
             try {
                 const { data } = await this.form.post('/api/auth/register')
+
                 this.snackbarMessage = 'Account created..Well done!!'
                 this.snackbar = true
+                this.$router.push({ name: 'login' })
             } catch (err) {
                 const errors = this.form.errors.errors
                 this.snackbarMessage = errors[Object.keys(errors)[0]][0]
@@ -399,12 +401,12 @@ export default {
             } finally {
                 this.progressing = false
             }
-        },
+        }
     },
     components: {
         ValidationProvider,
-        ValidationObserver,
-    },
+        ValidationObserver
+    }
 }
 </script>
 

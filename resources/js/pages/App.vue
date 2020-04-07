@@ -40,6 +40,7 @@ export default {
     name: 'App',
 
     created() {
+        this.fetchUser()
         window.addEventListener('resize', this.setScreenWidth)
         this.setScreenWidth()
     },
@@ -58,7 +59,8 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
-        ...mapActions('global', ['setScreenWidth'])
+        ...mapActions('global', ['setScreenWidth']),
+        ...mapActions('auth', ['fetchUser'])
     }
 }
 </script>

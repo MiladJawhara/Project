@@ -29,7 +29,7 @@ class AuthController extends Controller
     {
         $data =  $this->validator(request()->all())->validate();
 
-        $this->createUser($data);
+        $user = $this->createUser($data);
 
         return response()->json(['status' => 'success']);
     }
@@ -54,7 +54,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function user()
     {
         return response()->json(auth()->user());
     }
@@ -91,7 +91,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
+            'token' => $token,
             'user' => auth()->user(),
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60

@@ -69,7 +69,7 @@ import { mapGetters } from 'vuex'
 import NavBar from '../../components/Admin/NavBar'
 export default {
     name: 'admin',
-
+    middleware: 'auth',
     components: {
         NavBar
     },

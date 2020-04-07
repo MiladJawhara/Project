@@ -61,6 +61,15 @@
                                             </ValidationProvider>
                                         </v-col>
                                     </v-row>
+                                    <v-row justify="end">
+                                        <v-col cols="auto">
+                                            <v-switch
+                                                v-model="remember"
+                                                label="Remember me?"
+                                                dir="ltr"
+                                            ></v-switch>
+                                        </v-col>
+                                    </v-row>
                                     <v-row>
                                         <v-col :cols="isMobile ? 12 : 'auto'">
                                             <router-link to="/">
@@ -122,7 +131,7 @@
 
 <script>
 import Form from 'vform'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { required, email, min } from 'vee-validate/dist/rules'
 import { extend, ValidationProvider, ValidationObserver } from 'vee-validate'
 
@@ -148,11 +157,13 @@ export default {
             showPassword: false,
             snackbarMessage: '',
             snackbar: false,
+            remember: false,
             firstTime: true
         }
     },
     computed: {
-        ...mapGetters('global', ['isMobile'])
+        ...mapGetters('global', ['isMobile']),
+        ...mapGetters('auth', ['user'])
     },
     methods: {
         async login() {
@@ -160,6 +171,17 @@ export default {
             this.snackbar = false
             try {
                 const { data } = await this.form.post('/api/auth/login')
+
+                this.saveToken({
+                    token: data.token,
+                    remember: this.remember
+                })
+                await this.fetchUser()
+                console.log(this.user)
+                if (this.user.user_type == 'Admin') {
+                } else {
+                    this.$router.push({ name: 'user.dashboard' })
+                }
                 this.snackbarMessage = 'Welcome back ' + data.user.f_name
                 this.snackbar = true
             } catch (err) {
@@ -168,8 +190,11 @@ export default {
                 this.form.email = ''
                 this.form.password = ''
                 this.$refs.form.reset()
+
+                console.log(err)
             }
-        }
+        },
+        ...mapActions('auth', ['saveToken', 'fetchUser'])
     },
     components: {
         ValidationProvider,

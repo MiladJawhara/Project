@@ -21,6 +21,16 @@ try {
 
 window.axios = require('axios')
 
+import store from './Store/index'
+window.axios.interceptors.request.use(request => {
+    const token = store.getters['auth/token']
+    if (token) {
+        request.headers.common['Authorization'] = `Bearer ${token}`
+    }
+
+    return request
+})
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 window.progress = require('nprogress')
