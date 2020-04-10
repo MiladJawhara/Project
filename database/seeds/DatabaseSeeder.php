@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             YearSeeder::class,
             DepartmentSeeder::class,
             UserSeeder::class,
-            GroupsSettingSeeder::class,
+            ProjectTypeSeeder::class,
         ]);
     }
 }

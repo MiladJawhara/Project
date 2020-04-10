@@ -177,7 +177,7 @@ export default {
                     remember: this.remember
                 })
                 await this.fetchUser()
-                console.log(this.user)
+
                 if (this.user.user_type == 'Admin') {
                 } else {
                     this.$router.push({ name: 'user.dashboard' })

@@ -2,6 +2,7 @@
 
 use App\Department;
 use App\GroupsSetting;
+use App\ProjectType;
 use App\User;
 use App\Year;
 use Illuminate\Http\Request;
@@ -18,23 +19,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/test', function () {
+    return Year::with('projectsTypes')->get();
+});
 
 Route::get('/years', function () {
     return Year::all();
 });
 
+Route::get('/departments', function () {
+    return Department::all();
+});
+
+Route::get('/projectsTypes', function () {
+    return ProjectType::with('groupsSetting')->get();
+});
+
 Route::get('/supervisors', function () {
     return User::where('user_type', '=', User::$USER_TYPES[1])->get();
 });
-
-Route::get('/admin/groups/globalSettings', function () {
-    return Department::with('groupsSettings')->get();
-});
-
-Route::put('/admin/groups/globalSettings', 'GroupsSettingController@update');
-Route::post('/admin/groups/globalSettings', 'GroupsSettingController@store');
-Route::delete('/admin/groups/globalSettings', 'GroupsSettingController@destroy');
 
 Route::group([
     'prefix' => 'auth'

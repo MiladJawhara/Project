@@ -29,4 +29,10 @@ class Year extends Model
         }
         return true;
     }
+
+
+    public function projectsTypes()
+    {
+        return $this->hasMany(ProjectType::class);
+    }
 }

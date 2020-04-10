@@ -32,8 +32,12 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>Application</v-list-item-title>
-                        <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+                        <v-list-item-title>{{
+                            userFullName
+                        }}</v-list-item-title>
+                        <v-list-item-subtitle>{{
+                            userDept
+                        }}</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -47,13 +51,46 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
+    created() {
+        this.getDepartments().then(() => {
+            this.userDept = this.getBy(
+                'title',
+                'departments',
+                'id',
+                this.userDeptID
+            )
+        })
+    },
     data() {
         return {
-            drawer: false
+            drawer: false,
+            userDept: 'Dept'
         }
     },
-    computed: {}
+    computed: {
+        ...mapGetters('auth', ['user', 'check']),
+        ...mapGetters('data', ['getBy']),
+
+        userFullName() {
+            if (this.user) {
+                return this.user.f_name + ' ' + this.user.l_name
+            }
+
+            return ''
+        },
+        userDeptID() {
+            if (this.user) {
+                return this.user.department_id
+            }
+
+            return 1
+        }
+    },
+    methods: {
+        ...mapActions('data', ['getDepartments'])
+    }
 }
 </script>
 <style lang="scss" scoped></style>

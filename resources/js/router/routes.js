@@ -39,9 +39,9 @@ export default [
                 component: importPage('admin/Main'),
                 children: [
                     {
-                        path: 'groups/globalSettings',
-                        name: 'admin.groups.globalSettings',
-                        component: importPage('admin/GroupsGloabalSettings')
+                        path: 'projects/projectsTypes',
+                        name: 'admin.projects.registableProjectsList',
+                        component: importPage('admin/RegistableProjectsList')
                     },
                     {
                         path: 'dashboard',

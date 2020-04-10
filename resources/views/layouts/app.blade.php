@@ -16,8 +16,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body class="bg-info">
+    <div class="bg-info" id="app">
         <router-view></router-view>
     </div>
     {{-- <div>
@@ -28,6 +28,9 @@
 
     </div> --}}
       <!-- Scripts -->
+    <script>
+    window.laravel = {csrfToken:'{{ csrf_token() }}'}
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

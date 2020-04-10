@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GroupsSetting extends Model
 {
     protected $fillable = [
-        'department_id',
-        'year_id',
+        'project_type_id',
         'min_group_members_count',
         'max_group_members_count',
     ];

@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('national_id')->unique();
             //nullable properties
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('department_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
-            $table->string('year_id')->nullable();
+            $table->unsignedBigInteger('year_id')->nullable();
             $table->string('university_id')->unique()->nullable();
             $table->string('profile_img_url')->nullable();
 
