@@ -15,19 +15,10 @@
                 <v-list-item-content>Admin</v-list-item-content>
             </v-list-item>
         </side-bar>
-        <v-content>
-            <v-container class="p-0">
-                <v-row>
-                    <!-- main -->
-                    <v-col>
-                        <transition name="fade" mode="out-in">
-                            <router-view></router-view>
-                        </transition>
-                    </v-col>
-                    <!-- main -->
-                </v-row>
-            </v-container>
-        </v-content>
+
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </v-app>
 </template>
 

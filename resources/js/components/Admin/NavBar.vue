@@ -25,6 +25,7 @@
                     <template v-if="isNavArray(link)">
                         <div
                             class="nav-link dropdown-toggle"
+                            :class="isActive(link.data)"
                             :id="link.title"
                             role="button"
                             data-toggle="dropdown"
@@ -51,6 +52,7 @@
                     <router-link
                         v-else
                         class="nav-link"
+                        :class="isActive(link.data)"
                         :to="{ name: link.data }"
                     >
                         {{ link.title }}
@@ -87,8 +89,26 @@ export default {
         },
         isNavArray(link) {
             return link.data instanceof Array
+        },
+        isActive(data) {
+            if (data instanceof Array) {
+                for (const subLink in data) {
+                    if (data.hasOwnProperty(subLink)) {
+                        const element = data[subLink]
+                        const subData = element.data
+                        if (subData == this.$route.name) {
+                            return 'active'
+                        }
+                    }
+                }
+            }
+
+            if (data == this.$route.name) {
+                return 'active'
+            }
         }
-    }
+    },
+    computed: {}
 }
 </script>
 

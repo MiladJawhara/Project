@@ -13,44 +13,45 @@
                     ]"
                     newItemBtnLable="Create Registable Project"
                     maxDialogsWidth="800px"
+                    itemHasDetails
+                    itemEditable
                 >
-                    <template v-slot:detialsDialog="{ item }">
+                    <template v-slot:detailsDialog="{ item }">
                         <template v-if="item">
-                            <v-card-title>
-                                {{ item.title }}
+                            <v-card-title class="primary text-white">
+                                Project:&nbsp;
+                                <span style="color: #22ff11">{{
+                                    item.title
+                                }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-list>
                                     <v-list-item>
-                                        <v-list-item-title
-                                            >Departmnet:
-                                            {{
-                                                getBy(
-                                                    'title',
-                                                    'departments',
-                                                    'id',
-                                                    item.department_id
-                                                )
-                                            }}
+                                        <v-list-item-title>
+                                            <v-icon>mdi-office-building</v-icon>
+                                            Departmnet:&nbsp;
+                                            <span style="color: #22ff11">
+                                                {{ item.department }}
+                                            </span>
                                         </v-list-item-title>
                                     </v-list-item>
 
                                     <v-list-item>
                                         <v-list-item-title
-                                            >Year:
-                                            {{
-                                                getBy(
-                                                    'title',
-                                                    'years',
-                                                    'id',
-                                                    item.year_id
-                                                )
-                                            }}</v-list-item-title
+                                            >Year:&nbsp;
+                                            {{ item.year }}</v-list-item-title
                                         >
                                     </v-list-item>
                                     <v-list-item>
+                                        <v-list-item-title>
+                                            Every Group has to consist of (
+                                            {{ item.minGM }} -
+                                            {{ item.maxGM }} ) Students
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
                                         <v-list-item-title
-                                            >Created:
+                                            >Created:&nbsp;
                                             {{ item.created_at }}
                                         </v-list-item-title>
                                     </v-list-item>
@@ -61,8 +62,11 @@
 
                     <template v-slot:editDialog="{ item }">
                         <template v-if="item">
-                            <v-card-title>
-                                {{ item.title }}
+                            <v-card-title class="primary text-white">
+                                Project:&nbsp;
+                                <span style="color: #22ff11">{{
+                                    item.title
+                                }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-form>
@@ -109,9 +113,11 @@
                                             </v-col>
                                         </v-row>
                                         <v-row>
-                                            <v-col>
+                                            <v-col cols="12" md="4">
+                                                <h5>Groups Members Range</h5>
+                                            </v-col>
+                                            <v-col cols="12" md="8">
                                                 <v-range-slider
-                                                    label="Groups Members Range"
                                                     min="1"
                                                     max="7"
                                                     thumb-label="always"

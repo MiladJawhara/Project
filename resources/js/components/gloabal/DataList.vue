@@ -1,21 +1,29 @@
 <template>
-    <v-data-table :headers="headers" :items="items" class="elevation-1">
+    <v-data-table :headers="headers" :items="items" class="elevation-2">
         <template v-slot:top>
             <v-toolbar flat color="white">
                 <v-spacer></v-spacer>
 
-                <v-dialog v-model="detialsDialog" :max-width="maxDialogsWidth">
+                <v-dialog
+                    v-if="itemHasDetails"
+                    v-model="detailsDialog"
+                    :max-width="maxDialogsWidth"
+                >
                     <v-card>
-                        <slot name="detialsDialog" :item="selectedItem"></slot>
+                        <slot name="detailsDialog" :item="selectedItem"></slot>
                         <v-card-actions>
                             <slot
-                                name="detialsDialog.actions"
+                                name="detailsDialog.actions"
                                 :item="selectedItem"
                             ></slot>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="editDialog" :max-width="maxDialogsWidth">
+                <v-dialog
+                    v-if="itemEditable"
+                    v-model="editDialog"
+                    :max-width="maxDialogsWidth"
+                >
                     <v-card>
                         <slot name="editDialog" :item="selectedItem"></slot>
                         <v-card-actions>
@@ -26,16 +34,54 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+
+                <v-dialog
+                    v-if="newItemBtnLable"
+                    v-model="newItemDialog"
+                    :max-width="maxDialogsWidth"
+                >
+                    <template v-slot:activator="{ on }">
+                        <v-btn v-on="on" color="primary">
+                            <template v-if="!isMobile"
+                                >{{ newItemBtnLable }}
+                            </template>
+                            <template v-else>
+                                <v-icon>mdi-plus</v-icon>
+                            </template>
+                        </v-btn>
+                    </template>
+                    <v-card>
+                        <slot name="newItemDialog"></slot>
+                        <v-card-actions>
+                            <slot name="newItemDialog.actions"></slot>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-toolbar>
         </template>
-        <template v-slot:item.actions="{ item }">
-            <v-icon small class="mr-2" @click="showItem(item)">
+        <template v-if="itemManagable" v-slot:item.actions="{ item }">
+            <v-icon
+                v-if="itemHasDetails"
+                small
+                class="mr-2"
+                @click="showItem(item)"
+            >
                 mdi-eye
             </v-icon>
-            <v-icon small class="mr-2" @click="editItem(item)">
+            <v-icon
+                v-if="itemEditable"
+                small
+                class="mr-2"
+                @click="editItem(item)"
+            >
                 mdi-pencil
             </v-icon>
-            <v-icon small color="red" @click="deleteItem(item)">
+            <v-icon
+                v-if="itemDeleteable"
+                small
+                color="red"
+                @click="deleteItem(item)"
+            >
                 mdi-delete
             </v-icon>
         </template>
@@ -50,18 +96,28 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     props: {
         items: {
-            type: Array
+            type: Array,
+            require: true
         },
         dataToList: {
-            type: Array
+            type: Array,
+            require: true
         },
         newItemBtnLable: {
-            type: String,
-            default: 'New Item'
+            type: String
         },
         maxDialogsWidth: {
             type: String,
             default: '500px'
+        },
+        itemDeleteable: {
+            type: Boolean
+        },
+        itemEditable: {
+            type: Boolean
+        },
+        itemHasDetails: {
+            type: Boolean
         }
     },
     created() {
@@ -79,18 +135,21 @@ export default {
             return res
         })
 
-        this.headers.push({
-            text: 'Actions',
-            value: 'actions',
-            align: 'end',
-            sortable: false
-        })
+        if (this.itemManagable) {
+            this.headers.push({
+                text: 'Actions',
+                value: 'actions',
+                align: 'end',
+                sortable: false
+            })
+        }
     },
     data() {
         return {
             headers: [],
-            detialsDialog: false,
+            detailsDialog: false,
             editDialog: false,
+            newItemDialog: false,
             selectedItem: null
         }
     },
@@ -104,12 +163,17 @@ export default {
         },
         showItem(item) {
             this.selectedItem = item
-            this.detialsDialog = true
+            this.detailsDialog = true
         }
     },
     components: {},
     computed: {
-        ...mapGetters('global', ['isMobile'])
+        ...mapGetters('global', ['isMobile']),
+        itemManagable() {
+            return (
+                this.itemDeleteable || this.itemEditable || this.itemHasDetails
+            )
+        }
     }
 }
 </script>

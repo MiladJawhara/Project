@@ -2,7 +2,7 @@
     <div>
         <nav-bar :pLinks="links"></nav-bar>
 
-        <v-container class="p-0">
+        <v-container class="">
             <v-row>
                 <v-col>
                     <v-card v-if="getTitle !== ''">
@@ -65,9 +65,7 @@ export default {
                             if (element.data.hasOwnProperty(subLink)) {
                                 const subElement = element.data[subLink]
                                 if (subElement.data == name) {
-                                    return (
-                                        element.title + ': ' + subElement.title
-                                    )
+                                    return `${element.title}:\n ${subElement.title}`
                                 }
                             }
                         }
