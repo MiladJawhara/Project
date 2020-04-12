@@ -20,8 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return Year::with('projectsTypes')->get();
-});
+    return Department::all();
 
 Route::post('/postTest', function () {
     $rp = RegistableProject::create([
