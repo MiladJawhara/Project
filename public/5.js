@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{23:function(n,e,t){"use strict";t.r(e);var a={name:"admin-dashboard"},s=t(3),c=Object(s.a)(a,(function(){var n=this.$createElement;return(this._self._c||n)("div")}),[],!1,null,"134363fc",null);e.default=c.exports}}]);
