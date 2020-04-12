@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
     return Department::all();
-
+});
 Route::post('/postTest', function () {
     $rp = RegistableProject::create([
         'title' => request('title'),
