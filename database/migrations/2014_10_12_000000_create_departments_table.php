@@ -19,7 +19,7 @@ class CreateDepartmentsTable extends Migration
             $table->unsignedBigInteger('dept_manager_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('dept_manager_id')->references('id')->on('users');
+            // $table->foreign('dept_manager_id')->references('id')->on('users');
         });
     }
 
