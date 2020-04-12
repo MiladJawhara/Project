@@ -3,7 +3,7 @@
         <v-row>
             <v-col>
                 <data-list
-                    :items="listOfItems"
+                    :items="items"
                     :dataToList="[
                         'title',
                         'open',
@@ -19,6 +19,8 @@
                     itemDeleteable
                     @deleteItem="deleteItem"
                 >
+                    <!-- details Dialog -->
+
                     <template v-slot:detailsDialog="{ item }">
                         <template v-if="item">
                             <v-card-title class="primary text-white">
@@ -62,6 +64,10 @@
                             </v-card-text>
                         </template>
                     </template>
+
+                    <!-- details Dialog -->
+
+                    <!-- edit dialog -->
 
                     <template v-slot:editDialog="{ item, close }">
                         <template v-if="item">
@@ -155,6 +161,11 @@
                             </v-card-actions>
                         </template>
                     </template>
+
+                    <!-- edit dialog -->
+
+                    <!-- new item dialog -->
+
                     <template v-slot:newItemDialog="{ close }">
                         <v-card-title class="primary text-white">
                             Create New Registable Project
@@ -247,6 +258,8 @@
                             >
                         </v-card-actions>
                     </template>
+
+                    <!-- new item dialog -->
                 </data-list>
             </v-col>
         </v-row>
@@ -261,7 +274,7 @@ export default {
     name: 'admin-projects-registableProjects',
 
     created() {
-        this.request('all')
+        this.request('all').then(() => (this.dataLoaded = true))
     },
     data() {
         return {
@@ -269,7 +282,8 @@ export default {
             newRegistableProject: {
                 range: [2, 4],
                 isOpen: true
-            }
+            },
+            dataLoaded: false
         }
     },
     methods: {
@@ -349,7 +363,6 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log(res.data)
                     this.deleteItemBy({
                         from: 'registableProjects',
                         by: 'id',
@@ -360,26 +373,30 @@ export default {
     },
     computed: {
         ...mapGetters('data', ['getListOf', 'getBy', 'getAll']),
-        listOfItems() {
-            return this.getAll('registableProjects').map(item => {
-                return {
-                    ...item,
-                    department: this.getBy(
-                        'title',
-                        'departments',
-                        'id',
-                        item.department_id
-                    ),
-                    year: this.getBy('title', 'years', 'id', item.year_id),
-                    range: [
-                        item.groups_setting.min_group_members_count,
-                        item.groups_setting.max_group_members_count
-                    ],
-                    minGM: item.groups_setting.min_group_members_count,
-                    maxGM: item.groups_setting.max_group_members_count,
-                    open: item.is_open ? 'YES' : 'NO'
-                }
-            })
+        items() {
+            if (this.dataLoaded) {
+                return this.getAll('registableProjects').map(item => {
+                    return {
+                        ...item,
+                        department: this.getBy(
+                            'title',
+                            'departments',
+                            'id',
+                            item.department_id
+                        ),
+                        year: this.getBy('title', 'years', 'id', item.year_id),
+                        range: [
+                            item.groups_setting.min_group_members_count,
+                            item.groups_setting.max_group_members_count
+                        ],
+                        minGM: item.groups_setting.min_group_members_count,
+                        maxGM: item.groups_setting.max_group_members_count,
+                        open: item.is_open ? 'YES' : 'NO'
+                    }
+                })
+            } else {
+                return []
+            }
         }
     },
     components: {

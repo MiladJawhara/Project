@@ -44,6 +44,11 @@ export default [
                         component: importPage('admin/RegistableProjectsList')
                     },
                     {
+                        path: 'departments/list',
+                        name: 'admin.departments.list',
+                        component: importPage('admin/DepartmentsList')
+                    },
+                    {
                         path: 'dashboard',
                         name: 'admin.dashboard',
                         component: importPage('admin/Dashboard')

@@ -15,7 +15,11 @@ export const getters = {
         return state[from].map(item => item[what])
     },
     getBy: state => (what, from, by, Payload) => {
-        return state[from].find(item => item[by] == Payload)[what]
+        if (state[from]) {
+            return state[from].find(item => item[by] == Payload)[what]
+        } else {
+            throw new Error('there is no data with name: ' + from)
+        }
     },
     getAll: state => what => {
         return state[what]

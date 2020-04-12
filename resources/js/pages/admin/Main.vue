@@ -47,6 +47,15 @@ export default {
                             data: 'admin.projects.registableProjectsList'
                         }
                     ]
+                },
+                {
+                    title: 'Departemnts',
+                    data: [
+                        {
+                            title: 'Departemnts List',
+                            data: 'admin.departments.list'
+                        }
+                    ]
                 }
             ]
         }
