@@ -15,7 +15,6 @@
 
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body class="bg-info">
     <div class="bg-info" id="app">

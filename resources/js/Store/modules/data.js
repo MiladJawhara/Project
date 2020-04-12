@@ -12,17 +12,33 @@ export const state = {
 // getters
 export const getters = {
     getListOf: state => (what, from) => {
-        return state[from].map(item => item[what])
-    },
-    getBy: state => (what, from, by, Payload) => {
         if (state[from]) {
-            return state[from].find(item => item[by] == Payload)[what]
+            if (state[from].length > 0) {
+                return state[from].map(item => item[what])
+            } else {
+                return []
+            }
         } else {
             throw new Error('there is no data with name: ' + from)
         }
     },
-    getAll: state => what => {
-        return state[what]
+    getBy: state => (what, from, by, Payload) => {
+        if (state[from]) {
+            if (state[from].length > 0) {
+                return state[from].find(item => item[by] == Payload)[what]
+            } else {
+                return null
+            }
+        } else {
+            throw new Error('there is no data with name: ' + from)
+        }
+    },
+    getAll: state => from => {
+        if (state[from]) {
+            return state[from]
+        } else {
+            throw new Error('there is no data with name: ' + from)
+        }
     }
 }
 
