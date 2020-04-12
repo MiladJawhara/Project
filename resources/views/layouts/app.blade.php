@@ -17,8 +17,8 @@
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body class="bg-info">
+    <div class="bg-info" id="app">
         <router-view></router-view>
     </div>
     {{-- <div>

@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app dark>
         <!-- NavBar -->
         <!-- <nav-bar /> -->
         <!-- NavBar -->
@@ -15,19 +15,10 @@
                 <v-list-item-content>Admin</v-list-item-content>
             </v-list-item>
         </side-bar>
-        <v-content>
-            <v-container class="p-0 pt-5">
-                <v-row>
-                    <!-- main -->
-                    <v-col>
-                        <transition name="fade" mode="out-in">
-                            <router-view></router-view>
-                        </transition>
-                    </v-col>
-                    <!-- main -->
-                </v-row>
-            </v-container>
-        </v-content>
+
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </v-app>
 </template>
 
@@ -40,6 +31,7 @@ export default {
     name: 'App',
 
     created() {
+        this.fetchUser()
         window.addEventListener('resize', this.setScreenWidth)
         this.setScreenWidth()
     },
@@ -58,7 +50,8 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
-        ...mapActions('global', ['setScreenWidth'])
+        ...mapActions('global', ['setScreenWidth']),
+        ...mapActions('auth', ['fetchUser'])
     }
 }
 </script>

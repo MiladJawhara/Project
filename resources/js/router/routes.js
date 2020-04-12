@@ -22,14 +22,26 @@ export default [
                 component: importPage('auth/Register')
             },
             {
-                path: '/admin',
+                path: '/user',
+                name: 'user',
+                component: importPage('user/Main'),
+                children: [
+                    {
+                        path: 'dashboard',
+                        name: 'user.dashboard',
+                        component: importPage('user/Dashboard')
+                    }
+                ]
+            },
+            {
+                path: 'admin',
                 name: 'admin',
                 component: importPage('admin/Main'),
                 children: [
                     {
-                        path: 'settings',
-                        name: 'admin.settings',
-                        component: importPage('admin/Settings')
+                        path: 'projects/projectsTypes',
+                        name: 'admin.projects.registableProjectsList',
+                        component: importPage('admin/RegistableProjectsList')
                     },
                     {
                         path: 'dashboard',

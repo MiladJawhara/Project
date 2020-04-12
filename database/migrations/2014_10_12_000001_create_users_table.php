@@ -24,16 +24,18 @@ class CreateUsersTable extends Migration
             $table->string('national_id')->unique();
             //nullable properties
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('department')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
-            $table->string('year_of_study')->nullable();
+            $table->unsignedBigInteger('year_id')->nullable();
             $table->string('university_id')->unique()->nullable();
             $table->string('profile_img_url')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
 
-            // $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('year_id')->references('id')->on('years');
+            $table->foreign('group_id')->references('id')->on('groups');
         });
 
 
@@ -54,5 +56,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('supervisor_unverified');
     }
 }

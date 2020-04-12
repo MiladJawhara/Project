@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Year;
+use App\Department;
+use App\Events\UserConnected;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +33,7 @@ class AuthController extends Controller
 
         $data =  $this->validator(request()->all())->validate();
 
-        $this->createUser($data);
+        $user = $this->createUser($data);
 
         return response()->json(['status' => 'success']);
     }
@@ -46,7 +49,7 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        // event(new UserConnected(auth()->user()->f_name));
         return $this->respondWithToken($token);
     }
 
@@ -55,7 +58,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function user()
     {
         return response()->json(auth()->user());
     }
@@ -92,7 +95,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
+            'token' => $token,
             'user' => auth()->user(),
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
@@ -136,12 +139,12 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
             'national_id' => $data['national_id'],
             'user_type' => $data['user_type'],
-            'department' => $data['department'],
+            'department_id' => Department::where('title', $data['department'])->first()->id,
         ];
 
         if ($data['user_type'] === User::$USER_TYPES[0]) {
             $tempData['university_id'] = $data['university_id'];
-            $tempData['year_of_study'] = $data['year_of_study'];
+            $tempData['year_id'] = Year::where('title', $data['year_of_study'])->first()->id;
         }
 
 

@@ -167,7 +167,7 @@
                                                 prepend-icon="mdi-office-building"
                                                 label="Department"
                                                 dense
-                                                :items="departments"
+                                                :items="departmentsTitles"
                                                 v-model="form.department"
                                             >
                                             </v-select>
@@ -231,7 +231,7 @@
                                         <v-col>
                                             <v-btn
                                                 :block="isMobile"
-                                                style="float: right"
+                                                style="float: right;"
                                                 color="primary"
                                                 @click.prevent="
                                                     handleSubmit(
@@ -342,8 +342,11 @@ export default {
     name: 'Register',
     middleware: 'guest',
     created() {
-        this.getYears().then(data => {
-            this.yearsOfStudy = data
+        this.request('years').then(data => {
+            this.yearsOfStudy = data.map(year => year.title)
+        })
+        this.request('departments').then(data => {
+            this.departmentsTitles = data.map(dept => dept.title)
         })
     },
     data() {
@@ -355,7 +358,7 @@ export default {
             showPassword: false,
             accountTypes: ['Student', 'Supervisor'],
             yearsOfStudy: [],
-            departments: ['none'],
+            departmentsTitles: ['none'],
             progressing: false,
             snackbarMessage: '',
             snackbar: false
@@ -381,14 +384,16 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
-        ...mapActions('data', ['getYears']),
+        ...mapActions('data', ['request']),
         async createNewAccount() {
             if (this.progressing) return
             this.progressing = true
             try {
                 const { data } = await this.form.post('/api/auth/register')
+
                 this.snackbarMessage = 'Account created..Well done!!'
                 this.snackbar = true
+                this.$router.push({ name: 'login' })
             } catch (err) {
                 const errors = this.form.errors.errors
                 this.snackbarMessage = errors[Object.keys(errors)[0]][0]

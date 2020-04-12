@@ -21,6 +21,16 @@ try {
 
 window.axios = require('axios')
 
+import store from './Store/index'
+window.axios.interceptors.request.use(request => {
+    const token = store.getters['auth/token']
+    if (token) {
+        request.headers.common['Authorization'] = `Bearer ${token}`
+    }
+
+    return request
+})
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 window.progress = require('nprogress')
@@ -30,13 +40,18 @@ window.progress = require('nprogress')
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+// import Echo from 'laravel-echo'
 
-// window.Pusher = require('pusher-js');
+// window.Pusher = require('pusher-js')
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
-// });
+// })
+
+// var channel = window.Echo.channel('connected.user')
+// channel.listen('UserConnected', function(data) {
+//     console.log(JSON.stringify(data))
+// })
