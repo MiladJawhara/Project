@@ -32,10 +32,6 @@ class CreateUsersTable extends Migration
 
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('year_id')->references('id')->on('years');
-            $table->foreign('group_id')->references('id')->on('groups');
         });
 
 
@@ -43,8 +39,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

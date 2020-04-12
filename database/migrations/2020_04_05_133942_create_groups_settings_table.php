@@ -19,9 +19,6 @@ class CreateGroupsSettingsTable extends Migration
             $table->unsignedInteger('min_group_members_count');
             $table->unsignedInteger('max_group_members_count');
             $table->timestamps();
-
-
-            $table->foreign('registable_project_id')->references('id')->on('registable_projects')->onDelete('cascade');
         });
     }
 
