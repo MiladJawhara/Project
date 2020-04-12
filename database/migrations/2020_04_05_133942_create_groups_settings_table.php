@@ -15,13 +15,13 @@ class CreateGroupsSettingsTable extends Migration
     {
         Schema::create('groups_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_type_id');
+            $table->unsignedBigInteger('registable_project_id');
             $table->unsignedInteger('min_group_members_count');
             $table->unsignedInteger('max_group_members_count');
             $table->timestamps();
 
 
-            $table->foreign('project_type_id')->references('id')->on('project_types')->onDelete('cascade');
+            $table->foreign('registable_project_id')->references('id')->on('registable_projects')->onDelete('cascade');
         });
     }
 

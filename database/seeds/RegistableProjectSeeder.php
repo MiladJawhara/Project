@@ -1,9 +1,9 @@
 <?php
 
-use App\ProjectType;
+use App\RegistableProject;
 use Illuminate\Database\Seeder;
 
-class ProjectTypeSeeder extends Seeder
+class RegistableProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class ProjectTypeSeeder extends Seeder
      */
     public function run()
     {
-        factory(ProjectType::class, 5)->create();
+        // factory(RegistableProject::class, 20)->create();
     }
 }

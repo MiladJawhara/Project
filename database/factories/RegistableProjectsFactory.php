@@ -4,11 +4,12 @@
 
 use App\Year;
 use App\Department;
+
 use App\GroupsSetting;
-use App\ProjectType;
+use App\RegistableProject;
 use Faker\Generator as Faker;
 
-$factory->define(ProjectType::class, function (Faker $faker) {
+$factory->define(RegistableProject::class, function (Faker $faker) {
     return [
         'department_id' => Department::all()->random()->id,
         'year_id' => Year::all()->random()->id,
@@ -17,17 +18,17 @@ $factory->define(ProjectType::class, function (Faker $faker) {
     ];
 });
 
-$factory->afterCreating(ProjectType::class, function ($projectType, $faker) {
+$factory->afterCreating(RegistableProject::class, function ($registableProject, $faker) {
 
     $min = rand(1, 4);
     $max = rand($min + 1, 7);
 
     $groupsSetting = GroupsSetting::create([
-        'project_type_id' => $projectType->id,
+        'registable_project_id' => $registableProject->id,
         'min_group_members_count' => $min,
         'max_group_members_count' => $max,
     ]);
 
-    $projectType->groups_settings_id = $groupsSetting->id;
-    $projectType->save();
+    $registableProject->groups_settings_id = $groupsSetting->id;
+    $registableProject->save();
 });

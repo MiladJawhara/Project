@@ -342,10 +342,10 @@ export default {
     name: 'Register',
     middleware: 'guest',
     created() {
-        this.getYears().then(data => {
+        this.request('years').then(data => {
             this.yearsOfStudy = data.map(year => year.title)
         })
-        this.getDepartments().then(data => {
+        this.request('departments').then(data => {
             this.departmentsTitles = data.map(dept => dept.title)
         })
     },
@@ -384,7 +384,7 @@ export default {
         ...mapGetters('global', ['isMobile'])
     },
     methods: {
-        ...mapActions('data', ['getYears', 'getDepartments']),
+        ...mapActions('data', ['request']),
         async createNewAccount() {
             if (this.progressing) return
             this.progressing = true

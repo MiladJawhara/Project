@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProjectType;
+use App\RegistableProject;
 use Illuminate\Http\Request;
 
 class ProjectTypeController extends Controller
@@ -41,10 +41,10 @@ class ProjectTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProjectType  $projectType
+     * @param  \App\RegistableProject  $registableProject
      * @return \Illuminate\Http\Response
      */
-    public function show(ProjectType $projectType)
+    public function show(RegistableProject $registableProject)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProjectTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProjectType  $projectType
+     * @param  \App\RegistableProject  $registableProject
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectType $projectType)
+    public function edit(RegistableProject $registableProject)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProjectTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProjectType  $projectType
+     * @param  \App\RegistableProject  $registableProject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProjectType $projectType)
+    public function update(Request $request, RegistableProject $registableProject)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProjectTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProjectType  $projectType
+     * @param  \App\RegistableProject  $registableProject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProjectType $projectType)
+    public function destroy(RegistableProject $registableProject)
     {
         //
     }

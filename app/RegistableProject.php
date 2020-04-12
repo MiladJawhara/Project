@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectType extends Model
+class RegistableProject extends Model
 {
     protected $fillable = [
         'department_id',
@@ -13,7 +13,9 @@ class ProjectType extends Model
         'groups_settings_id',
         'title',
     ];
-
+    protected $casts = [
+        'is_open' => 'boolean',
+    ];
 
     public function department()
     {

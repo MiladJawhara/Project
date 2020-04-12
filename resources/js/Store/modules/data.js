@@ -35,6 +35,9 @@ export const mutations = {
     },
     [types.SET_SUPERVISORS](state, data) {
         state.supervisors = data
+    },
+    [types.UPDATE_DATA](state, { what, newData }) {
+        state[what] = newData
     }
 }
 /**
@@ -68,7 +71,7 @@ const mutationsCut = {
 const apis = {
     years: '/api/years',
     departments: '/api/departments',
-    registableProjects: '/api/projectsTypes',
+    registableProjects: '/api/registableprojects',
     supervisors: '/api/supervisors'
 }
 
@@ -95,31 +98,22 @@ export const actions = {
             return getData(what, mutationsCut[what], apis[what], ctx)
         }
     },
-    getYears(ctx) {
-        return getData('years', types.SET_YEARS_TITLES, '/api/years', ctx)
+    addNewItemTo(ctx, { what, item }) {
+        const newData = [...ctx.state[what], item]
+        ctx.commit(types.UPDATE_DATA, { what, newData })
     },
-    getDepartments(ctx) {
-        return getData(
-            'departments',
-            types.SET_DEPARTMENTS,
-            '/api/departments',
-            ctx
-        )
+    deleteItemBy(ctx, { from, by, value }) {
+        const newData = ctx.state[from].filter(data => data[by] != value)
+        ctx.commit(types.UPDATE_DATA, { what: from, newData })
     },
-    getRegistableProjects(ctx) {
-        return getData(
-            'registableProjects',
-            types.SET_REGISTABLE_PROJECTS,
-            '/api/projectsTypes',
-            ctx
-        )
-    },
-    getSupervisors(ctx) {
-        return getData(
-            'supervisors',
-            types.SET_SUPERVISORS,
-            '/api/supervisors',
-            ctx
-        )
+    updateItemBy(ctx, { from, by, value, item }) {
+        const newData = ctx.state[from].map(data => {
+            if (data[by] === value) {
+                return item
+            } else {
+                return data
+            }
+        })
+        ctx.commit(types.UPDATE_DATA, { what: from, newData })
     }
 }

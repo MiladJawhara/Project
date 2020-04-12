@@ -33,6 +33,6 @@ class Year extends Model
 
     public function projectsTypes()
     {
-        return $this->hasMany(ProjectType::class);
+        return $this->hasMany(RegistableProject::class);
     }
 }

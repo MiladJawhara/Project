@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectTypesTable extends Migration
+class CreateRegistableProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProjectTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_types', function (Blueprint $table) {
+        Schema::create('registable_projects', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('year_id');
@@ -35,6 +35,6 @@ class CreateProjectTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_types');
+        Schema::dropIfExists('registable_projects');
     }
 }

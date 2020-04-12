@@ -9,14 +9,12 @@
                     v-model="detailsDialog"
                     :max-width="maxDialogsWidth"
                 >
-                    <v-card>
-                        <slot name="detailsDialog" :item="selectedItem"></slot>
-                        <v-card-actions>
-                            <slot
-                                name="detailsDialog.actions"
-                                :item="selectedItem"
-                            ></slot>
-                        </v-card-actions>
+                    <v-card class="pb-2">
+                        <slot
+                            name="detailsDialog"
+                            :item="selectedItem"
+                            :close="closeDialog"
+                        ></slot>
                     </v-card>
                 </v-dialog>
                 <v-dialog
@@ -24,14 +22,12 @@
                     v-model="editDialog"
                     :max-width="maxDialogsWidth"
                 >
-                    <v-card>
-                        <slot name="editDialog" :item="selectedItem"></slot>
-                        <v-card-actions>
-                            <slot
-                                name="editDialog.actions"
-                                :item="selectedItem"
-                            ></slot>
-                        </v-card-actions>
+                    <v-card class="pb-2">
+                        <slot
+                            name="editDialog"
+                            :item="selectedItem"
+                            :close="closeDialog"
+                        ></slot>
                     </v-card>
                 </v-dialog>
 
@@ -50,11 +46,8 @@
                             </template>
                         </v-btn>
                     </template>
-                    <v-card>
-                        <slot name="newItemDialog"></slot>
-                        <v-card-actions>
-                            <slot name="newItemDialog.actions"></slot>
-                        </v-card-actions>
+                    <v-card class="pb-2">
+                        <slot name="newItemDialog" :close="closeDialog"></slot>
                     </v-card>
                 </v-dialog>
             </v-toolbar>
@@ -118,6 +111,10 @@ export default {
         },
         itemHasDetails: {
             type: Boolean
+        },
+        deleteConfirmMsg: {
+            type: String,
+            default: 'Are you sure you want to delete?'
         }
     },
     created() {
@@ -155,15 +152,28 @@ export default {
     },
     methods: {
         editItem(item) {
-            this.selectedItem = item
+            this.selectedItem = { ...item }
             this.editDialog = true
         },
         deleteItem(item) {
-            this.selectedItem = item
+            const answer = confirm(this.deleteConfirmMsg)
+            if (answer) {
+                this.selectedItem = { ...item }
+                this.$emit('deleteItem', item)
+            }
         },
         showItem(item) {
-            this.selectedItem = item
+            this.selectedItem = { ...item }
             this.detailsDialog = true
+        },
+        closeDialog(dialogName) {
+            if (this[dialogName]) {
+                this[dialogName] = false
+            } else {
+                throw new Error(
+                    'Dialog name does not exist! avalibal dialogs names: "detailsDialog, editDialog, newItemDialog"'
+                )
+            }
         }
     },
     components: {},

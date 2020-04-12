@@ -54,7 +54,7 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
     created() {
-        this.getDepartments().then(() => {
+        this.request('departments').then(() => {
             this.userDept = this.getBy(
                 'title',
                 'departments',
@@ -89,7 +89,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('data', ['getDepartments'])
+        ...mapActions('data', ['request'])
     }
 }
 </script>
