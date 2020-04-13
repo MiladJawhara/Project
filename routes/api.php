@@ -20,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return Year::with('projectsTypes')->get();
+    return Department::all();
 });
-
 Route::post('/postTest', function () {
     $rp = RegistableProject::create([
         'title' => request('title'),
@@ -71,13 +70,26 @@ Route::put('/putTest', function () {
     return $rp;
 });
 
+
+
+//Departments End Points
+
+Route::get('/departments', 'DepartmentsController@index');
+Route::post('/departments', 'DepartmentsController@store');
+Route::put('/departments/{id}', 'DepartmentsController@update');
+Route::delete('/departments/{id}', 'DepartmentsController@destroy');
+
+
+
+//Departments End Points
+
+
+
+
 Route::get('/years', function () {
     return Year::all();
 });
 
-Route::get('/departments', function () {
-    return Department::all();
-});
 
 Route::get('/registableprojects', function () {
     return RegistableProject::with('groupsSetting')->get();

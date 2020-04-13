@@ -13,7 +13,7 @@
                         <slot
                             name="detailsDialog"
                             :item="selectedItem"
-                            :close="closeDialog"
+                            :close="closeDetailsDialog"
                         ></slot>
                     </v-card>
                 </v-dialog>
@@ -26,7 +26,7 @@
                         <slot
                             name="editDialog"
                             :item="selectedItem"
-                            :close="closeDialog"
+                            :close="closeEditDialog"
                         ></slot>
                     </v-card>
                 </v-dialog>
@@ -47,7 +47,10 @@
                         </v-btn>
                     </template>
                     <v-card class="pb-2">
-                        <slot name="newItemDialog" :close="closeDialog"></slot>
+                        <slot
+                            name="newItemDialog"
+                            :close="closeNewItemDialog"
+                        ></slot>
                     </v-card>
                 </v-dialog>
             </v-toolbar>
@@ -118,27 +121,29 @@ export default {
         }
     },
     created() {
-        this.headers = this.dataToList.map((data, i) => {
-            let res = {
-                text: data,
-                value: data
-            }
-            if (i == 0) {
-                res = {
-                    ...res,
-                    align: 'start'
+        if (this.dataToList) {
+            this.headers = this.dataToList.map((data, i) => {
+                let res = {
+                    text: data,
+                    value: data
                 }
-            }
-            return res
-        })
-
-        if (this.itemManagable) {
-            this.headers.push({
-                text: 'Actions',
-                value: 'actions',
-                align: 'end',
-                sortable: false
+                if (i == 0) {
+                    res = {
+                        ...res,
+                        align: 'start'
+                    }
+                }
+                return res
             })
+
+            if (this.itemManagable) {
+                this.headers.push({
+                    text: 'Actions',
+                    value: 'actions',
+                    align: 'end',
+                    sortable: false
+                })
+            }
         }
     },
     data() {
@@ -147,7 +152,8 @@ export default {
             detailsDialog: false,
             editDialog: false,
             newItemDialog: false,
-            selectedItem: null
+            selectedItem: null,
+            currentDialog: 'newItemDialog'
         }
     },
     methods: {
@@ -166,14 +172,14 @@ export default {
             this.selectedItem = { ...item }
             this.detailsDialog = true
         },
-        closeDialog(dialogName) {
-            if (this[dialogName]) {
-                this[dialogName] = false
-            } else {
-                throw new Error(
-                    'Dialog name does not exist! avalibal dialogs names: "detailsDialog, editDialog, newItemDialog"'
-                )
-            }
+        closeNewItemDialog() {
+            this.newItemDialog = false
+        },
+        closeEditDialog() {
+            this.editDialog = false
+        },
+        closeDetailsDialog() {
+            this.detailsDialog = false
         }
     },
     components: {},

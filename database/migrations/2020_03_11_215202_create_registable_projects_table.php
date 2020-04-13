@@ -21,10 +21,6 @@ class CreateRegistableProjectsTable extends Migration
             $table->unsignedBigInteger('groups_settings_id')->unique()->nullable();
             $table->string('title');
             $table->timestamps();
-
-            $table->foreign('groups_settings_id')->references('id')->on('groups_settings');
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('year_id')->references('id')->on('years');
         });
     }
 

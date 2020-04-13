@@ -6,14 +6,13 @@
             <v-row>
                 <v-col>
                     <v-card v-if="getTitle !== ''">
-                        <transition name="fade">
-                            <v-card-title class="bg-primary">
-                                {{ getTitle }}
+                        <transition name="slide-fade" mode="out-in">
+                            <v-card-title v-text="getTitle" class="bg-primary">
                             </v-card-title>
                         </transition>
                         <v-card-text>
-                            <transition name="fade">
-                                <router-view></router-view>
+                            <transition name="slide-fade" mode="out-in">
+                                <router-view />
                             </transition>
                         </v-card-text>
                     </v-card>
@@ -45,6 +44,15 @@ export default {
                         {
                             title: 'Registable Projects List',
                             data: 'admin.projects.registableProjectsList'
+                        }
+                    ]
+                },
+                {
+                    title: 'Departments',
+                    data: [
+                        {
+                            title: 'Departments List',
+                            data: 'admin.departments.list'
                         }
                     ]
                 }
