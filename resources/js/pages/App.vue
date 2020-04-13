@@ -17,7 +17,7 @@
         </side-bar>
 
         <transition name="fade" mode="out-in">
-            <router-view></router-view>
+            <router-view />
         </transition>
     </v-app>
 </template>
@@ -65,12 +65,30 @@ export default {
     background-color: #c97414;
     color: azure;
 }
+
+/* Transitons */
+
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease-out;
 }
-.fade-enter, .fade-leave-to
-/* .component-fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* --------------------------------------------- */
+
+.slide-fade-enter {
+    transform: translateX(10px);
+    opacity: 0;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.3s ease;
+}
+.slide-fade-leave-to {
+    transform: translateX(-10px);
     opacity: 0;
 }
 </style>

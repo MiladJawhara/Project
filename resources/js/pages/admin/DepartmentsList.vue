@@ -6,7 +6,6 @@
                     :items="items"
                     :dataToList="['title', 'manager']"
                     itemDeleteable
-                    itemHasDetails
                     itemEditable
                     newItemBtnLable="Create New Department"
                     maxDialogsWidth="800px"
@@ -48,7 +47,11 @@
                         </v-card-text>
 
                         <v-card-actions>
-                            <v-btn text @click="createNewDepartment(close)"
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="blue"
+                                text
+                                @click="createNewDepartment(close)"
                                 >Save</v-btn
                             >
                         </v-card-actions>
