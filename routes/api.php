@@ -83,6 +83,16 @@ Route::delete('/departments/{id}', 'DepartmentsController@destroy');
 
 //Departments End Points
 
+//-------------------------------------------------------
+
+//Supervisors Admin
+
+
+Route::get('/supervisors', 'UsersController@adminSupervisors');
+Route::post('/supervisors', 'UsersController@adminSupervisorCreate');
+
+//Supervisors Admin
+
 
 
 
@@ -95,9 +105,7 @@ Route::get('/registableprojects', function () {
     return RegistableProject::with('groupsSetting')->get();
 });
 
-Route::get('/supervisors', function () {
-    return User::where('user_type', '=', User::$USER_TYPES[1])->get();
-});
+
 
 Route::group([
     'prefix' => 'auth'
