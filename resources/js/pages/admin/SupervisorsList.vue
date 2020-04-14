@@ -56,15 +56,43 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
-                                                label="password"
-                                                type="text"
+                                                :type="
+                                                        showPassword
+                                                            ? 'text'
+                                                            : 'password'
+                                                    "
+                                                    label="Password"
+                                                    title="password"
+                                                    :append-icon="
+                                                        !showPassword
+                                                            ? 'mdi-eye'
+                                                            : 'mdi-eye-off'
+                                                    "
+                                                    prepend-icon="mdi-key-outline"
                                                 v-model="newSupervisor.password"
+                                                 @click:append="
+                                                        showPassword = !showPassword
+                                                    "
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
-                                                label="Confirm Password"
-                                                type="text"
+                                                 :type="
+                                                        showPasswordConfirm
+                                                            ? 'text'
+                                                            : 'password'
+                                                    "
+                                                    label="Confirm Password"
+                                                    title="Confirm password"
+                                                    :append-icon="
+                                                        !showPasswordConfirm
+                                                            ? 'mdi-eye'
+                                                            : 'mdi-eye-off'
+                                                    "
+                                                    prepend-icon="mdi-key-outline"
+                                                    @click:append="
+                                                        showPasswordConfirm = !showPasswordConfirm
+                                                    "
                                             ></v-text-field>
                                         </v-col>  
                                         <v-col cols="12" md="6">
@@ -107,7 +135,9 @@ export default {
         data()
         {
          return {
-            newSupervisor: {}
+            newSupervisor: {},
+            showPassword: false,
+            showPasswordConfirm: false
                 }
         },
         components: {
