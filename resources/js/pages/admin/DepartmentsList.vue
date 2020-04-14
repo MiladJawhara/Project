@@ -30,7 +30,6 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-select
-                                                v-if="dataLoaded"
                                                 :items="
                                                     getListOf(
                                                         'f_name',
@@ -67,14 +66,10 @@
 import DataList from '../../components/gloabal/DataList'
 import { mapActions, mapGetters } from 'vuex'
 export default {
-    created() {
-        this.request({ what: ['departments', 'supervisors'] }).then(() => {
-            this.dataLoaded = true
-        })
-    },
+    requiredData: ['departments', 'supervisors'],
+    created() {},
     data() {
         return {
-            dataLoaded: false,
             newDepartment: {}
         }
     },
@@ -109,24 +104,20 @@ export default {
     computed: {
         ...mapGetters('data', ['getAll', 'getListOf', 'getBy']),
         items() {
-            if (this.dataLoaded) {
-                const { getBy, getAll } = this
-                return getAll('departments').map(dept => {
-                    return {
-                        ...dept,
-                        manager: dept.dept_manager_id
-                            ? getBy(
-                                  'f_name',
-                                  'supervisors',
-                                  'id',
-                                  dept.dept_manager_id
-                              )
-                            : 'None'
-                    }
-                })
-            } else {
-                return []
-            }
+            const { getBy, getAll } = this
+            return getAll('departments').map(dept => {
+                return {
+                    ...dept,
+                    manager: dept.dept_manager_id
+                        ? getBy(
+                              'f_name',
+                              'supervisors',
+                              'id',
+                              dept.dept_manager_id
+                          )
+                        : 'None'
+                }
+            })
         }
     }
 }

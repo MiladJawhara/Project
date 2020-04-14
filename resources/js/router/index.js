@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // The middleware for every page of the application.
-const globalMiddleware = ['test']
+const globalMiddleware = ['loadRequiredData']
 // ***********************************************************
 
 function resolveMiddleware(requireContext) {
