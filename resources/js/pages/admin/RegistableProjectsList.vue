@@ -272,18 +272,15 @@ import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'admin-projects-registableProjects',
-
-    created() {
-        this.request('all').then(() => (this.dataLoaded = true))
-    },
+    requiredData: 'all',
+    created() {},
     data() {
         return {
             registableProjects: [],
             newRegistableProject: {
                 range: [2, 4],
                 isOpen: true
-            },
-            dataLoaded: false
+            }
         }
     },
     methods: {
@@ -374,29 +371,25 @@ export default {
     computed: {
         ...mapGetters('data', ['getListOf', 'getBy', 'getAll']),
         items() {
-            if (this.dataLoaded) {
-                return this.getAll('registableProjects').map(item => {
-                    return {
-                        ...item,
-                        department: this.getBy(
-                            'title',
-                            'departments',
-                            'id',
-                            item.department_id
-                        ),
-                        year: this.getBy('title', 'years', 'id', item.year_id),
-                        range: [
-                            item.groups_setting.min_group_members_count,
-                            item.groups_setting.max_group_members_count
-                        ],
-                        minGM: item.groups_setting.min_group_members_count,
-                        maxGM: item.groups_setting.max_group_members_count,
-                        open: item.is_open ? 'YES' : 'NO'
-                    }
-                })
-            } else {
-                return []
-            }
+            return this.getAll('registableProjects').map(item => {
+                return {
+                    ...item,
+                    department: this.getBy(
+                        'title',
+                        'departments',
+                        'id',
+                        item.department_id
+                    ),
+                    year: this.getBy('title', 'years', 'id', item.year_id),
+                    range: [
+                        item.groups_setting.min_group_members_count,
+                        item.groups_setting.max_group_members_count
+                    ],
+                    minGM: item.groups_setting.min_group_members_count,
+                    maxGM: item.groups_setting.max_group_members_count,
+                    open: item.is_open ? 'YES' : 'NO'
+                }
+            })
         }
     },
     components: {

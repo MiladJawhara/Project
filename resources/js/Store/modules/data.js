@@ -14,7 +14,13 @@ export const getters = {
     getListOf: state => (what, from) => {
         if (state[from]) {
             if (state[from].length > 0) {
-                return state[from].map(item => item[what])
+                try {
+                    return state[from].map(item => item[what])
+                } catch (e) {
+                    throw new Error(
+                        `Error when try to find item with ${what} in ${from}`
+                    )
+                }
             } else {
                 return []
             }
@@ -22,10 +28,16 @@ export const getters = {
             throw new Error('there is no data with name: ' + from)
         }
     },
-    getBy: state => (what, from, by, Payload) => {
+    getBy: state => (what, from, by, value) => {
         if (state[from]) {
             if (state[from].length > 0) {
-                return state[from].find(item => item[by] == Payload)[what]
+                try {
+                    return state[from].find(item => item[by] == value)[what]
+                } catch (e) {
+                    throw new Error(
+                        `Error when try to find item with "${what}" using "${by}" in "${from}" with the value "${value}"`
+                    )
+                }
             } else {
                 return null
             }
@@ -67,16 +79,20 @@ export const mutations = {
  * @param {*} url
  * @param {*} ctx
  */
-function getData(stateName, commitType, url, ctx, force = false) {
+function getData(stateName, commitType, url, ctx, force) {
     return new Promise((resolve, reject) => {
-        if (ctx.state[stateName].length == 0 || force) {
-            Axios.get(url).then(res => {
-                const data = res.data
-                ctx.commit(commitType, data)
-                resolve(data)
-            })
+        if (ctx.state[stateName]) {
+            if (ctx.state[stateName].length == 0 || force) {
+                Axios.get(url).then(res => {
+                    const data = res.data
+                    ctx.commit(commitType, data)
+                    resolve(data)
+                })
+            } else {
+                resolve(ctx.state[stateName])
+            }
         } else {
-            resolve(ctx.state[stateName])
+            throw new Error(`Error when try to request "${stateName}"`)
         }
     })
 }
@@ -97,7 +113,11 @@ const apis = {
 
 // actions
 export const actions = {
-    async request(ctx, what) {
+    async request(ctx, { what, force }) {
+        if (!force) {
+            force = false
+        }
+
         if (what === 'all') {
             what = Object.keys(ctx.state)
         }
@@ -110,12 +130,13 @@ export const actions = {
                         element,
                         mutationsCut[element],
                         apis[element],
-                        ctx
+                        ctx,
+                        force
                     )
                 }
             }
         } else {
-            return getData(what, mutationsCut[what], apis[what], ctx)
+            return getData(what, mutationsCut[what], apis[what], ctx, force)
         }
     },
     addNewItemTo(ctx, { what, item }) {

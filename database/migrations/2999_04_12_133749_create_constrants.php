@@ -31,7 +31,7 @@ class CreateConstrants extends Migration
 
         Schema::table('registable_projects', function (Blueprint $table) {
             $table->foreign('groups_settings_id')->references('id')->on('groups_settings');
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->foreign('year_id')->references('id')->on('years');
         });
 
