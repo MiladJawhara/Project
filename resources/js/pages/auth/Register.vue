@@ -382,7 +382,6 @@ export default {
         ...mapGetters('data', ['getListOf'])
     },
     methods: {
-        ...mapActions('data', ['request']),
         async createNewAccount() {
             if (this.progressing) return
             this.progressing = true
