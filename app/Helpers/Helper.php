@@ -49,12 +49,12 @@ if (!function_exists('createUser')) {
             'password' => Hash::make($data['password']),
             'national_id' => $data['national_id'],
             'user_type' => $data['user_type'],
-            'department_id' => Department::where('title', $data['department'])->first()->id,
+            'department_id' => $data['department_id'],
         ];
 
         if ($data['user_type'] === User::$USER_TYPES[0]) {
             $tempData['university_id'] = $data['university_id'];
-            $tempData['year_id'] = Year::where('title', $data['year_of_study'])->first()->id;
+            $tempData['year_id'] = $data['year_id'];
         }
 
 
