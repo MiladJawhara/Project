@@ -341,13 +341,10 @@ extend('password', {
 export default {
     name: 'Register',
     middleware: 'guest',
+    requiredData: ['years', 'departments'],
     created() {
-        this.request('years').then(data => {
-            this.yearsOfStudy = data.map(year => year.title)
-        })
-        this.request('departments').then(data => {
-            this.departmentsTitles = data.map(dept => dept.title)
-        })
+        this.yearsOfStudy = this.getListOf('title', 'years')
+        this.departmentsTitles = this.getListOf('title', 'departments')
     },
     data() {
         return {
@@ -381,7 +378,8 @@ export default {
         selectedAccountType() {
             return this.form.user_type
         },
-        ...mapGetters('global', ['isMobile'])
+        ...mapGetters('global', ['isMobile']),
+        ...mapGetters('data', ['getListOf'])
     },
     methods: {
         ...mapActions('data', ['request']),

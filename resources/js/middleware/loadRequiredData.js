@@ -1,27 +1,29 @@
 import store from '../Store/index'
 
 export default (to, from, next) => {
+    let promeses = []
     to.matched.forEach(element => {
         if (element.components) {
             if (typeof element.components.default === 'function') {
-                element.components.default().then(data => {
-                    if (data.requiredData) {
-                        store
-                            .dispatch('data/request', {
-                                what: data.requiredData
-                            })
-                            .then(() => {
-                                next()
-                            })
-                    } else {
-                        next()
-                    }
-                })
-            } else {
-                next()
+                promeses.push(element.components.default())
             }
-        } else {
-            next()
         }
+    })
+
+    Promise.all(promeses).then(data => {
+        promeses = []
+        data.forEach(item => {
+            if (item.requiredData) {
+                promeses.push(
+                    store.dispatch('data/request', {
+                        what: item.requiredData
+                    })
+                )
+            }
+        })
+    })
+
+    Promise.all(promeses).then(() => {
+        next()
     })
 }

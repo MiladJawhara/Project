@@ -81,14 +81,18 @@ export const mutations = {
  */
 function getData(stateName, commitType, url, ctx, force) {
     return new Promise((resolve, reject) => {
-        if (ctx.state[stateName].length == 0 || force) {
-            Axios.get(url).then(res => {
-                const data = res.data
-                ctx.commit(commitType, data)
-                resolve(data)
-            })
+        if (ctx.state[stateName]) {
+            if (ctx.state[stateName].length == 0 || force) {
+                Axios.get(url).then(res => {
+                    const data = res.data
+                    ctx.commit(commitType, data)
+                    resolve(data)
+                })
+            } else {
+                resolve(ctx.state[stateName])
+            }
         } else {
-            resolve(ctx.state[stateName])
+            throw new Error(`Error when try to request "${stateName}"`)
         }
     })
 }
