@@ -4,7 +4,7 @@
             <v-col>
                 <data-list
                     :items="items"
-                    :dataToList="['f_name', 'l_name', 'email','national_id','dept']"
+                    :dataToList="['First_Name', 'Last_Name', 'Private_Email','National_Number','Dept']"
                     itemDeleteable
                     itemEditable
                     newItemBtnLable="Create New Supervisor"
@@ -36,7 +36,6 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-select
-                                                v-if="dataLoaded"
                                                 :items="
                                                     getListOf(
                                                         'title',
@@ -44,7 +43,7 @@
                                                     )
                                                 "
                                                 v-model="newSupervisor.super"
-                                                label="dept"
+                                                label="Dept"
                                             >
                                             </v-select>
                                         </v-col>
@@ -104,14 +103,10 @@ import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'admin-supervisors-supervisorsList',
-        created() {
-        this.request('supervisors').then(() => {
-            this.dataLoaded = true
-        })},
+    requiredData: ['departments', 'supervisors'],
         data()
         {
          return {
-            dataLoaded: false,
             newSupervisor: {}
                 }
         },
@@ -128,7 +123,7 @@ export default {
                 email: this.newSupervisor.email,
                 national_id: this.newSupervisor.national_id,
                 password: this.newSupervisor.password,
-                supervisor_dept_id: this.getBy(
+                department_id: this.getBy(
                     'id',
                     'departemnts',
                     'title',
@@ -153,17 +148,20 @@ export default {
         items() {
             if (this.dataLoaded) {
                 const { getBy, getAll } = this
-                return getAll('departments').map(dept => {
+                return getAll('supervisors').map(sup => {
                     return {
                         ...sup,
-                        dept: sup.supervisor_dept_id
-                            ? getBy(
+                        Dept: sup.deptartment_id.
+                             getBy(
                                   'title',
                                   'departments',
                                   'id',
-                                  sup.supervisor_dept_id
-                              )
-                            : 'None'
+                                  sup.department_id
+                              ),
+                         First_Name: sup.f_name,
+                         Last_Name:sup.l_name,
+                         National_number:sup.national_id,
+                         Private_Email: sup.email     
                     }
                 })
             } else {

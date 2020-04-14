@@ -57,7 +57,7 @@ export default {
                     ]
                 },
                                 {
-                    title: 'Supervisors',
+                    title: 'Users',
                     data: [
                         {
                             title: 'Supervisors List',
