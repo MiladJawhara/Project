@@ -55,6 +55,15 @@ export default {
                             data: 'admin.departments.list'
                         }
                     ]
+                },
+                                {
+                    title: 'Supervisors',
+                    data: [
+                        {
+                            title: 'Supervisors List',
+                            data: 'admin.supervisors.list'
+                        }
+                    ]
                 }
             ]
         }
