@@ -4,7 +4,7 @@
             <v-col>
                 <data-list
                     :items="items"
-                    :dataToList="['first_name', 'last_name', 'private_Email','national_number','dept']"
+                    :dataToList="['First_Name', 'Last_Name', 'Private_Email','National_Number','Dept']"
                     itemDeleteable
                     itemEditable
                     newItemBtnLable="Create New Supervisor"
@@ -43,7 +43,7 @@
                                                     )
                                                 "
                                                 v-model="newSupervisor.super"
-                                                label="dept"
+                                                label="Dept"
                                             >
                                             </v-select>
                                         </v-col>
@@ -123,7 +123,7 @@ export default {
                 email: this.newSupervisor.email,
                 national_id: this.newSupervisor.national_id,
                 password: this.newSupervisor.password,
-                supervisor_dept_id: this.getBy(
+                department_id: this.getBy(
                     'id',
                     'departemnts',
                     'title',
@@ -151,17 +151,17 @@ export default {
                 return getAll('supervisors').map(sup => {
                     return {
                         ...sup,
-                        dept: sup.deptartment_id.
+                        Dept: sup.deptartment_id.
                              getBy(
                                   'title',
                                   'departments',
                                   'id',
                                   sup.department_id
                               ),
-                         first_name: sup.f_name,
-                         last_name:sup.l_name,
+                         First_Name: sup.f_name,
+                         Last_Name:sup.l_name,
                          National_number:sup.national_id,
-                         private_Email: sup.email     
+                         Private_Email: sup.email     
                     }
                 })
             } else {
