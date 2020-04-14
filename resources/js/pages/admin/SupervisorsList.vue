@@ -89,7 +89,9 @@
                                                             ? 'mdi-eye'
                                                             : 'mdi-eye-off'
                                                     "
+
                                                     prepend-icon="mdi-key-outline"
+                                                    v-model="newSupervisor.password_confirmation"
                                                     @click:append="
                                                         showPasswordConfirm = !showPasswordConfirm
                                                     "
@@ -176,7 +178,7 @@ export default {
         computed: {
         ...mapGetters('data', ['getAll', 'getListOf', 'getBy']),
         items() {
-            if (this.dataLoaded) {
+            
                 const { getBy, getAll } = this
                 return getAll('supervisors').map(sup => {
                     return {
@@ -191,12 +193,10 @@ export default {
                          First_Name: sup.f_name,
                          Last_Name:sup.l_name,
                          National_number:sup.national_id,
-                         Private_Email: sup.email     
-                    }
-                })
-            } else {
-                return []
-            }
+                         Private_Email: sup.email    
+                    
+                } 
+         })
         }
     }
 
