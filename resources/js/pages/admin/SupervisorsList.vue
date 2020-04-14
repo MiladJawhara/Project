@@ -4,7 +4,13 @@
             <v-col>
                 <data-list
                     :items="items"
-                    :dataToList="['First_Name', 'Last_Name', 'Private_Email','National_Number','Dept']"
+                    :dataToList="[
+                        'First_Name',
+                        'Last_Name',
+                        'Private_Email',
+                        'National_Number',
+                        'Dept'
+                    ]"
                     itemDeleteable
                     itemEditable
                     newItemBtnLable="Create New Supervisor"
@@ -57,54 +63,56 @@
                                         <v-col cols="12" md="6">
                                             <v-text-field
                                                 :type="
-                                                        showPassword
-                                                            ? 'text'
-                                                            : 'password'
-                                                    "
-                                                    label="Password"
-                                                    title="password"
-                                                    :append-icon="
-                                                        !showPassword
-                                                            ? 'mdi-eye'
-                                                            : 'mdi-eye-off'
-                                                    "
-                                                    prepend-icon="mdi-key-outline"
+                                                    showPassword
+                                                        ? 'text'
+                                                        : 'password'
+                                                "
+                                                label="Password"
+                                                title="password"
+                                                :append-icon="
+                                                    !showPassword
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                prepend-icon="mdi-key-outline"
                                                 v-model="newSupervisor.password"
-                                                 @click:append="
-                                                        showPassword = !showPassword
-                                                    "
+                                                @click:append="
+                                                    showPassword = !showPassword
+                                                "
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
-                                                 :type="
-                                                        showPasswordConfirm
-                                                            ? 'text'
-                                                            : 'password'
-                                                    "
-                                                    label="Confirm Password"
-                                                    title="Confirm password"
-                                                    :append-icon="
-                                                        !showPasswordConfirm
-                                                            ? 'mdi-eye'
-                                                            : 'mdi-eye-off'
-                                                    "
-
-                                                    prepend-icon="mdi-key-outline"
-                                                    v-model="newSupervisor.password_confirmation"
-                                                    @click:append="
-                                                        showPasswordConfirm = !showPasswordConfirm
-                                                    "
+                                                :type="
+                                                    showPasswordConfirm
+                                                        ? 'text'
+                                                        : 'password'
+                                                "
+                                                label="Confirm Password"
+                                                title="Confirm password"
+                                                :append-icon="
+                                                    !showPasswordConfirm
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                prepend-icon="mdi-key-outline"
+                                                v-model="
+                                                    newSupervisor.password_confirmation
+                                                "
+                                                @click:append="
+                                                    showPasswordConfirm = !showPasswordConfirm
+                                                "
                                             ></v-text-field>
-                                        </v-col>  
+                                        </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
                                                 label="National Id"
                                                 type="text"
-                                                v-model="newSupervisor.national_id"
+                                                v-model="
+                                                    newSupervisor.national_id
+                                                "
                                             ></v-text-field>
                                         </v-col>
-
                                     </v-row>
                                 </v-container>
                             </v-form>
@@ -127,25 +135,23 @@
 </template>
 
 <script>
-
 import DataList from '../../components/gloabal/DataList'
 import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'admin-supervisors-supervisorsList',
     requiredData: ['departments', 'supervisors'],
-        data()
-        {
-         return {
+    data() {
+        return {
             newSupervisor: {},
             showPassword: false,
             showPasswordConfirm: false
-                }
-        },
-        components: {
+        }
+    },
+    components: {
         DataList
-        },
-         methods: {
+    },
+    methods: {
         ...mapActions('data', ['request', 'addNewItemTo', 'deleteItemBy']),
         async createNewSupervisor(close) {
             close()
@@ -167,38 +173,33 @@ export default {
                 what: 'supervisors',
                 item: data
             })
-
-            },
-            async deleteSupervisor(sup) {
+        },
+        async deleteSupervisor(sup) {
             await axios.delete(`/api/supervisors/${sup.id}`)
 
             this.deleteItemBy({ from: 'supervisors', by: 'id', value: sup.id })
         }
-        },
-        computed: {
+    },
+    computed: {
         ...mapGetters('data', ['getAll', 'getListOf', 'getBy']),
         items() {
-            
-                const { getBy, getAll } = this
-                return getAll('supervisors').map(sup => {
-                    return {
-                        ...sup,
-                        Dept: sup.deptartment_id.
-                             getBy(
-                                  'title',
-                                  'departments',
-                                  'id',
-                                  sup.department_id
-                              ),
-                         First_Name: sup.f_name,
-                         Last_Name:sup.l_name,
-                         National_number:sup.national_id,
-                         Private_Email: sup.email    
-                    
-                } 
-         })
+            const { getBy, getAll } = this
+            return getAll('supervisors').map(sup => {
+                return {
+                    ...sup,
+                    Dept: getBy(
+                        'title',
+                        'departments',
+                        'id',
+                        sup.department_id
+                    ),
+                    First_Name: sup.f_name,
+                    Last_Name: sup.l_name,
+                    National_number: sup.national_id,
+                    Private_Email: sup.email
+                }
+            })
         }
     }
-
 }
 </script>
