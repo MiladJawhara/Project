@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\RegistableProject;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
@@ -61,6 +62,9 @@ class DepartmentsController extends Controller
     public function destroy($id)
     {
         $dpet = Department::find($id);
+
+        RegistableProject::where('department_id', '=', $dpet->id)->delete();
+
         $dpet->delete();
     }
 }

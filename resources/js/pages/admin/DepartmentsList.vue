@@ -10,6 +10,7 @@
                     newItemBtnLable="Create New Department"
                     maxDialogsWidth="800px"
                     @deleteItem="deleteDepartment"
+                    deleteConfirmMsg="Are you sure you want to delete this Departmente? any thing is depending on this will be delete too!!!!"
                 >
                     <template v-slot:newItemDialog="{ close }">
                         <v-card-title class="primary text-white">
@@ -67,7 +68,7 @@ import DataList from '../../components/gloabal/DataList'
 import { mapActions, mapGetters } from 'vuex'
 export default {
     created() {
-        this.request(['departments', 'supervisors']).then(() => {
+        this.request({ what: ['departments', 'supervisors'] }).then(() => {
             this.dataLoaded = true
         })
     },
@@ -101,7 +102,7 @@ export default {
         },
         async deleteDepartment(dept) {
             await axios.delete(`/api/departments/${dept.id}`)
-
+            await this.request({ what: 'registableProjects', force: true })
             this.deleteItemBy({ from: 'departments', by: 'id', value: dept.id })
         }
     },

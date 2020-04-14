@@ -32,12 +32,10 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>{{
-                            userFullName
-                        }}</v-list-item-title>
-                        <v-list-item-subtitle>{{
-                            userDept
-                        }}</v-list-item-subtitle>
+                        <v-list-item-title>User Full Name</v-list-item-title>
+                        <v-list-item-subtitle
+                            >User Department</v-list-item-subtitle
+                        >
                     </v-list-item-content>
                 </v-list-item>
 
@@ -53,40 +51,15 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
-    created() {
-        this.request('departments').then(() => {
-            this.userDept = this.getBy(
-                'title',
-                'departments',
-                'id',
-                this.userDeptID
-            )
-        })
-    },
+    created() {},
     data() {
         return {
-            drawer: false,
-            userDept: 'Dept'
+            drawer: false
         }
     },
     computed: {
         ...mapGetters('auth', ['user', 'check']),
-        ...mapGetters('data', ['getBy']),
-
-        userFullName() {
-            if (this.user) {
-                return this.user.f_name + ' ' + this.user.l_name
-            }
-
-            return ''
-        },
-        userDeptID() {
-            if (this.user) {
-                return this.user.department_id
-            }
-
-            return 1
-        }
+        ...mapGetters('data', ['getBy'])
     },
     methods: {
         ...mapActions('data', ['request'])

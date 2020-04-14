@@ -274,7 +274,7 @@ export default {
     name: 'admin-projects-registableProjects',
 
     created() {
-        this.request('all').then(() => (this.dataLoaded = true))
+        this.request({ what: 'all' }).then(() => (this.dataLoaded = true))
     },
     data() {
         return {
