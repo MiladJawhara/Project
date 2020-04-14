@@ -30,10 +30,10 @@ class AuthController extends Controller
 
     public function register()
     {
+        return request();
+        $data =  validateUser(request()->all())->validate();
 
-        $data =  $this->validator(request()->all())->validate();
-
-        $user = $this->createUser($data);
+        $user = createUser($data);
 
         return response()->json(['status' => 'success']);
     }
@@ -100,55 +100,5 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
-    }
-
-
-    protected function validator(array $data)
-    {
-        if ($data['user_type'] === User::$USER_TYPES[0]) {
-
-            return Validator::make($data, [
-                'f_name' => ['required', 'string', 'max:255'],
-                'l_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'national_id' => ['required', 'string', 'min:11', 'unique:users'],
-                'university_id' => ['required', 'string', 'unique:users,university_id'],
-                'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
-                'department' => ['required', 'string'],
-                'year_of_study' => ['required', 'string'],
-            ]);
-        } else {
-            return Validator::make($data, [
-                'f_name' => ['required', 'string', 'max:255'],
-                'l_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'national_id' => ['required', 'string', 'min:11', 'unique:users'],
-                'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
-                'department' => ['required', 'string'],
-            ]);
-        }
-    }
-    protected function createUser(array $data)
-    {
-        $tempData = [
-            'f_name' => $data['f_name'],
-            'l_name' => $data['l_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'national_id' => $data['national_id'],
-            'user_type' => $data['user_type'],
-            'department_id' => Department::where('title', $data['department'])->first()->id,
-        ];
-
-        if ($data['user_type'] === User::$USER_TYPES[0]) {
-            $tempData['university_id'] = $data['university_id'];
-            $tempData['year_id'] = Year::where('title', $data['year_of_study'])->first()->id;
-        }
-
-
-        $user = User::create($tempData);
-        return $user;
     }
 }
