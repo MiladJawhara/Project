@@ -194,7 +194,7 @@ export default {
                          Last_Name:sup.l_name,
                          National_number:sup.national_id,
                          Private_Email: sup.email    
-                    
+
                 } 
          })
         }
