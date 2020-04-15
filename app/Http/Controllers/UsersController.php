@@ -13,6 +13,12 @@ class UsersController extends Controller
         return User::where('user_type', '=', User::$USER_TYPES[1])->get();
     }
 
+    public function adminStudents()
+    {
+        return User::where('user_type', '=', User::$USER_TYPES[0])->get();
+    }
+
+
     public function adminSupervisorCreate()
     {
         request()->merge([

@@ -6,7 +6,8 @@ export const state = {
     years: [],
     departments: [],
     registableProjects: [],
-    supervisors: []
+    supervisors: [],
+    students: []
 }
 
 // getters
@@ -68,6 +69,9 @@ export const mutations = {
     [types.SET_SUPERVISORS](state, data) {
         state.supervisors = data
     },
+    [types.SET_STUDENTS](state, data) {
+        state.students = data
+    },
     [types.UPDATE_DATA](state, { what, newData }) {
         state[what] = newData
     }
@@ -101,14 +105,16 @@ const mutationsCut = {
     years: types.SET_YEARS_TITLES,
     departments: types.SET_DEPARTMENTS,
     registableProjects: types.SET_REGISTABLE_PROJECTS,
-    supervisors: types.SET_SUPERVISORS
+    supervisors: types.SET_SUPERVISORS,
+    students: types.SET_STUDENTS
 }
 
 const apis = {
     years: '/api/years',
     departments: '/api/departments',
     registableProjects: '/api/registableprojects',
-    supervisors: '/api/supervisors'
+    supervisors: '/api/supervisors',
+    students: '/api/students'
 }
 
 // actions

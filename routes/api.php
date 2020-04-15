@@ -97,6 +97,16 @@ Route::delete('/supervisors/{id}', 'UsersController@adminSupervisorDelete');
 
 
 
+//Students Admin
+
+
+Route::get('/students', 'UsersController@adminStudents');
+Route::post('/students', 'UsersController@adminSupervisorCreate');
+Route::put('/students/{id}', 'UsersController@adminSupervisorUpdate');
+Route::delete('/students/{id}', 'UsersController@adminSupervisorDelete');
+
+//Students Admin
+
 
 Route::get('/years', function () {
     return Year::all();

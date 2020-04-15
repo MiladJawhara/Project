@@ -56,12 +56,16 @@ export default {
                         }
                     ]
                 },
-                                {
+                {
                     title: 'Users',
                     data: [
                         {
                             title: 'Supervisors List',
                             data: 'admin.supervisors.list'
+                        },
+                        {
+                            title: 'Students List',
+                            data: 'admin.users.students.list'
                         }
                     ]
                 }
