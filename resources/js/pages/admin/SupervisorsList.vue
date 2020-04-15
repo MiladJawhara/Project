@@ -48,7 +48,7 @@
                                                         'departments'
                                                     )
                                                 "
-                                                v-model="newSupervisor.super"
+                                                v-model="newSupervisor.Dept"
                                                 label="Dept"
                                             >
                                             </v-select>
@@ -164,9 +164,9 @@ export default {
                 password_confirmation: this.newSupervisor.password_confirmation,
                 department_id: this.getBy(
                     'id',
-                    'departemnts',
+                    'departments',
                     'title',
-                    this.newSupervisor.super
+                    this.newSupervisor.Dept
                 )
             })
 
