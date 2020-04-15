@@ -4,7 +4,13 @@
             <v-col>
                 <data-list
                     :items="items"
-                    :dataToList="['f_name', 'l_name', 'email','national_id','dept']"
+                    :dataToList="[
+                        'First_Name',
+                        'Last_Name',
+                        'Private_Email',
+                        'National_Number',
+                        'Dept'
+                    ]"
                     itemDeleteable
                     itemEditable
                     newItemBtnLable="Create New Supervisor"
@@ -36,15 +42,14 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-select
-                                                v-if="dataLoaded"
                                                 :items="
                                                     getListOf(
                                                         'title',
                                                         'departments'
                                                     )
                                                 "
-                                                v-model="newSupervisor.super"
-                                                label="dept"
+                                                v-model="newSupervisor.Dept"
+                                                label="Dept"
                                             >
                                             </v-select>
                                         </v-col>
@@ -57,25 +62,57 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
-                                                label="password"
-                                                type="text"
+                                                :type="
+                                                    showPassword
+                                                        ? 'text'
+                                                        : 'password'
+                                                "
+                                                label="Password"
+                                                title="password"
+                                                :append-icon="
+                                                    !showPassword
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                prepend-icon="mdi-key-outline"
                                                 v-model="newSupervisor.password"
+                                                @click:append="
+                                                    showPassword = !showPassword
+                                                "
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
+                                                :type="
+                                                    showPasswordConfirm
+                                                        ? 'text'
+                                                        : 'password'
+                                                "
                                                 label="Confirm Password"
-                                                type="text"
+                                                title="Confirm password"
+                                                :append-icon="
+                                                    !showPasswordConfirm
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                prepend-icon="mdi-key-outline"
+                                                v-model="
+                                                    newSupervisor.password_confirmation
+                                                "
+                                                @click:append="
+                                                    showPasswordConfirm = !showPasswordConfirm
+                                                "
                                             ></v-text-field>
-                                        </v-col>  
+                                        </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
                                                 label="National Id"
                                                 type="text"
-                                                v-model="newSupervisor.national_id"
+                                                v-model="
+                                                    newSupervisor.national_id
+                                                "
                                             ></v-text-field>
                                         </v-col>
-
                                     </v-row>
                                 </v-container>
                             </v-form>
@@ -98,27 +135,23 @@
 </template>
 
 <script>
-
 import DataList from '../../components/gloabal/DataList'
 import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'admin-supervisors-supervisorsList',
-        created() {
-        this.request('supervisors').then(() => {
-            this.dataLoaded = true
-        })},
-        data()
-        {
-         return {
-            dataLoaded: false,
-            newSupervisor: {}
-                }
-        },
-        components: {
+    requiredData: ['departments', 'supervisors'],
+    data() {
+        return {
+            newSupervisor: {},
+            showPassword: false,
+            showPasswordConfirm: false
+        }
+    },
+    components: {
         DataList
-        },
-         methods: {
+    },
+    methods: {
         ...mapActions('data', ['request', 'addNewItemTo', 'deleteItemBy']),
         async createNewSupervisor(close) {
             close()
@@ -128,11 +161,12 @@ export default {
                 email: this.newSupervisor.email,
                 national_id: this.newSupervisor.national_id,
                 password: this.newSupervisor.password,
-                supervisor_dept_id: this.getBy(
+                password_confirmation: this.newSupervisor.password_confirmation,
+                department_id: this.getBy(
                     'id',
-                    'departemnts',
+                    'departments',
                     'title',
-                    this.newSupervisor.super
+                    this.newSupervisor.Dept
                 )
             })
 
@@ -140,37 +174,34 @@ export default {
                 what: 'supervisors',
                 item: data
             })
-
-            },
-            async deleteSupervisor(sup) {
+        },
+        async deleteSupervisor(sup) {
             await axios.delete(`/api/supervisors/${sup.id}`)
 
             this.deleteItemBy({ from: 'supervisors', by: 'id', value: sup.id })
         }
-        },
-        computed: {
+    },
+    computed: {
         ...mapGetters('data', ['getAll', 'getListOf', 'getBy']),
         items() {
-            if (this.dataLoaded) {
-                const { getBy, getAll } = this
-                return getAll('departments').map(dept => {
-                    return {
-                        ...sup,
-                        dept: sup.supervisor_dept_id
-                            ? getBy(
-                                  'title',
-                                  'departments',
-                                  'id',
-                                  sup.supervisor_dept_id
-                              )
-                            : 'None'
-                    }
-                })
-            } else {
-                return []
-            }
+
+            const { getBy, getAll } = this
+            return getAll('supervisors').map(sup => {
+                return {
+                    ...sup,
+                    Dept: getBy(
+                        'title',
+                        'departments',
+                        'id',
+                        sup.department_id
+                    ),
+                    First_Name: sup.f_name,
+                    Last_Name: sup.l_name,
+                    National_number: sup.national_id,
+                    Private_Email: sup.email
+                }
+            })
         }
     }
-
 }
 </script>
