@@ -90,6 +90,8 @@ Route::delete('/departments/{id}', 'DepartmentsController@destroy');
 
 Route::get('/supervisors', 'UsersController@adminSupervisors');
 Route::post('/supervisors', 'UsersController@adminSupervisorCreate');
+Route::put('/supervisors/{id}', 'UsersController@adminSupervisorUpdate');
+Route::delete('/supervisors/{id}', 'UsersController@adminSupervisorDelete');
 
 //Supervisors Admin
 
