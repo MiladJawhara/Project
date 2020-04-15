@@ -1,103 +1,115 @@
 <template>
-    <v-data-table
-        :search="search"
-        :headers="headers"
-        :items="items"
-        class="elevation-2"
-    >
-        <template v-slot:top>
-            <v-toolbar flat color="white">
-                <v-toolbar-items class="mt-5">
+    <v-container class=" m-0">
+        <v-row justify="center" class="mt-0" dense>
+            <v-col cols="12" sm="8" md="6">
+                <v-toolbar-items>
                     <v-text-field
                         type="text"
                         label="Search"
                         outlined
                         v-model="search"
+                        height="20px"
                     ></v-text-field>
                 </v-toolbar-items>
-                <v-spacer></v-spacer>
+            </v-col>
+            <v-col cols="12">
+                <v-data-table
+                    :search="search"
+                    :headers="headers"
+                    :items="items"
+                    class="elevation-2"
+                >
+                    <template v-slot:top>
+                        <v-toolbar flat color="white">
+                            <v-spacer></v-spacer>
 
-                <v-dialog
-                    v-if="itemHasDetails"
-                    v-model="detailsDialog"
-                    :max-width="maxDialogsWidth"
-                >
-                    <v-card class="pb-2">
-                        <slot
-                            name="detailsDialog"
-                            :item="selectedItem"
-                            :close="closeDetailsDialog"
-                        ></slot>
-                    </v-card>
-                </v-dialog>
-                <v-dialog
-                    v-if="itemEditable"
-                    v-model="editDialog"
-                    :max-width="maxDialogsWidth"
-                >
-                    <v-card class="pb-2">
-                        <slot
-                            name="editDialog"
-                            :item="selectedItem"
-                            :close="closeEditDialog"
-                        ></slot>
-                    </v-card>
-                </v-dialog>
+                            <v-dialog
+                                v-if="itemHasDetails"
+                                v-model="detailsDialog"
+                                :max-width="maxDialogsWidth"
+                            >
+                                <v-card class="pb-2">
+                                    <slot
+                                        name="detailsDialog"
+                                        :item="selectedItem"
+                                        :close="closeDetailsDialog"
+                                    ></slot>
+                                </v-card>
+                            </v-dialog>
+                            <v-dialog
+                                v-if="itemEditable"
+                                v-model="editDialog"
+                                :max-width="maxDialogsWidth"
+                            >
+                                <v-card class="pb-2">
+                                    <slot
+                                        name="editDialog"
+                                        :item="selectedItem"
+                                        :close="closeEditDialog"
+                                    ></slot>
+                                </v-card>
+                            </v-dialog>
 
-                <v-dialog
-                    v-if="newItemBtnLable"
-                    v-model="newItemDialog"
-                    :max-width="maxDialogsWidth"
-                >
-                    <template v-slot:activator="{ on }">
-                        <v-btn v-on="on" color="primary">
-                            <template v-if="!isMobile"
-                                >{{ newItemBtnLable }}
-                            </template>
-                            <template v-else>
-                                <v-icon>mdi-plus</v-icon>
-                            </template>
-                        </v-btn>
+                            <v-dialog
+                                v-if="newItemBtnLable"
+                                v-model="newItemDialog"
+                                :max-width="maxDialogsWidth"
+                            >
+                                <template v-slot:activator="{ on }">
+                                    <v-btn v-on="on" color="primary">
+                                        <template v-if="!isMobile"
+                                            >{{ newItemBtnLable }}
+                                        </template>
+                                        <template v-else>
+                                            <v-icon>mdi-plus</v-icon>
+                                        </template>
+                                    </v-btn>
+                                </template>
+                                <v-card class="pb-2">
+                                    <slot
+                                        name="newItemDialog"
+                                        :close="closeNewItemDialog"
+                                    ></slot>
+                                </v-card>
+                            </v-dialog>
+                        </v-toolbar>
                     </template>
-                    <v-card class="pb-2">
-                        <slot
-                            name="newItemDialog"
-                            :close="closeNewItemDialog"
-                        ></slot>
-                    </v-card>
-                </v-dialog>
-            </v-toolbar>
-        </template>
-        <template v-if="itemManagable" v-slot:item.actions="{ item }">
-            <v-icon
-                v-if="itemHasDetails"
-                small
-                class="mr-2"
-                @click="showItem(item)"
-            >
-                mdi-eye
-            </v-icon>
-            <v-icon
-                v-if="itemEditable"
-                small
-                class="mr-2"
-                @click="editItem(item)"
-            >
-                mdi-pencil
-            </v-icon>
-            <v-icon
-                v-if="itemDeleteable"
-                small
-                color="red"
-                @click="deleteItem(item)"
-            >
-                mdi-delete
-            </v-icon>
-        </template>
-        <template v-slot:no-data>
-            <h3>No Data Found!</h3>
-        </template>
-    </v-data-table>
+                    <template
+                        v-if="itemManagable"
+                        v-slot:item.actions="{ item }"
+                    >
+                        <v-icon
+                            v-if="itemHasDetails"
+                            small
+                            class="mr-2"
+                            @click="showItem(item)"
+                        >
+                            mdi-eye
+                        </v-icon>
+                        <v-icon
+                            v-if="itemEditable"
+                            small
+                            class="mr-2"
+                            @click="editItem(item)"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            v-if="itemDeleteable"
+                            small
+                            color="red"
+                            @click="deleteItem(item)"
+                        >
+                            mdi-delete
+                        </v-icon>
+                    </template>
+                    <template v-slot:no-data>
+                        <h3>No Data Found!</h3>
+                    </template>
+                </v-data-table>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
