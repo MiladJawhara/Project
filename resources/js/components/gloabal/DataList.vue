@@ -99,6 +99,9 @@ export default {
             type: Array,
             require: true
         },
+        dataTitles: {
+            type: Array
+        },
         newItemBtnLable: {
             type: String
         },
@@ -124,7 +127,11 @@ export default {
         if (this.dataToList) {
             this.headers = this.dataToList.map((data, i) => {
                 let res = {
-                    text: data,
+                    text: this.dataTitles
+                        ? this.dataTitles[i]
+                            ? this.dataTitles[i]
+                            : data
+                        : data,
                     value: data
                 }
                 if (i == 0) {

@@ -4,6 +4,7 @@
             <v-col>
                 <data-list
                     :items="items"
+                    :dataTitles="['Title', 'Manager']"
                     :dataToList="['title', 'manager']"
                     itemDeleteable
                     itemEditable
