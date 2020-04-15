@@ -31,7 +31,7 @@ if (!function_exists('validateUser')) {
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'national_id' => ['required', 'string', 'min:11', 'unique:users'],
                 'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
-                'department_id' => ['required', 'string'],
+                'department_id' => ['required', 'numeric'],
             ]);
         }
     }
