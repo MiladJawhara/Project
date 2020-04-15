@@ -1,7 +1,20 @@
 <template>
-    <v-data-table :headers="headers" :items="items" class="elevation-2">
+    <v-data-table
+        :search="search"
+        :headers="headers"
+        :items="items"
+        class="elevation-2"
+    >
         <template v-slot:top>
             <v-toolbar flat color="white">
+                <v-toolbar-items class="mt-5">
+                    <v-text-field
+                        type="text"
+                        label="Search"
+                        outlined
+                        v-model="search"
+                    ></v-text-field>
+                </v-toolbar-items>
                 <v-spacer></v-spacer>
 
                 <v-dialog
@@ -160,7 +173,8 @@ export default {
             editDialog: false,
             newItemDialog: false,
             selectedItem: null,
-            currentDialog: 'newItemDialog'
+            currentDialog: 'newItemDialog',
+            search: ''
         }
     },
     methods: {
