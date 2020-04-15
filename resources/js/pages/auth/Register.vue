@@ -370,14 +370,12 @@ export default {
                     'title',
                     this.newAccount.department
                 ),
-                year_id: this.newAccount.year_of_study
-                    ? this.getBy(
-                          'id',
-                          'years',
-                          'title',
-                          this.newAccount.year_of_study
-                      )
-                    : null
+                year_id: this.getBy(
+                    'id',
+                    'years',
+                    'title',
+                    this.newAccount.year_of_study
+                )
             })
             try {
                 const { data } = await form.post('/api/auth/register')

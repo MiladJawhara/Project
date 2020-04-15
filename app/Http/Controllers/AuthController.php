@@ -30,6 +30,9 @@ class AuthController extends Controller
 
     public function register()
     {
+        request()->merge([
+            'user_type' => User::$USER_TYPES[0]
+        ]);
 
         $data =  validateUser(request()->all())->validate();
 
