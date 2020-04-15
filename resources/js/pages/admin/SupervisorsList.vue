@@ -161,6 +161,7 @@ export default {
                 email: this.newSupervisor.email,
                 national_id: this.newSupervisor.national_id,
                 password: this.newSupervisor.password,
+                password_confirmation: this.newSupervisor.password_confirmation,
                 department_id: this.getBy(
                     'id',
                     'departemnts',
