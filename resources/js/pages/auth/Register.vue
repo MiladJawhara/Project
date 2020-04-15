@@ -15,19 +15,6 @@
                                 <v-container class="pl-0 pr-0">
                                     <v-row>
                                         <v-col>
-                                            <v-select
-                                                prepend-icon="mdi-account-cog-outline"
-                                                label="Account Type"
-                                                dense
-                                                :items="accountTypes"
-                                                v-model="form.user_type"
-                                            >
-                                            </v-select>
-                                        </v-col>
-                                    </v-row>
-
-                                    <v-row>
-                                        <v-col>
                                             <ValidationProvider
                                                 rules="required|alpha|minmax:2,15"
                                                 name="First Name"
@@ -39,7 +26,7 @@
                                                     label="First Name"
                                                     title="Your First Name"
                                                     prepend-icon="mdi-card-text-outline"
-                                                    v-model="form.f_name"
+                                                    v-model="newAccount.f_name"
                                                 ></v-text-field>
                                             </ValidationProvider>
                                         </v-col>
@@ -58,7 +45,7 @@
                                                     label="Last Name"
                                                     title="Your Last Name"
                                                     prepend-icon="mdi-card-text-outline"
-                                                    v-model="form.l_name"
+                                                    v-model="newAccount.l_name"
                                                 ></v-text-field>
                                             </ValidationProvider>
                                         </v-col>
@@ -77,7 +64,7 @@
                                                     label="E-mail"
                                                     title="Your Email Address"
                                                     prepend-icon="mdi-email"
-                                                    v-model="form.email"
+                                                    v-model="newAccount.email"
                                                 ></v-text-field>
                                             </ValidationProvider>
                                         </v-col>
@@ -105,7 +92,9 @@
                                                             ? 'mdi-eye'
                                                             : 'mdi-eye-off'
                                                     "
-                                                    v-model="form.password"
+                                                    v-model="
+                                                        newAccount.password
+                                                    "
                                                     @click:append="
                                                         showPassword = !showPassword
                                                     "
@@ -132,7 +121,7 @@
                                                     title="Confirm The Password You Have Entered!"
                                                     prepend-icon="mdi-key-plus"
                                                     v-model="
-                                                        form.password_confirmation
+                                                        newAccount.password_confirmation
                                                     "
                                                     @click:append="
                                                         showPassword = !showPassword
@@ -155,7 +144,9 @@
                                                     label="National ID"
                                                     title="Your National ID"
                                                     prepend-icon="mdi-id-card"
-                                                    v-model="form.national_id"
+                                                    v-model="
+                                                        newAccount.national_id
+                                                    "
                                                 ></v-text-field>
                                             </ValidationProvider>
                                         </v-col>
@@ -167,16 +158,14 @@
                                                 prepend-icon="mdi-office-building"
                                                 label="Department"
                                                 dense
-                                                :items="departmentsTitles"
-                                                v-model="form.department"
+                                                :items="deptsTitleList"
+                                                v-model="newAccount.department"
                                             >
                                             </v-select>
                                         </v-col>
                                     </v-row>
 
-                                    <template
-                                        v-if="form.user_type == 'Student'"
-                                    >
+                                    <template>
                                         <v-row>
                                             <v-col>
                                                 <ValidationProvider
@@ -189,9 +178,9 @@
                                                         label="Year Of Study"
                                                         :error-messages="errors"
                                                         dense
-                                                        :items="yearsOfStudy"
+                                                        :items="yearTitleList"
                                                         v-model="
-                                                            form.year_of_study
+                                                            newAccount.year_of_study
                                                         "
                                                     >
                                                     </v-select>
@@ -213,7 +202,7 @@
                                                         title="Your University ID"
                                                         prepend-icon="mdi-id-card"
                                                         v-model="
-                                                            form.university_id
+                                                            newAccount.university_id
                                                         "
                                                     ></v-text-field>
                                                 </ValidationProvider>
@@ -261,7 +250,7 @@
             </v-col>
         </v-row>
         <v-snackbar
-            :color="form.successful ? '#0c3' : '#c03'"
+            :color="createUserSuccess ? '#0c3' : '#c03'"
             v-model="snackbar"
             :timeout="6000"
             buttom
@@ -342,57 +331,60 @@ export default {
     name: 'Register',
     middleware: 'guest',
     requiredData: ['years', 'departments'],
-    created() {
-        this.yearsOfStudy = this.getListOf('title', 'years')
-        this.departmentsTitles = this.getListOf('title', 'departments')
-    },
+    created() {},
+    mounted() {},
     data() {
         return {
-            form: new Form({
-                user_type: 'Student',
+            newAccount: {
                 department: 'none'
-            }),
+            },
             showPassword: false,
             accountTypes: ['Student', 'Supervisor'],
-            yearsOfStudy: [],
-            departmentsTitles: ['none'],
             progressing: false,
+            // snackbar
             snackbarMessage: '',
+            createUserSuccess: false,
             snackbar: false
         }
     },
-    watch: {
-        selectedAccountType(value) {
-            if (value == this.accountTypes[1]) {
-                if (this.form.year_of_study !== undefined) {
-                    delete this.form.year_of_study
-                }
-
-                if (this.form.university_id !== undefined) {
-                    delete this.form.university_id
-                }
-            }
-        }
-    },
+    watch: {},
     computed: {
-        selectedAccountType() {
-            return this.form.user_type
+        yearTitleList() {
+            return this.getListOf('title', 'years')
+        },
+        deptsTitleList() {
+            return this.getListOf('title', 'departments')
         },
         ...mapGetters('global', ['isMobile']),
-        ...mapGetters('data', ['getListOf'])
+        ...mapGetters('data', ['getListOf', 'getBy'])
     },
     methods: {
         async createNewAccount() {
             if (this.progressing) return
             this.progressing = true
+            const form = new Form({
+                ...this.newAccount,
+                department_id: this.getBy(
+                    'id',
+                    'departments',
+                    'title',
+                    this.newAccount.department
+                ),
+                year_id: this.newAccount.year_of_study
+                    ? this.getBy(
+                          'id',
+                          'years',
+                          'title',
+                          this.newAccount.year_of_study
+                      )
+                    : null
+            })
             try {
-                const { data } = await this.form.post('/api/auth/register')
-
-                this.snackbarMessage = 'Account created..Well done!!'
-                this.snackbar = true
+                const { data } = await form.post('/api/auth/register')
                 this.$router.push({ name: 'login' })
             } catch (err) {
-                const errors = this.form.errors.errors
+                const errors = form.errors.errors
+                this.createUserSuccess = false
                 this.snackbarMessage = errors[Object.keys(errors)[0]][0]
                 this.snackbar = true
             } finally {

@@ -24,6 +24,6 @@ export default (to, from, next) => {
     })
 
     Promise.all(promeses).then(() => {
-        next()
+        setTimeout(next, 100)
     })
 }

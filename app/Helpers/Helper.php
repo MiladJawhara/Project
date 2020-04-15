@@ -20,8 +20,8 @@ if (!function_exists('validateUser')) {
                 'national_id' => ['required', 'string', 'min:11', 'unique:users'],
                 'university_id' => ['required', 'string', 'unique:users,university_id'],
                 'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
-                'department' => ['required', 'string'],
-                'year_of_study' => ['required', 'string'],
+                'department_id' => ['required', 'numeric'],
+                'year_id' => ['required', 'numeric'],
             ]);
         } else {
             return Validator::make($data, [
@@ -31,7 +31,7 @@ if (!function_exists('validateUser')) {
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'national_id' => ['required', 'string', 'min:11', 'unique:users'],
                 'user_type' => ['required', 'string', 'in:' . User::$USER_TYPES[0] . ',' . User::$USER_TYPES[1]],
-                'department' => ['required', 'string'],
+                'department_id' => ['required', 'string'],
             ]);
         }
     }
