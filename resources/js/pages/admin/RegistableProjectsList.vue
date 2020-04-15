@@ -4,6 +4,14 @@
             <v-col>
                 <data-list
                     :items="items"
+                    :dataTitles="[
+                        'Title',
+                        'Open',
+                        'Department',
+                        'Year',
+                        'MinGM',
+                        'MaxGM'
+                    ]"
                     :dataToList="[
                         'title',
                         'open',
