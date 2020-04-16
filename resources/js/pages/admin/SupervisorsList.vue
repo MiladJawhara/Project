@@ -106,7 +106,7 @@
                                         </v-col>
                                         <v-col cols="12" md="6">
                                             <v-text-field
-                                                label="National Id"
+                                                label="National Number"
                                                 type="text"
                                                 v-model="
                                                     newSupervisor.national_id
