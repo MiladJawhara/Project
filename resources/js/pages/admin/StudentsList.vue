@@ -20,7 +20,7 @@
                     <template v-slot:detailsDialog="{ item, close }">
                         <template v-if="item">
                             <v-card-title class="primary text-white">
-                                {{ item.f_name }}'s' Detials
+                                {{ item.f_name }}'s Detials
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
