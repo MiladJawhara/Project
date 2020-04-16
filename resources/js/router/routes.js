@@ -35,6 +35,7 @@ export default [
             },
             {
                 path: 'admin',
+                redirect: { name: 'admin.dashboard' },
                 name: 'admin',
                 component: importPage('admin/Main'),
                 children: [

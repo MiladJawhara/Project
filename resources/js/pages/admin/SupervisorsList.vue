@@ -256,8 +256,8 @@ export default {
     },
     computed: {
         ...mapGetters('data', ['getAll', 'getListOf', 'getBy']),
+        ...mapGetters('global', ['isMobile']),
         items() {
-
             const { getBy, getAll } = this
             return getAll('supervisors').map(sup => {
                 return {

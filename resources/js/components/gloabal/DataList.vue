@@ -1,18 +1,21 @@
 <template>
-    <v-container class=" m-0">
-        <v-row justify="center" class="mt-0" dense>
-            <v-col cols="12" sm="8" md="6">
+    <v-container class=" m-0 p-0">
+        <v-row justify="center" dense>
+            <v-col class="m-0 p-0" cols="12" sm="8" md="6" v-if="searchable">
                 <v-toolbar-items>
                     <v-text-field
+                        class="m-0 p-0"
                         type="text"
                         label="Search"
+                        dense
+                        append-icon="mdi-magnify"
                         outlined
                         v-model="search"
                         height="20px"
                     ></v-text-field>
                 </v-toolbar-items>
             </v-col>
-            <v-col cols="12">
+            <v-col class="mt-0 p-0" cols="12">
                 <v-data-table
                     :search="search"
                     :headers="headers"
@@ -29,6 +32,11 @@
                                 :max-width="maxDialogsWidth"
                             >
                                 <v-card class="pb-2">
+                                    <v-icon
+                                        @click="closeDetailsDialog()"
+                                        class="close-mark"
+                                        >mdi-close</v-icon
+                                    >
                                     <slot
                                         name="detailsDialog"
                                         :item="selectedItem"
@@ -42,6 +50,11 @@
                                 :max-width="maxDialogsWidth"
                             >
                                 <v-card class="pb-2">
+                                    <v-icon
+                                        @click="closeEditDialog()"
+                                        class="close-mark"
+                                        >mdi-close</v-icon
+                                    >
                                     <slot
                                         name="editDialog"
                                         :item="selectedItem"
@@ -66,6 +79,11 @@
                                     </v-btn>
                                 </template>
                                 <v-card class="pb-2">
+                                    <v-icon
+                                        @click="closeNewItemDialog()"
+                                        class="close-mark"
+                                        >mdi-close</v-icon
+                                    >
                                     <slot
                                         name="newItemDialog"
                                         :close="closeNewItemDialog"
@@ -146,6 +164,9 @@ export default {
         deleteConfirmMsg: {
             type: String,
             default: 'Are you sure you want to delete?'
+        },
+        searchable: {
+            type: Boolean
         }
     },
     created() {
@@ -227,4 +248,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.close-mark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: wheat;
+}
+</style>
