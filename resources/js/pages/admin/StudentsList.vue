@@ -14,7 +14,7 @@
                     <template v-slot:detailsDialog="{ item, close }">
                         <template v-if="item">
                             <v-card-title class="primary text-white">
-                                {{ item.f_name }} Detials
+                                {{ item.f_name }}'s' Detials
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -40,7 +40,7 @@
                                                     <v-list-item-content>
                                                         <v-list-item-title
                                                             :title="
-                                                                `Go to ${item.f_name} profile`
+                                                                `Go to ${item.f_name}'s profile`
                                                             "
                                                         >
                                                             {{
@@ -51,7 +51,7 @@
                                                         </v-list-item-title>
 
                                                         <v-list-item-subtitle>{{
-                                                            item.email
+                                                            item.user_type
                                                         }}</v-list-item-subtitle>
                                                     </v-list-item-content>
                                                 </v-list-item>
@@ -82,6 +82,14 @@
                                                         {{ item.dept }}
                                                     </v-list-item-title>
                                                 </v-list-item>
+                                                <v-list-item>
+                                                    <v-list-item-title>
+                                                        <v-label>
+                                                            Email:
+                                                        </v-label>
+                                                        {{ item.email }}
+                                                    </v-list-item-title>
+                                                </v-list-item>                                                
                                             </v-list>
                                         </v-col>
                                     </v-row>
