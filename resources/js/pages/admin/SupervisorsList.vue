@@ -16,6 +16,7 @@
                     itemEditable
                     itemDeleteable
                     itemHasDetails
+                    searchable
                     newItemBtnLable="Create New Supervisor"
                     maxDialogsWidth="800px"
                     @deleteItem="deleteSupervisor"
@@ -195,6 +196,14 @@
                                                         {{ item.email }}
                                                     </v-list-item-title>
                                                 </v-list-item>
+                                                <v-list-item>
+                                                    <v-list-item-title>
+                                                        <v-label>
+                                                            Account Verified:
+                                                        </v-label>
+                                                        {{ item.emailVerified}}
+                                                    </v-list-item-title>
+                                                </v-list-item>
                                             </v-list>
                                         </v-col>
                                     </v-row>
@@ -271,7 +280,8 @@ export default {
                     First_Name: sup.f_name,
                     Last_Name: sup.l_name,
                     National_number: sup.national_id,
-                    Private_Email: sup.email
+                    Private_Email: sup.email,
+                    emailVerified: sup.email_verified_at ? 'Yes' : 'No'
                 }
             })
         }
