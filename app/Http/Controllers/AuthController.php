@@ -34,7 +34,7 @@ class AuthController extends Controller
             'user_type' => User::$USER_TYPES[0]
         ]);
 
-        $data =  validateUser(request()->all())->validate();
+        $data =  studentValidator(request()->all())->validate();
 
         $user = createUser($data);
 

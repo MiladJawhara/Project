@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="colored">
         <nav-bar :pLinks="links"></nav-bar>
 
-        <v-container class="">
-            <v-row>
+        <v-container :class="isMobile ? 'p-0' : 'p-0'">
+            <v-row justify="center">
                 <v-col>
-                    <v-card v-if="getTitle !== ''">
+                    <v-card color="#f8f8f8" v-if="getTitle !== ''">
                         <transition name="slide-fade" mode="out-in">
                             <v-card-title v-text="getTitle" class="bg-primary">
                             </v-card-title>
