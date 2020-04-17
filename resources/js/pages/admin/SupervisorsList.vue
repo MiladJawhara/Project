@@ -61,11 +61,11 @@
                                                     )
                                                 "
                                                 v-model="newSupervisor.Dept"
-                                                label="Dept"
-                                                :error-messages="DeptErrors"
+                                                label="Department"
                                                 required
-                                                @change="$v.dept.$touch()"
-                                                @blur="$v.dept.$touch()"
+                                                @change="$v.Dept.$touch()"
+                                                @blur="$v.Dept.$touch()"
+
                                             >
                                             </v-select>
                                         </v-col>
@@ -132,7 +132,7 @@
                                                 v-model="
                                                     newSupervisor.national_id
                                                 "
-                                                :error-messages="NationalNumberErrors"
+                                                :error-messages="nationalNumberErrors"
                                                 required
                                                 @change="v.national_id.$touch()"
                                                 @blur="$v.national_id.$touch()"
@@ -199,7 +199,7 @@
                                                 </v-list-item>
                                             </v-list>
                                         </v-col>
-                                    </v-row>
+                                    </v-row> 
 
                                    <v-row>
                                         <v-col>
@@ -246,12 +246,12 @@
 </template>
 
 <script>
-import DataList from '../../components/gloabal/DataList'
 import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email,sameAs,minLength } from 'vuelidate/lib/validators'
-Vue.use(Vuelidate)
+import DataList from '../../components/gloabal/DataList'
+
 export default {
         mixins: [validationMixin],
         validations: {
@@ -331,7 +331,7 @@ export default {
       deptErrors () {
         const errors = []
         if (!this.$v.Dept.$dirty) return errors
-        !this.$v.Dept.required && errors.push('Item is required')
+        !this.$v.Dept.required && errors.push('Department is required')
         return errors
       },
       f_nameErrors () {
@@ -355,7 +355,7 @@ export default {
         !this.$v.email.required && errors.push('E-mail is required')
         return errors
       },
-      NationalNumberErrorsErrors () {
+      nationalNumberErrorsErrors () {
         const errors = []
         if (!this.$v.national_id.$dirty) return errors
         !this.$v.national_id.minLength && errors.push('it must be more than 11 numbers')
