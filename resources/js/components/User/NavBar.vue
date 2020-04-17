@@ -23,7 +23,7 @@
         <v-btn icon class="mr-1">
             <v-icon color="yellow">mdi-bell</v-icon>
         </v-btn>
-        <v-btn icon :to="{ name: 'user.profile' }">
+        <v-btn title="My Profile" icon :to="{ name: 'user.profile' }">
             <v-avatar size="35">
                 <v-img
                     src="https://randomuser.me/api/portraits/men/81.jpg"
