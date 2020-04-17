@@ -66,7 +66,7 @@ export default [
                     },
                     {
                         path: 'supervisors/list',
-                        name: 'admin.supervisors.list',
+                        name: 'admin.users.supervisors.list',
                         component: importPage('admin/SupervisorsList')
                     }
                 ]

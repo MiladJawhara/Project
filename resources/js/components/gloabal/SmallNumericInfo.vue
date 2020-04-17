@@ -1,5 +1,5 @@
 <template>
-    <v-card class="$class">
+    <v-card :to="to ? to : null" class="$class m-card">
         <v-card-title :style="`background-color:${color}`" class="text-white">
             {{ title }}:<v-spacer></v-spacer>
             <v-chip color="white">{{ amount }}</v-chip>
@@ -21,9 +21,16 @@ export default {
         color: {
             type: String,
             default: '#1976d2'
+        },
+        to: {
+            type: Object
         }
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.m-card {
+    text-decoration: none;
+}
+</style>

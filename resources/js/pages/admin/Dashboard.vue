@@ -2,10 +2,14 @@
     <v-container>
         <v-row justify="center">
             <v-col cols="12" sm="6" md="3">
-                <small-numeric-info title="Students" :amount="numStudents"
+                <small-numeric-info
+                    :to="{ name: 'admin.users.students.list' }"
+                    title="Students"
+                    :amount="numStudents"
             /></v-col>
             <v-col cols="12" sm="6" md="3"
                 ><small-numeric-info
+                    :to="{ name: 'admin.departments.list' }"
                     color="#008080"
                     title="Departments"
                     :amount="numDepartments"
@@ -13,6 +17,7 @@
             </v-col>
             <v-col cols="12" sm="6" md="3"
                 ><small-numeric-info
+                    :to="{ name: 'admin.users.supervisors.list' }"
                     color="#5319d2"
                     title="Supervisors"
                     :amount="numSupervisors"
@@ -35,9 +40,7 @@ import $ from 'jquery'
 export default {
     name: 'admin-dashboard',
     requiredData: 'all',
-    created() {
-        console.log($('div'))
-    },
+    created() {},
     components: {
         SmallNumericInfo
     },

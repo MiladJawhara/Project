@@ -61,7 +61,7 @@ export default {
                     data: [
                         {
                             title: 'Supervisors List',
-                            data: 'admin.supervisors.list'
+                            data: 'admin.users.supervisors.list'
                         },
                         {
                             title: 'Students List',
