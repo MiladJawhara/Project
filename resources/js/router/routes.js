@@ -68,6 +68,16 @@ export default [
                         path: 'supervisors/list',
                         name: 'admin.users.supervisors.list',
                         component: importPage('admin/SupervisorsList')
+                    },
+                    {
+                        path: 'advertisements/create',
+                        name: 'admin.advertisements.new',
+                        component: importPage('admin/NewAdverstisements')
+                    },
+                    {
+                        path: 'advertisements/existed',
+                        name: 'admin.advertisements.existed',
+                        component: importPage('admin/ExistedAdvertisements')
                     }
                 ]
             }
