@@ -30,6 +30,11 @@ export default [
                         path: 'dashboard',
                         name: 'user.dashboard',
                         component: importPage('user/Dashboard')
+                    },
+                    {
+                        path: 'profile',
+                        name: 'user.profile',
+                        component: importPage('user/Profile')
                     }
                 ]
             },
