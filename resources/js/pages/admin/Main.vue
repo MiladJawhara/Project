@@ -68,6 +68,19 @@ export default {
                             data: 'admin.users.students.list'
                         }
                     ]
+                },
+                {
+                    title: 'Advertisement Board',
+                    data: [
+                        {
+                            title: 'Advertise',
+                            data: 'admin.advertisements.new'
+                        },
+                        {
+                            title: 'Existed Advertisements',
+                            data: 'admin.advertisements.existed'
+                        }
+                    ]
                 }
             ]
         }

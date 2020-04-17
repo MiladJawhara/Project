@@ -35,6 +35,10 @@
                                                 label="First Name"
                                                 type="text"
                                                 v-model="newSupervisor.f_name"
+                                                :error-messages="f_nameErrors"
+                                                required
+                                                @change="$v.f_name.$touch()"
+                                                @blur="$v.f_name.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
@@ -42,6 +46,10 @@
                                                 label="Last Name"
                                                 type="text"
                                                 v-model="newSupervisor.l_name"
+                                                :error-messages="l_nameErrors"
+                                                required
+                                                @change="$v.l_name.$touch()"
+                                                @blur="$v.l_name.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
@@ -54,6 +62,10 @@
                                                 "
                                                 v-model="newSupervisor.Dept"
                                                 label="Dept"
+                                                :error-messages="DeptErrors"
+                                                required
+                                                @change="$v.dept.$touch()"
+                                                @blur="$v.dept.$touch()"
                                             >
                                             </v-select>
                                         </v-col>
@@ -62,6 +74,10 @@
                                                 label="Email"
                                                 type="text"
                                                 v-model="newSupervisor.email"
+                                                :error-messages="emailErrors"
+                                                required
+                                                @change="$v.email.$touch()"
+                                                @blur="$v.email.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
@@ -83,6 +99,10 @@
                                                 @click:append="
                                                     showPassword = !showPassword
                                                 "
+                                                :error-messages="passwordErrors"
+                                                required
+                                                @change="$v.password.$touch()"
+                                                @blur="$v.password.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
@@ -99,6 +119,10 @@
                                                 v-model="
                                                     newSupervisor.password_confirmation
                                                 "
+                                                :error-messages="passwordConfirmErrors"
+                                                required
+                                                @change="$v.password_confirmation.$touch()"
+                                                @blur="$v.password_confirmation.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
@@ -108,6 +132,10 @@
                                                 v-model="
                                                     newSupervisor.national_id
                                                 "
+                                                :error-messages="NationalNumberErrors"
+                                                required
+                                                @change="v.national_id.$touch()"
+                                                @blur="$v.national_id.$touch()"
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -221,7 +249,21 @@
 import DataList from '../../components/gloabal/DataList'
 import Form from 'vform'
 import { mapGetters, mapActions } from 'vuex'
+import { validationMixin } from 'vuelidate'
+import { required, maxLength, email,sameAs,minLength } from 'vuelidate/lib/validators'
+Vue.use(Vuelidate)
 export default {
+        mixins: [validationMixin],
+        validations: {
+         f_name: { required, maxLength: maxLength(10) },
+         l_name:{required, maxLength: maxLength(10)},
+         email: { required, email },
+         Dept: { required },
+         national_id:{required,minLength:minLength(11) },
+         password:{required,minLength: minLength(10)},
+         password_confirmation:{sameAsPassword:sameAs('password')},
+         validationGroup:['f_name','l_name','email','Dept','national_id','password','password_confirmation'],
+      },
     name: 'admin-supervisors-supervisorsList',
     requiredData: ['departments', 'supervisors'],
     data() {
@@ -229,7 +271,7 @@ export default {
             newSupervisor: {},
             showPassword: false,
         }
-    },
+    }, 
     components: {
         DataList
     },
@@ -284,7 +326,43 @@ export default {
                     emailVerified: sup.email_verified_at ? 'Yes' : 'No'
                 }
             })
-        }
+        },
+
+      deptErrors () {
+        const errors = []
+        if (!this.$v.Dept.$dirty) return errors
+        !this.$v.Dept.required && errors.push('Item is required')
+        return errors
+      },
+      f_nameErrors () {
+        const errors = []
+        if (!this.$v.f_name.$dirty) return errors
+        !this.$v.f_name.maxLength && errors.push('First Name must be at most 10 characters long')
+        !this.$v.f_name.required && errors.push('First Name is required.')
+        return errors
+      },
+     l_nameErrors () {
+        const errors = []
+        if (!this.$v.l_name.$dirty) return errors
+        !this.$v.l_name.maxLength && errors.push('Last Name must be at most 10 characters long')
+        !this.$v.l_name.required && errors.push('Last Name is required.')
+        return errors
+      },
+      emailErrors () {
+        const errors = []
+        if (!this.$v.email.$dirty) return errors
+        !this.$v.email.email && errors.push('Must be valid e-mail')
+        !this.$v.email.required && errors.push('E-mail is required')
+        return errors
+      },
+      NationalNumberErrorsErrors () {
+        const errors = []
+        if (!this.$v.national_id.$dirty) return errors
+        !this.$v.national_id.minLength && errors.push('it must be more than 11 numbers')
+        !this.$v.national_id.required && errors.push('National Number is required')
+        return errors
+      },
     }
 }
+
 </script>
