@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <h1>Welcome to your Dashboard {{ userFirstName }}</h1>
-    </div>
+    <v-container>
+        <v-row>
+            <v-col>
+                Welcome
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>

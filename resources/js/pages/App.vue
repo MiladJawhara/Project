@@ -4,6 +4,9 @@
         <!-- <nav-bar /> -->
         <!-- NavBar -->
         <side-bar>
+            <v-list-item :to="{ name: 'user' }">
+                <v-list-item-content>User</v-list-item-content>
+            </v-list-item>
             <v-list-item :to="{ name: 'login' }">
                 <v-list-item-content>Login</v-list-item-content>
             </v-list-item>

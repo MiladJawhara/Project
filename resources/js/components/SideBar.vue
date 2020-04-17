@@ -7,7 +7,7 @@
             color="teal"
             @click="drawer = !drawer"
             fixed
-            style="z-index: 10 ;left: -25px; padding-left: 25px"
+            style="z-index: 10 ;left: -55px; padding-left: 25px"
         >
             <v-icon dark>mdi-format-list-bulleted-square</v-icon>
         </v-btn>
